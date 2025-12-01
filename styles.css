@@ -42,7 +42,6 @@ BorderPane, VBox, HBox, GridPane {
     -fx-cursor: hand;
 }
 
-/* Card styles */
 .card {
     -fx-background-color: white;
     -fx-background-radius: 8px;
@@ -57,7 +56,6 @@ BorderPane, VBox, HBox, GridPane {
     -fx-text-fill: #2c3e50;
 }
 
-/* Menu styles */
 .menu-bar {
     -fx-background-color: #3498db;
 }
