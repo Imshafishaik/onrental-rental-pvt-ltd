@@ -80,4 +80,5 @@ BorderPane, VBox, HBox, GridPane {
 .footer .label {
     -fx-text-fill: #ecf0f1;
     -fx-font-size: 12px;
+    background-color: #2980b9;
 }
