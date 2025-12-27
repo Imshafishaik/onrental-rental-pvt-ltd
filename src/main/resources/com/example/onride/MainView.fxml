@@ -1,26 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.onride.controller.MainViewController">
-   <left>
-      <VBox alignment="TOP_CENTER" prefWidth="200.0" spacing="10.0">
-         <padding>
-            <Insets top="20.0" />
-         </padding>
-         <children>
-            <Label styleClass="title" text="OnRide" />
-            <Button onAction="#handleHomeButtonAction" styleClass="action-button" text="Home" />
-            <Button onAction="#handleVehiclesButtonAction" styleClass="action-button" text="Vehicles" />
-            <Button onAction="#handleAdminButtonAction" styleClass="action-button" text="Admin" />
-         </children>
-      </VBox>
-   </left>
-   <center>
-      <VBox fx:id="contentArea" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
-   </center>
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+    <center>
+        <TabPane>
+            <tabs>
+                <Tab text="Vehicles">
+                    <fx:include source="VehiclesView.fxml" />
+                </Tab>
+                <Tab text="My Bookings">
+                    <fx:include source="MyBookingsView.fxml" />
+                </Tab>
+            </tabs>
+        </TabPane>
+    </center>
 </BorderPane>

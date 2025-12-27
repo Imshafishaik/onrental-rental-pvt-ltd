@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="10" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <GridPane hgap="10" vgap="5">
+            <children>
+                <Label text="Start Date:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <DatePicker fx:id="startDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                <Label text="End Date:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <DatePicker fx:id="endDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            </children>
+        </GridPane>
+        <Label fx:id="totalAmountLabel" text="Total Amount: $0.00" />
+        <Button fx:id="confirmBookingButton" onAction="#confirmBooking" text="Confirm Booking" />
+    </children>
+</VBox>
