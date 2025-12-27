@@ -59,38 +59,52 @@ public class VehicleListCell extends ListCell<Vehicle> {
                 }
             }
 
-            vehicleNameLabel.setText(vehicle.getBrand() + " " + vehicle.getModel());
-            vehicleTypeLabel.setText(vehicle.getType());
-            priceLabel.setText(String.format("$%.2f/day", vehicle.getPricePerDay()));
-            availabilityLabel.setText(vehicle.getStatus());
-            bookNowButton.setDisable(!vehicle.getStatus().equalsIgnoreCase("AVAILABLE"));
+            if (vehicleNameLabel != null) {
+                vehicleNameLabel.setText(vehicle.getBrand() + " " + vehicle.getModel());
+            }
+            if (vehicleTypeLabel != null) {
+                vehicleTypeLabel.setText(vehicle.getType());
+            }
+            if (priceLabel != null) {
+                priceLabel.setText(String.format("$%.2f/day", vehicle.getPricePerDay()));
+            }
+            if (availabilityLabel != null) {
+                availabilityLabel.setText(vehicle.getStatus());
+            }
+            if (bookNowButton != null) {
+                bookNowButton.setDisable(!vehicle.getStatus().equalsIgnoreCase("AVAILABLE"));
+            }
 
-            bookNowButton.setOnAction(event -> {
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/onride/BookingDialog.fxml"));
-                    Parent parent = loader.load();
+            if (bookNowButton != null) {
+                bookNowButton.setOnAction(event -> {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/onride/BookingDialog.fxml"));
+                        Parent parent = loader.load();
 
-                    BookingDialogController controller = loader.getController();
-                    controller.setVehicle(vehicle);
-                    // This should be replaced with the actual logged-in user's ID
-                    controller.setUserId(1);
+                        BookingDialogController controller = loader.getController();
+                        controller.setVehicle(vehicle);
+                        // This should be replaced with the actual logged-in user's ID
+                        controller.setUserId(1);
 
-                    Stage stage = new Stage();
-                    stage.initModality(Modality.APPLICATION_MODAL);
-                    stage.setTitle("Book Vehicle");
-                    stage.setScene(new Scene(parent));
-                    stage.showAndWait();
+                        Stage stage = new Stage();
+                        stage.initModality(Modality.APPLICATION_MODAL);
+                        stage.setTitle("Book Vehicle");
+                        stage.setScene(new Scene(parent));
+                        stage.showAndWait();
 
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+            }
 
             // Since we don't have a direct image URL in the new schema, we can remove this for now.
             // vehicleImageView.setImage(new Image(vehicle.getImageUrl()));
 
             setText(null);
-            setGraphic(hBox);
+            if (hBox != null) {
+                setGraphic(hBox);
+            }
         }
     }
 }

@@ -68,6 +68,51 @@ public class VehicleDAO {
         return vehicle;
     }
 
+    public List<Vehicle> searchVehicles(String type, String location) {
+        List<Vehicle> vehicles = new ArrayList<>();
+        StringBuilder sql = new StringBuilder("SELECT * FROM vehicles WHERE 1=1");
+        List<Object> parameters = new ArrayList<>();
+
+        if (type != null && !type.isEmpty() && !type.equals("All")) {
+            sql.append(" AND LOWER(type) = LOWER(?)");
+            parameters.add(type);
+        }
+
+        if (location != null && !location.trim().isEmpty()) {
+            sql.append(" AND LOWER(location) LIKE LOWER(?)");
+            parameters.add("%" + location.trim() + "%");
+        }
+
+        try (Connection connection = Database.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql.toString())) {
+
+            // Set parameters
+            for (int i = 0; i < parameters.size(); i++) {
+                preparedStatement.setObject(i + 1, parameters.get(i));
+            }
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Vehicle vehicle = new Vehicle();
+                vehicle.setVehicleId(resultSet.getInt("vehicle_id"));
+                vehicle.setRenterId(resultSet.getInt("renter_id"));
+                vehicle.setType(resultSet.getString("type"));
+                vehicle.setBrand(resultSet.getString("brand"));
+                vehicle.setModel(resultSet.getString("model"));
+                vehicle.setYear(resultSet.getInt("year"));
+                vehicle.setPricePerDay(resultSet.getDouble("price_per_day"));
+                vehicle.setLocation(resultSet.getString("location"));
+                vehicle.setStatus(resultSet.getString("status"));
+                vehicle.setCreatedAt(resultSet.getTimestamp("created_at"));
+                vehicles.add(vehicle);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return vehicles;
+    }
+
     public void deleteVehicle(int vehicleId) {
         String sql = "DELETE FROM vehicles WHERE vehicle_id = ?";
         try (Connection connection = Database.getConnection();

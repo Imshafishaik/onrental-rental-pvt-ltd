@@ -10,8 +10,8 @@ public class OnRideApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/com/example/onride/LoginView.fxml"));
-        primaryStage.setTitle("OnRide - Login");
+        Parent root = FXMLLoader.load(getClass().getResource("/com/example/onride/HomeView.fxml"));
+        primaryStage.setTitle("OnRide - Home");
         primaryStage.setScene(new Scene(root, 1000, 600));
         primaryStage.show();
     }

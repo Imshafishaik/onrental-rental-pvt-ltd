@@ -1,15 +1,152 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.text.Font?>
+<?import java.net.URL?>
 
-<VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Label styleClass="section-title" text="Welcome to OnRide" />
-      <Label styleClass="section-subtitle" text="Your journey starts here. Rent a vehicle today!" />
-   </children>
-   <padding>
-      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-   </padding>
-</VBox>
+<BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.onride.controller.HomeViewController">
+   <stylesheets>
+      <URL value="@styles.css" />
+   </stylesheets>
+   <top>
+      <VBox styleClass="header">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="20.0">
+               <children>
+                  <Label styleClass="title" text="OnRide Rentals" />
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button fx:id="loginButton" onAction="#handleLoginButtonAction" styleClass="action-button" text="Login" />
+                  <Button fx:id="signupButton" onAction="#handleSignupButtonAction" styleClass="action-button" text="Sign Up" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+               </padding>
+            </HBox>
+            <Label styleClass="subtitle" text="Premium Bike &amp; Car Rentals - Book your ride today!" />
+         </children>
+         <padding>
+            <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
+         </padding>
+      </VBox>
+   </top>
+   <center>
+      <VBox spacing="20.0" styleClass="content-area">
+         <children>
+            <!-- Search Section -->
+            <VBox styleClass="search-section" spacing="10.0">
+               <children>
+                  <Label styleClass="section-title" text="Find Your Perfect Ride" />
+                  <HBox alignment="CENTER" spacing="15.0">
+                     <children>
+                        <ComboBox fx:id="vehicleTypeCombo" prefWidth="150.0" promptText="Vehicle Type" />
+                        <TextField fx:id="locationField" prefWidth="200.0" promptText="Enter location..." />
+                        <Button fx:id="searchButton" onAction="#handleSearchButtonAction" styleClass="action-button" text="Search Vehicles" />
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
+               </padding>
+            </VBox>
+            
+            <!-- Vehicle Categories -->
+            <VBox spacing="15.0">
+               <children>
+                  <Label styleClass="section-title" text="Vehicle Categories" />
+                  <GridPane hgap="20.0" vgap="15.0">
+                     <children>
+                        <VBox alignment="CENTER" styleClass="card" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                           <children>
+                              <Label styleClass="card-title" text="Bikes" />
+                              <Label text="Sport, Cruiser, Electric" />
+                              <Button fx:id="bikesButton" onAction="#handleBikesButtonAction" styleClass="action-button" text="View Bikes" />
+                           </children>
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                           </padding>
+                        </VBox>
+                        <VBox alignment="CENTER" styleClass="card" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                           <children>
+                              <Label styleClass="card-title" text="Cars" />
+                              <Label text="Sedan, SUV, Luxury" />
+                              <Button fx:id="carsButton" onAction="#handleCarsButtonAction" styleClass="action-button" text="View Cars" />
+                           </children>
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                           </padding>
+                        </VBox>
+                        <VBox alignment="CENTER" styleClass="card" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                           <children>
+                              <Label styleClass="card-title" text="Scooters" />
+                              <Label text="Electric, Manual" />
+                              <Button fx:id="scootersButton" onAction="#handleScootersButtonAction" styleClass="action-button" text="View Scooters" />
+                           </children>
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </GridPane>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
+               </padding>
+            </VBox>
+            
+            <!-- Featured Section -->
+            <VBox spacing="15.0">
+               <children>
+                  <Label styleClass="section-title" text="Why Choose OnRide?" />
+                  <HBox alignment="CENTER" spacing="30.0">
+                     <children>
+                        <VBox alignment="CENTER" styleClass="feature-box">
+                           <children>
+                              <Label styleClass="feature-title" text="24/7 Support" />
+                              <Label text="Round the clock assistance" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" styleClass="feature-box">
+                           <children>
+                              <Label styleClass="feature-title" text="Best Prices" />
+                              <Label text="Competitive rates guaranteed" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" styleClass="feature-box">
+                           <children>
+                              <Label styleClass="feature-title" text="Easy Booking" />
+                              <Label text="Quick and simple process" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
+               </padding>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+   </center>
+   <bottom>
+      <HBox alignment="CENTER" styleClass="footer">
+         <children>
+            <Label text="© 2024 OnRide Rentals. All rights reserved." />
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+         </padding>
+      </HBox>
+   </bottom>
+</BorderPane>

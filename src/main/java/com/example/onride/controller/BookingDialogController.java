@@ -54,7 +54,7 @@ public class BookingDialogController {
 
         Booking booking = new Booking();
         booking.setCustomerId(customerId);
-        booking.setVehicleId(vehicle.getId());
+        booking.setVehicleId(vehicle.getVehicleId());
         booking.setStartDate(Date.from(startDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
         booking.setEndDate(Date.from(endDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
         booking.setTotalAmount(totalAmount);
