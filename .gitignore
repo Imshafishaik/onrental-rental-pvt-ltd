@@ -80,3 +80,4 @@ logs/
 
 # Debug logs
 *.log.*
+database.properties

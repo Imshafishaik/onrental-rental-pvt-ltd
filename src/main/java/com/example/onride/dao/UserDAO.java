@@ -22,7 +22,7 @@ public class UserDAO {
 
             if (resultSet.next()) {
                 User user = new User();
-                user.setId(resultSet.getInt("id"));
+//                user.setId(resultSet.getInt("id"));
                 user.setName(resultSet.getString("name"));
                 user.setEmail(resultSet.getString("email"));
                 return user;
@@ -33,7 +33,26 @@ public class UserDAO {
         return null;
     }
 
+    public boolean emailExists(String email) {
+        String sql = "SELECT 1 FROM users WHERE email = ?";
+        try (Connection connection = Database.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, email);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                return resultSet.next();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // In case of an error, assume the email exists to be safe
+            return true;
+        }
+    }
+
     public boolean signUp(User user, String password) {
+        if (emailExists(user.getEmail())) {
+            System.err.println("Sign up failed: Email already exists - " + user.getEmail());
+            return false;
+        }
         String sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
         try (Connection connection = Database.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -42,8 +61,7 @@ public class UserDAO {
             preparedStatement.setString(2, user.getEmail());
             preparedStatement.setString(3, password);
 
-            int rowsAffected = preparedStatement.executeUpdate();
-            return rowsAffected > 0;
+            return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
