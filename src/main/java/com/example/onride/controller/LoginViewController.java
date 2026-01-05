@@ -1,18 +1,21 @@
+
 package com.example.onride.controller;
+
+import java.io.IOException;
 
 import com.example.onride.dao.UserDAO;
 import com.example.onride.model.User;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class LoginViewController {
 
@@ -21,6 +24,9 @@ public class LoginViewController {
 
     @FXML
     private PasswordField passwordField;
+
+    @FXML
+    private Button loginButton;
 
     private UserDAO userDAO = new UserDAO();
 
@@ -79,5 +85,22 @@ public class LoginViewController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+     private void loadView(String fxmlPath, String title) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
+        Stage stage = (Stage) loginButton.getScene().getWindow();
+        stage.setTitle(title);
+        stage.setScene(new Scene(root, 1000, 600));
+        stage.show();
+    }
+
+    @FXML
+    void handleLoginButtonAction(ActionEvent event) {
+        try {
+            loadView("/com/example/onride/LoginView.fxml", "OnRide - Login");
+        } catch (IOException e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Could not load login page: " + e.getMessage());
+        }
     }
 }

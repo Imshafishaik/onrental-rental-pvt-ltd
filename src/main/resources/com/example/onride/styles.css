@@ -224,9 +224,9 @@ BorderPane, VBox, HBox, GridPane {
     -fx-background-color: #0F1115;
 }
 
-/* Navbar */
 .navbar {
-    -fx-background-color: rgba(15, 17, 21, 0.95);
+    -fx-background-color: #12141a;
+    -fx-pref-height: 50;
 }
 
 .logo-text {
@@ -238,6 +238,7 @@ BorderPane, VBox, HBox, GridPane {
 .nav-link {
     -fx-text-fill: #BBBBBB;
     -fx-cursor: hand;
+    -fx-background-color: transparent;
 }
 
 .login-link-btn {
@@ -280,6 +281,10 @@ BorderPane, VBox, HBox, GridPane {
     -fx-text-fill: white;
     -fx-font-size: 64px;
     -fx-font-weight: 900;
+}
+
+.hero-image{
+    -fx-width: 500px;
 }
 
 .hero-sub-text {
@@ -334,4 +339,119 @@ BorderPane, VBox, HBox, GridPane {
     -fx-font-size: 32px;
     -fx-font-weight: bold;
 }
+
+/* ROOT */
+.root {
+    -fx-background-color: #0f1115;
+    -fx-font-family: "Segoe UI", "Inter", sans-serif;
+}
+
+/* NAVBAR */
+.navbar {
+    -fx-background-color: #12141a;
+}
+
+.logo {
+    -fx-text-fill: #ff7a18;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+/* .nav-link {
+    -fx-background-color: transparent;
+    -fx-text-fill: #cfcfcf;
+} */
+
+.nav-link:hover {
+    -fx-text-fill: white;
+}
+
+.cta-button {
+    -fx-background-color: #ff7a18;
+    -fx-text-fill: white;
+    -fx-background-radius: 20;
+    -fx-padding: 8 18;
+    -fx-font-weight: bold;
+}
+
+/* HERO */
+.hero-section {
+    -fx-min-height: 600;
+}
+
+.hero-bg {
+    -fx-background-color: linear-gradient(to right, #1a1d24, #0f1115);
+}
+
+.hero-overlay {
+    -fx-background-color: rgba(0,0,0,0.45);
+}
+
+.hero-content {
+    -fx-padding: 60;
+}
+
+/* BADGE */
+.badge {
+    -fx-background-color: rgba(255,122,24,0.15);
+    -fx-text-fill: #ff7a18;
+    -fx-padding: 6 14;
+    -fx-background-radius: 20;
+}
+
+/* TITLES */
+.hero-title {
+    -fx-text-fill: white;
+    -fx-font-size: 48px;
+    -fx-font-weight: bold;
+}
+
+.hero-title-secondary {
+    -fx-text-fill: #ff7a18;
+    -fx-font-size: 48px;
+    -fx-font-weight: bold;
+}
+
+.hero-subtitle {
+    -fx-text-fill: #9aa0a6;
+    -fx-font-size: 14px;
+}
+
+/* SEARCH CARD */
+.search-card {
+    -fx-background-color: #1c1f26;
+    -fx-background-radius: 18;
+    -fx-padding: 15;
+}
+
+.search-input {
+    -fx-background-color: #12141a;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: #6b7280;
+    -fx-background-radius: 12;
+    -fx-padding: 10;
+}
+
+.search-button {
+    -fx-background-color: #ff7a18;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 14;
+    -fx-padding: 10 25;
+}
+
+/* STATS */
+.stat-number {
+    -fx-text-fill: white;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.stat-label {
+    -fx-text-fill: #9aa0a6;
+    -fx-font-size: 12px;
+}
+
+
+
 

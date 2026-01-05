@@ -8,8 +8,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class HomeViewController {
@@ -19,11 +22,39 @@ public class HomeViewController {
     @FXML private DatePicker pickUpDate;
 
     @FXML
+    private ImageView heroImage;
+
+    @FXML
+    private StackPane heroStack;
+    
+    @FXML
+    private Button loginButton;
+
+    @FXML
     public void initialize() {
-        // Since we removed the ComboBox in the new design, 
-        // we no longer need to initialize it.
-        // You can initialize date pickers or other logic here.
+
+        heroImage.fitWidthProperty().bind(heroStack.widthProperty());
+        heroImage.fitHeightProperty().bind(heroStack.heightProperty());
+
     }
+
+    @FXML
+    void handleLoginButtonAction(ActionEvent event) {
+        try {
+            loadView("/com/example/onride/LoginView.fxml", "OnRide - Login");
+        } catch (IOException e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Could not load login page: " + e.getMessage());
+        }
+    }
+
+    // @FXML
+    // void handleSignupButtonAction(ActionEvent event) {
+    //     try {
+    //         loadView("/com/example/onride/SignUpView.fxml", "OnRide - Sign Up");
+    //     } catch (IOException e) {
+    //         showAlert(Alert.AlertType.ERROR, "Error", "Could not load sign up page: " + e.getMessage());
+    //     }
+    // }
 
     @FXML
     void handleSearchButtonAction(ActionEvent event) {
@@ -53,6 +84,14 @@ public class HomeViewController {
         } catch (IOException e) {
             showAlert(Alert.AlertType.ERROR, "Error", "View not found.");
         }
+    }
+
+    private void loadView(String fxmlPath, String title) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
+        Stage stage = (Stage) loginButton.getScene().getWindow();
+        stage.setTitle(title);
+        stage.setScene(new Scene(root, 1000, 600));
+        stage.show();
     }
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {
