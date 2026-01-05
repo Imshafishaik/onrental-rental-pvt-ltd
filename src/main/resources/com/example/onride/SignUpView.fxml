@@ -10,6 +10,42 @@
             xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.onride.controller.SignUpViewController">
+            <top>
+        <!-- <HBox spacing="20" alignment="CENTER_LEFT" styleClass="navbar">
+            <padding>
+                <Insets top="15" right="10" bottom="15" left="30"/>
+            </padding>
+
+            <Label text="🚗 OnRide" styleClass="logo"/>
+            
+           
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Home" styleClass="nav-link"/>
+            <Button text="Vehicles" styleClass="nav-link"/>
+
+            <Region prefWidth="100"/>
+
+            <Button text="Sign In" styleClass="nav-link"/>
+            <Button text="Get Started" styleClass="cta-button"/>
+             
+        </HBox> -->
+
+        <HBox spacing="20" alignment="CENTER_LEFT" styleClass="navbar">
+         <padding>
+                <Insets top="15" right="10" bottom="15" left="30"/>
+            </padding>
+            <Label text="🚗 OnRide" styleClass="logo"/>
+
+            <Region HBox.hgrow="ALWAYS" maxWidth="950" /> <!-- optional, but we'll limit width -->
+
+            <HBox spacing="15" alignment="CENTER_RIGHT">
+                <Button fx:id="homeButton" onAction="#handleHomeButtonAction" text="Home" styleClass="nav-link"/>
+                <Button text="Vehicles" styleClass="nav-link"/>
+                <Button fx:id="loginButton" onAction="#handleLoginButtonAction" text="Login" styleClass="nav-link"/>
+                <Button text="Get Started" styleClass="cta-button"/>
+            </HBox>
+        </HBox>
+    </top>
 
     <center>
         <VBox alignment="CENTER"
@@ -27,7 +63,7 @@
             <!-- Tabs -->
             <HBox spacing="10" alignment="CENTER">
                 <Button text="Login"
-                        onAction="#handleSignInLinkAction"
+                        onAction="#handleLoginButtonAction"
                         styleClass="tab"/>
                 <Button text="Sign Up"
                         styleClass="tab-active"/>

@@ -41,7 +41,7 @@
             <Region HBox.hgrow="ALWAYS" maxWidth="950" /> <!-- optional, but we'll limit width -->
 
             <HBox spacing="15" alignment="CENTER_RIGHT">
-                <Button text="Home" styleClass="nav-link"/>
+                <Button fx:id="homeButton" onAction="#handleHomeButtonAction" text="Home" styleClass="nav-link"/>
                 <Button text="Vehicles" styleClass="nav-link"/>
                 <Button fx:id="loginButton" onAction="#handleLoginButtonAction" text="Login" styleClass="nav-link"/>
                 <Button text="Get Started" styleClass="cta-button"/>
@@ -64,7 +64,7 @@
             <!-- Tabs -->
             <HBox spacing="10" alignment="CENTER">
                 <Button text="Login" styleClass="tab-active"/>
-                <Button text="Sign Up" styleClass="tab"/>
+                <Button text="Sign Up" onAction="#handleSignUpLinkAction" styleClass="tab"/>
             </HBox>
 
             <!-- Headings -->
