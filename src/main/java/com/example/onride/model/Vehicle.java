@@ -15,6 +15,22 @@ public class Vehicle {
     private String status;
     private Date createdAt;
 
+    public Vehicle(int vehicleId, int renterId, String type, String brand, String model, int year, double pricePerDay, String location, String status, Date createdAt) {
+        this.vehicleId = vehicleId;
+        this.renterId = renterId;
+        this.type = type;
+        this.brand = brand;
+        this.model = model;
+        this.year = year;
+        this.pricePerDay = pricePerDay;
+        this.location = location;
+        this.status = status;
+        this.createdAt = createdAt;
+    }
+
+    public Vehicle() {
+    }
+
     public int getVehicleId() {
         return vehicleId;
     }

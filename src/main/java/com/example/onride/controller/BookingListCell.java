@@ -84,8 +84,9 @@ public class BookingListCell extends ListCell<Booking> {
             }
 
             cancelBookingButton.setOnAction(event -> {
-                bookingDAO.deleteBooking(booking.getBookingId());
-                bookingListView.getItems().remove(booking);
+                booking.setStatus("CANCELLED");
+                bookingDAO.updateBooking(booking);
+                bookingListView.refresh();
             });
 
             setText(null);

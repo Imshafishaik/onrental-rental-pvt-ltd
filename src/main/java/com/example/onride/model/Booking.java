@@ -13,6 +13,20 @@ public class Booking {
     private String status;
     private Date createdAt;
 
+    public Booking(int bookingId, int vehicleId, int customerId, Date startDate, Date endDate, double totalAmount, String status, Date createdAt) {
+        this.bookingId = bookingId;
+        this.vehicleId = vehicleId;
+        this.customerId = customerId;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.totalAmount = totalAmount;
+        this.status = status;
+        this.createdAt = createdAt;
+    }
+
+    public Booking() {
+    }
+
     public int getBookingId() {
         return bookingId;
     }

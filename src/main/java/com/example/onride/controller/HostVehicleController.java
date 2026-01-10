@@ -91,15 +91,7 @@ public class HostVehicleController {
         if (ok) {
             showAlert(Alert.AlertType.INFORMATION, "Success", "Vehicle hosted successfully");
             // Load vehicles view into content area
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource("/com/example/onride/VehiclesView.fxml"));
-                javafx.scene.Node contentArea = brandField.getScene().lookup("#contentArea");
-                if (contentArea instanceof javafx.scene.layout.Pane) {
-                    ((javafx.scene.layout.Pane) contentArea).getChildren().setAll(root);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            loadVehiclesView();
         } else {
             showAlert(Alert.AlertType.ERROR, "Error", "Could not host vehicle. Try again.");
         }
@@ -107,6 +99,18 @@ public class HostVehicleController {
 
     @FXML
     void handleCancelAction(ActionEvent event) {
+        loadVehiclesView();
+    }
+
+    private void showAlert(Alert.AlertType alertType, String title, String msg) {
+        Alert a = new Alert(alertType);
+        a.setTitle(title);
+        a.setHeaderText(null);
+        a.setContentText(msg);
+        a.showAndWait();
+    }
+
+    private void loadVehiclesView() {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/com/example/onride/VehiclesView.fxml"));
             javafx.scene.Node contentArea = brandField.getScene().lookup("#contentArea");
@@ -116,13 +120,5 @@ public class HostVehicleController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private void showAlert(Alert.AlertType alertType, String title, String msg) {
-        Alert a = new Alert(alertType);
-        a.setTitle(title);
-        a.setHeaderText(null);
-        a.setContentText(msg);
-        a.showAndWait();
     }
 }

@@ -11,6 +11,18 @@ public class Review {
     private String comment;
     private Date reviewDate;
 
+    public Review(int id, int userId, int vehicleId, int rating, String comment, Date reviewDate) {
+        this.id = id;
+        this.userId = userId;
+        this.vehicleId = vehicleId;
+        this.rating = rating;
+        this.comment = comment;
+        this.reviewDate = reviewDate;
+    }
+
+    public Review() {
+    }
+
     public int getId() {
         return id;
     }

@@ -11,6 +11,18 @@ public class Payment {
     private String paymentMethod;
     private String status;
 
+    public Payment(int id, int bookingId, double amount, Date paymentDate, String paymentMethod, String status) {
+        this.id = id;
+        this.bookingId = bookingId;
+        this.amount = amount;
+        this.paymentDate = paymentDate;
+        this.paymentMethod = paymentMethod;
+        this.status = status;
+    }
+
+    public Payment() {
+    }
+
     public int getId() {
         return id;
     }
