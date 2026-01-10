@@ -1,8 +1,11 @@
 package com.example.onride.controller;
 
+import java.io.IOException;
+
 import com.example.onride.dao.UserDAO;
-import com.example.onride.model.User;
 import com.example.onride.model.SessionManager;
+import com.example.onride.model.User;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,8 +16,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class SignUpViewController {
 
@@ -50,12 +51,18 @@ public class SignUpViewController {
         User user = userDAO.login(email, password);
 
         if (user != null) {
+            com.example.onride.model.SessionManager.getInstance().setCurrentUser(user);
             showAlert(Alert.AlertType.INFORMATION, "Login Successful!", "Welcome " + user.getName());
-            // Navigate to the main view
             try {
-                Parent root = FXMLLoader.load(getClass().getResource("/com/example/onride/MainView.fxml"));
-                Stage stage = (Stage) emailField.getScene().getWindow();
-                stage.setScene(new Scene(root, 1000, 600));
+                javafx.scene.Node contentArea = emailField.getScene().lookup("#contentArea");
+                if (contentArea instanceof javafx.scene.layout.Pane) {
+                    Parent home = FXMLLoader.load(getClass().getResource("/com/example/onride/HomeView.fxml"));
+                    ((javafx.scene.layout.Pane) contentArea).getChildren().setAll(home);
+                } else {
+                    Parent root = FXMLLoader.load(getClass().getResource("/com/example/onride/MainView.fxml"));
+                    Stage stage = (Stage) emailField.getScene().getWindow();
+                    stage.setScene(new Scene(root, 1000, 600));
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -87,14 +94,19 @@ public class SignUpViewController {
 
         if (userDAO.signUp(user, password)) {
             User newUser = userDAO.login(email, password);
-            if (newUser != null) {
+                if (newUser != null) {
                 SessionManager.getInstance().setCurrentUser(newUser);
                 showAlert(Alert.AlertType.INFORMATION, "Registration Successful!", "Welcome " + newUser.getName());
-                // Navigate to the main view
                 try {
-                    Parent root = FXMLLoader.load(getClass().getResource("/com/example/onride/MainView.fxml"));
-                    Stage stage = (Stage) nameField.getScene().getWindow();
-                    stage.setScene(new Scene(root, 1000, 600));
+                    javafx.scene.Node contentArea = nameField.getScene().lookup("#contentArea");
+                    if (contentArea instanceof javafx.scene.layout.Pane) {
+                        Parent home = FXMLLoader.load(getClass().getResource("/com/example/onride/HomeView.fxml"));
+                        ((javafx.scene.layout.Pane) contentArea).getChildren().setAll(home);
+                    } else {
+                        Parent root = FXMLLoader.load(getClass().getResource("/com/example/onride/MainView.fxml"));
+                        Stage stage = (Stage) nameField.getScene().getWindow();
+                        stage.setScene(new Scene(root));
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -110,8 +122,13 @@ public class SignUpViewController {
     void handleSignInLinkAction(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/com/example/onride/LoginView.fxml"));
-            Stage stage = (Stage) nameField.getScene().getWindow();
-            stage.setScene(new Scene(root, 1000, 600));
+            javafx.scene.Node contentArea = nameField.getScene().lookup("#contentArea");
+            if (contentArea instanceof javafx.scene.layout.Pane) {
+                ((javafx.scene.layout.Pane) contentArea).getChildren().setAll(root);
+            } else {
+                Stage stage = (Stage) nameField.getScene().getWindow();
+                stage.setScene(new Scene(root));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -146,8 +163,13 @@ public class SignUpViewController {
     void handleSignUpLinkAction(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/com/example/onride/SignUpView.fxml"));
-            Stage stage = (Stage) emailField.getScene().getWindow();
-            stage.setScene(new Scene(root, 1000, 600));
+            javafx.scene.Node contentArea = emailField.getScene().lookup("#contentArea");
+            if (contentArea instanceof javafx.scene.layout.Pane) {
+                ((javafx.scene.layout.Pane) contentArea).getChildren().setAll(root);
+            } else {
+                Stage stage = (Stage) emailField.getScene().getWindow();
+                stage.setScene(new Scene(root, 1000, 600));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -157,8 +179,13 @@ public class SignUpViewController {
     void handleHomeButtonAction(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/com/example/onride/HomeView.fxml"));
-            Stage stage = (Stage) emailField.getScene().getWindow();
-            stage.setScene(new Scene(root, 1000, 600));
+            javafx.scene.Node contentArea = emailField.getScene().lookup("#contentArea");
+            if (contentArea instanceof javafx.scene.layout.Pane) {
+                ((javafx.scene.layout.Pane) contentArea).getChildren().setAll(root);
+            } else {
+                Stage stage = (Stage) emailField.getScene().getWindow();
+                stage.setScene(new Scene(root, 1000, 600));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

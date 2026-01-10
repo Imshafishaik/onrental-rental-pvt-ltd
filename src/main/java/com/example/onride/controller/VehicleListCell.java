@@ -83,8 +83,13 @@ public class VehicleListCell extends ListCell<Vehicle> {
 
                         BookingDialogController controller = loader.getController();
                         controller.setVehicle(vehicle);
-                        // This should be replaced with the actual logged-in user's ID
-                        controller.setUserId(1);
+                        // Use session user if available
+                        com.example.onride.model.User current = com.example.onride.model.SessionManager.getInstance().getCurrentUser();
+                        if (current != null) {
+                            controller.setUserId(current.getId());
+                        } else {
+                            controller.setUserId(1); // fallback demo id
+                        }
 
                         Stage stage = new Stage();
                         stage.initModality(Modality.APPLICATION_MODAL);

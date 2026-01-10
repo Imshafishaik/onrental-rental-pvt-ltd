@@ -20,22 +20,19 @@ public class HomeViewController {
     // These should match the fx:id in your new FXML
     @FXML private TextField locationField;
     @FXML private DatePicker pickUpDate;
-
-    @FXML
-    private ImageView heroImage;
-
-    @FXML
-    private StackPane heroStack;
     
     @FXML
     private Button loginButton;
 
+    @FXML private ImageView heroImage;
+    @FXML private StackPane heroStack;
+
     @FXML
     public void initialize() {
-
+        // Fits the background image to the window width
         heroImage.fitWidthProperty().bind(heroStack.widthProperty());
-        heroImage.fitHeightProperty().bind(heroStack.heightProperty());
-
+        heroImage.setFitHeight(750);
+        heroImage.setPreserveRatio(false);
     }
 
     @FXML
@@ -44,6 +41,15 @@ public class HomeViewController {
             loadView("/com/example/onride/LoginView.fxml", "OnRide - Login");
         } catch (IOException e) {
             showAlert(Alert.AlertType.ERROR, "Error", "Could not load login page: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    void handleVehiclesButtonAction(ActionEvent event) {
+        try {
+            loadView("/com/example/onride/VehiclesView.fxml", "OnRide - Vehicles");
+        } catch (IOException e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Could not load vehicles page: " + e.getMessage());
         }
     }
 

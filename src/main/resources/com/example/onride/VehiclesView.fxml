@@ -1,35 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
-<?import java.net.URL?>
 
-<BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.onride.controller.VehiclesViewController">
-   <stylesheets>
-      <URL value="@styles.css" />
-   </stylesheets>
-   <top>
-      <VBox styleClass="header">
-         <children>
-            <Label styleClass="title" text="Available Vehicles" />
-            <Label styleClass="subtitle" text="Browse and book your perfect ride" />
-         </children>
-         <padding>
-            <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
-         </padding>
-      </VBox>
-   </top>
-   <center>
-      <VBox styleClass="content-area">
-         <children>
-            <ListView fx:id="vehicleListView" styleClass="vehicle-list" />
-         </children>
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </padding>
-      </VBox>
-   </center>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.onride.controller.VehiclesViewController"
+            stylesheets="@vehicle.css"
+            styleClass="vehicles-root">
+
+    <!-- HEADER -->
+    <top>
+        <VBox spacing="10" styleClass="page-header">
+            <Label text="Browse Vehicles" styleClass="page-title"/>
+            <Label text="Explore our extensive collection of premium bikes and cars."
+                   styleClass="page-subtitle"/>
+        </VBox>
+    </top>
+
+    <!-- CONTENT -->
+    <center>
+        <HBox spacing="30">
+            <padding>
+                <Insets top="30" right="30" bottom="30" left="30"/>
+            </padding>
+
+            <!-- FILTERS -->
+            <VBox spacing="20" styleClass="filter-panel">
+                <Label text="Filters" styleClass="filter-title"/>
+
+                <VBox spacing="8">
+                    <Label text="Location" styleClass="filter-label"/>
+                    <ComboBox promptText="All Locations"/>
+                </VBox>
+
+                <VBox spacing="8">
+                    <Label text="Vehicle Type" styleClass="filter-label"/>
+                    <HBox spacing="10">
+                        <ToggleButton text="All" selected="true"/>
+                        <ToggleButton text="Bikes"/>
+                        <ToggleButton text="Cars"/>
+                    </HBox>
+                </VBox>
+
+                <VBox spacing="8">
+                    <Label text="Price Range" styleClass="filter-label"/>
+                    <Slider min="0" max="500" value="250"/>
+                </VBox>
+            </VBox>
+
+            <!-- VEHICLES -->
+            <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
+               <content>
+                  <FlowPane fx:id="vehicleGrid"
+                              hgap="25"
+                              vgap="25"
+                              prefWrapLength="900"/>
+               </content>
+            </ScrollPane>
+
+        </HBox>
+    </center>
+
 </BorderPane>

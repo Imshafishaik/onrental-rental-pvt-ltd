@@ -29,11 +29,16 @@ public class ForgotPasswordViewController {
         // For this example, we'll just show a confirmation message.
         showAlert(Alert.AlertType.INFORMATION, "Password Reset", "A password reset link has been sent to your email address.");
 
-        // Navigate back to the login view
+        // Navigate back to the login view (prefer injecting into contentArea if available)
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/com/example/onride/LoginView.fxml"));
-            Stage stage = (Stage) emailField.getScene().getWindow();
-            stage.setScene(new Scene(root, 1000, 600));
+            javafx.scene.Node contentArea = emailField.getScene().lookup("#contentArea");
+            if (contentArea instanceof javafx.scene.layout.Pane) {
+                ((javafx.scene.layout.Pane) contentArea).getChildren().setAll(root);
+            } else {
+                Stage stage = (Stage) emailField.getScene().getWindow();
+                stage.setScene(new Scene(root, 1000, 600));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -43,8 +48,13 @@ public class ForgotPasswordViewController {
     void handleBackToLoginLinkAction(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/com/example/onride/LoginView.fxml"));
-            Stage stage = (Stage) emailField.getScene().getWindow();
-            stage.setScene(new Scene(root, 1000, 600));
+            javafx.scene.Node contentArea = emailField.getScene().lookup("#contentArea");
+            if (contentArea instanceof javafx.scene.layout.Pane) {
+                ((javafx.scene.layout.Pane) contentArea).getChildren().setAll(root);
+            } else {
+                Stage stage = (Stage) emailField.getScene().getWindow();
+                stage.setScene(new Scene(root, 1000, 600));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

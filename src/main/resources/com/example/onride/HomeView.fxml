@@ -1,237 +1,144 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.geometry.*?>
-
-<BorderPane prefWidth="1200" prefHeight="700"
-            styleClass="root"
-            stylesheets="@styles.css"
-            xmlns="http://javafx.com/javafx/21"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.onride.controller.HomeViewController">
-
-    <!-- ================= NAVBAR ================= -->
-    <top>
-        <!-- <HBox spacing="20" alignment="CENTER_LEFT" styleClass="navbar">
-            <padding>
-                <Insets top="15" right="10" bottom="15" left="30"/>
-            </padding>
-
-            <Label text="🚗 OnRide" styleClass="logo"/>
-            
-           
-            <Region HBox.hgrow="ALWAYS"/>
-            <Button text="Home" styleClass="nav-link"/>
-            <Button text="Vehicles" styleClass="nav-link"/>
-
-            <Region prefWidth="100"/>
-
-            <Button text="Sign In" styleClass="nav-link"/>
-            <Button text="Get Started" styleClass="cta-button"/>
-             
-        </HBox> -->
-
-        <HBox spacing="20" alignment="CENTER_LEFT" styleClass="navbar">
-         <padding>
-                <Insets top="15" right="10" bottom="15" left="30"/>
-            </padding>
-            <Label text="🚗 OnRide" styleClass="logo"/>
-
-            <Region HBox.hgrow="ALWAYS" maxWidth="950" /> <!-- optional, but we'll limit width -->
-
-            <HBox spacing="15" alignment="CENTER_RIGHT">
-                <Button text="Home" styleClass="nav-link"/>
-                <Button text="Vehicles" styleClass="nav-link"/>
-                <Button fx:id="loginButton" onAction="#handleLoginButtonAction" text="Login" styleClass="nav-link"/>
-                <Button text="Get Started" styleClass="cta-button"/>
-            </HBox>
-        </HBox>
-    </top>
-
-    <!-- ================= HERO SECTION ================= -->
-    <center>
-        <StackPane fx:id="heroStack"
-           alignment="CENTER_LEFT"
-           styleClass="hero-section">
-
-             <ImageView fx:id="heroImage"
-           preserveRatio="false"
-           smooth="true"
-           mouseTransparent="true"
-           pickOnBounds="true">
-                <image>
-                    <Image url="@../../../images/HeroSection.jpeg"/>
-                </image>
-            </ImageView>
-            <!-- IMAGE PLACEHOLDER (add ImageView later) -->
-            <!-- <Region styleClass="hero-bg"/> -->
-
-            <!-- DARK OVERLAY -->
-            <Region styleClass="hero-overlay"/>
-
-            <!-- CONTENT -->
-            <VBox alignment="CENTER_LEFT"
-                  maxWidth="900"
-                  styleClass="hero-content">
-
-                <Label text="Premium Vehicle Rentals"
-                       styleClass="badge"/>
-
-                <VBox spacing="10">
-                    <Label text="Drive Your Dreams"
-                           styleClass="hero-title"/>
-                    <Label text="Rent with Ease"
-                           styleClass="hero-title-secondary"/>
-                </VBox>
-
-                <Label text="Experience premium bikes and cars at your fingertips. Book instantly, ride freely, and explore without limits."
-                       wrapText="true"
-                       maxWidth="600"
-                       styleClass="hero-subtitle"/>
-
-                <!-- SEARCH CARD -->
-                <HBox spacing="15" alignment="CENTER_LEFT"
-                      styleClass="search-card">
-
-                    <TextField promptText="Enter city"
-                               styleClass="search-input"/>
-
-                    <DatePicker promptText="Pick-up"
-                                styleClass="search-input"/>
-
-                    <DatePicker promptText="Return"
-                                styleClass="search-input"/>
-
-                    <Button text="Search"
-                            styleClass="search-button"/>
-                </HBox>
-
-                <!-- STATS -->
-                <HBox spacing="40" alignment="CENTER_LEFT">
-                    <VBox>
-                        <Label text="500+" styleClass="stat-number"/>
-                        <Label text="Vehicles" styleClass="stat-label"/>
-                    </VBox>
-                    <VBox>
-                        <Label text="10K+" styleClass="stat-number"/>
-                        <Label text="Happy Customers" styleClass="stat-label"/>
-                    </VBox>
-                    <VBox>
-                        <Label text="50+" styleClass="stat-number"/>
-                        <Label text="Locations" styleClass="stat-label"/>
-                    </VBox>
-                </HBox>
-
-            </VBox>
-        </StackPane>
-    </center>
-
-</BorderPane>
-
-
-<!-- <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import javafx.scene.shape.*?>
 <?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
 
-<ScrollPane fitToWidth="true" styleClass="root" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.onride.controller.HomeViewController">
+<ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="root-scroll" 
+            stylesheets="@home.css" xmlns="http://javafx.com/javafx/21" 
+            xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.example.onride.controller.HomeViewController">
     <content>
-        <VBox alignment="TOP_CENTER" styleClass="main-container">
-            <HBox alignment="CENTER_LEFT" spacing="30.0" styleClass="navbar">
-                <children>
-                    <HBox alignment="CENTER" spacing="10">
-                        <Circle fill="#FF8C00" radius="12" />
-                        <Label styleClass="logo-text" text="OnRide" />
-                    </HBox>
-                    <Region HBox.hgrow="ALWAYS" />
-                    <Label styleClass="nav-link" text="Home" />
-                    <Label styleClass="nav-link" text="Vehicles" />
-                    <Button styleClass="login-link-btn" text="Sign In" />
-                    <Button styleClass="primary-button" text="Get Started" />
-                </children>
-                <padding>
-                    <Insets bottom="15.0" left="80.0" right="80.0" top="15.0" />
-                </padding>
+        <VBox alignment="TOP_CENTER" styleClass="main-wrapper">
+            
+            <HBox spacing="20" alignment="CENTER_LEFT" styleClass="navbar">
+                <padding><Insets top="15" right="50" bottom="15" left="50"/></padding>
+                <Label text="🚗 OnRide" styleClass="logo"/>
+                <Region HBox.hgrow="ALWAYS" />
+                <HBox spacing="25" alignment="CENTER_RIGHT">
+                    <Button text="Home" styleClass="nav-link"/>
+                    <Button text="Vehicles" onAction="#handleVehiclesButtonAction" styleClass="nav-link"/>
+                    <Button fx:id="loginButton" onAction="#handleLoginButtonAction" text="Login" styleClass="nav-link"/>
+                    <Button text="Get Started" styleClass="cta-button"/>
+                </HBox>
             </HBox>
 
-            <StackPane fx:id="heroStack" alignment="CENTER" prefHeight="600.0">
-    <children>
-
-        <ImageView fx:id="heroImage"
-                   preserveRatio="true"
-                   smooth="true">
-            <image>
-                <Image url="@../../../images/HeroSection.jpeg"/>
-            </image>
-        </ImageView>
-
-        <Region style="-fx-background-color: rgba(0,0,0,0.5);" />
-
-                    <VBox alignment="CENTER" spacing="20.0">
-                        <children>
-                            <Label styleClass="badge" text="● Premium Vehicle Rentals" />
-                            <HBox alignment="CENTER" spacing="10">
-                                <Label styleClass="hero-main-text" text="Drive Your" />
-                                <Label styleClass="hero-sub-text" text="Dreams" />
-                            </HBox>
-                            <Label styleClass="hero-description" maxWidth="600" text="Experience premium bikes and cars at your fingertips. Book instantly, ride freely, and explore without limits." textAlignment="CENTER" wrapText="true" />
-                            
-                            <HBox alignment="CENTER" spacing="20.0" styleClass="search-bar-container">
-                                <VBox spacing="5">
-                                    <Label styleClass="input-label" text="Location" />
-                                    <TextField fx:id="locationField" promptText="Enter city" styleClass="search-input" />
-                                </VBox>
-                                <Separator orientation="VERTICAL" />
-                                <VBox spacing="5">
-                                    <Label styleClass="input-label" text="Pick-up Date" />
-                                    <DatePicker fx:id="pickUpDate" promptText="dd/mm/yyyy" styleClass="search-date" />
-                                </VBox>
-                                <Button fx:id="searchButton" onAction="#handleSearchButtonAction" styleClass="primary-button-large" text="Search" />
-                            </HBox>
-
-                            <HBox alignment="CENTER" spacing="60" styleClass="stats-row">
-                                <VBox alignment="CENTER"><Label styleClass="stat-num" text="500+"/><Label styleClass="stat-label" text="Vehicles"/></VBox>
-                                <VBox alignment="CENTER"><Label styleClass="stat-num" text="10K+"/><Label styleClass="stat-label" text="Happy Customers"/></VBox>
-                                <VBox alignment="CENTER"><Label styleClass="stat-num" text="50+"/><Label styleClass="stat-label" text="Locations"/></VBox>
-                            </HBox>
-                        </children>
-                        <padding>
-                            <Insets bottom="80.0" top="80.0" />
-                        </padding>
+            <StackPane fx:id="heroStack" prefHeight="750">
+                <ImageView fx:id="heroImage" preserveRatio="false" smooth="true" pickOnBounds="true">
+                    <image>
+                        <Image url="@../../../images/HeroSection.jpeg"/>
+                    </image>
+                </ImageView>
+                <Region styleClass="hero-overlay"/>
+                <VBox alignment="CENTER_LEFT" maxWidth="1200" spacing="25" styleClass="hero-content">
+                    <padding><Insets left="80"/></padding>
+                    <Label text="● Premium Vehicle Rentals" styleClass="badge-top"/>
+                    <VBox spacing="0">
+                        <Label text="Drive Your Dreams" styleClass="hero-title"/>
+                        <Label text="Rent with Ease" styleClass="hero-title-orange"/>
                     </VBox>
-                </children>
+                    <Label text="Experience premium bikes and cars at your fingertips. Book instantly, ride freely, and explore without limits." 
+                           wrapText="true" maxWidth="600" styleClass="hero-subtitle"/>
+                    
+                    <HBox spacing="15" alignment="CENTER_LEFT" styleClass="search-card">
+                        <VBox spacing="5">
+                            <Label text="Location" styleClass="input-label"/>
+                            <TextField fx:id="locationField" promptText="Enter city" styleClass="search-input"/>
+                        </VBox>
+                        <Separator orientation="VERTICAL" />
+                        <VBox spacing="5">
+                            <Label text="Pick-up" styleClass="input-label"/>
+                            <DatePicker promptText="dd/mm/yyyy" styleClass="search-date"/>
+                        </VBox>
+                        <Button text="Search" styleClass="search-button"/>
+                    </HBox>
+
+                    <HBox spacing="60" alignment="CENTER_LEFT">
+                        <VBox><Label text="500+" styleClass="stat-number"/><Label text="Vehicles" styleClass="stat-label"/></VBox>
+                        <VBox><Label text="10K+" styleClass="stat-number"/><Label text="Happy Customers" styleClass="stat-label"/></VBox>
+                        <VBox><Label text="50+" styleClass="stat-number"/><Label text="Locations" styleClass="stat-label"/></VBox>
+                    </HBox>
+                </VBox>
             </StackPane>
 
-            <VBox alignment="CENTER" spacing="40.0" styleClass="section-container">
-                <children>
-                    <Label styleClass="section-title" text="OUR FLEET / Choose Your Ride" />
-                    <HBox alignment="CENTER" spacing="30.0">
-                        <VBox styleClass="fleet-card">
-                            <ImageView fitWidth="300" preserveRatio="true">
-                                <Image url="@images/bike_thumb.png"/>
-                            </ImageView>
-                            <Label styleClass="card-header" text="Sports Bikes" />
-                            <Label styleClass="card-price" text="From $15/day" />
+            <VBox alignment="CENTER" spacing="40" styleClass="section-padding">
+                <VBox alignment="CENTER" spacing="10">
+                    <Label text="OUR FLEET" styleClass="section-badge"/>
+                    <Label text="Choose Your Ride" styleClass="section-title"/>
+                </VBox>
+                <HBox alignment="CENTER" spacing="30">
+                    <StackPane styleClass="fleet-card">
+                        <ImageView fitWidth="550" preserveRatio="true"><Image url="@/images/logo.jpeg"/></ImageView>
+                        <VBox alignment="BOTTOM_LEFT" spacing="10" styleClass="card-overlay">
+                            <Label text="200+ Available" styleClass="badge-small"/>
+                            <Label text="Bikes" styleClass="card-title-main"/>
+                            <Label text="From $15/day" styleClass="card-price-label"/>
                         </VBox>
-                        <VBox styleClass="fleet-card">
-                            <ImageView fitWidth="300" preserveRatio="true">
-                                <Image url="@images/car_thumb.png"/>
-                            </ImageView>
-                            <Label styleClass="card-header" text="Luxury Cars" />
-                            <Label styleClass="card-price" text="From $45/day" />
+                    </StackPane>
+                    <StackPane styleClass="fleet-card">
+                        <ImageView fitWidth="550" preserveRatio="true"><Image url="@/images/HeroSection.jpeg"/></ImageView>
+                        <VBox alignment="BOTTOM_LEFT" spacing="10" styleClass="card-overlay">
+                            <Label text="300+ Available" styleClass="badge-small"/>
+                            <Label text="Cars" styleClass="card-title-main"/>
+                            <Label text="From $45/day" styleClass="card-price-label"/>
                         </VBox>
-                    </HBox>
-                </children>
-                <padding><Insets bottom="80" top="80"/></padding>
+                    </StackPane>
+                </HBox>
             </VBox>
+
+            <VBox alignment="CENTER" spacing="60" styleClass="section-padding-alt">
+                <VBox alignment="CENTER" spacing="10">
+                    <Label text="PROCESS" styleClass="section-badge"/>
+                    <Label text="How it Works" styleClass="section-title"/>
+                </VBox>
+                <HBox alignment="CENTER" spacing="80">
+                    <VBox alignment="CENTER" spacing="15" styleClass="step-item">
+                        <Label text="01" styleClass="step-num"/>
+                        <Label text="Choose Vehicle" styleClass="step-head"/>
+                        <Label text="Browse our extensive catalog" styleClass="step-sub"/>
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="15" styleClass="step-item">
+                        <Label text="02" styleClass="step-num-active"/>
+                        <Label text="Pick Date" styleClass="step-head"/>
+                        <Label text="Select your schedule" styleClass="step-sub"/>
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="15" styleClass="step-item">
+                        <Label text="03" styleClass="step-num"/>
+                        <Label text="Drive Away" styleClass="step-head"/>
+                        <Label text="Enjoy your premium ride" styleClass="step-sub"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+
+            <VBox alignment="CENTER" spacing="40" styleClass="section-padding">
+                <HBox alignment="CENTER" spacing="50" maxWidth="1200">
+                    <VBox alignment="CENTER_LEFT" spacing="20" HBox.hgrow="ALWAYS">
+                        <Label text="WHY CHOOSE US" styleClass="section-badge"/>
+                        <Label text="Premium Experience" styleClass="section-title"/>
+                        <VBox spacing="15">
+                            <HBox spacing="15" alignment="CENTER_LEFT">
+                                <Circle radius="5" fill="#FF8C00"/>
+                                <Label text="24/7 Roadside Assistance" styleClass="feature-text"/>
+                            </HBox>
+                            <HBox spacing="15" alignment="CENTER_LEFT">
+                                <Circle radius="5" fill="#FF8C00"/>
+                                <Label text="Flexible Pick-up &amp; Drop-off" styleClass="feature-text"/>
+                            </HBox>
+                            <HBox spacing="15" alignment="CENTER_LEFT">
+                                <Circle radius="5" fill="#FF8C00"/>
+                                <Label text="No Hidden Charges" styleClass="feature-text"/>
+                            </HBox>
+                        </VBox>
+                    </VBox>
+                    <ImageView fitWidth="500" preserveRatio="true">
+                        <Image url="@/images/logo.jpeg"/>
+                    </ImageView>
+                </HBox>
+            </VBox>
+
         </VBox>
     </content>
-</ScrollPane> -->
+</ScrollPane>

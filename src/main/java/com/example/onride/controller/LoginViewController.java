@@ -73,7 +73,7 @@ public class LoginViewController {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/com/example/onride/SignUpView.fxml"));
             Stage stage = (Stage) emailField.getScene().getWindow();
-            stage.setScene(new Scene(root, 1000, 600));
+            stage.setScene(new Scene(root));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -84,7 +84,7 @@ public class LoginViewController {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/com/example/onride/HomeView.fxml"));
             Stage stage = (Stage) emailField.getScene().getWindow();
-            stage.setScene(new Scene(root, 1000, 600));
+            stage.setScene(new Scene(root));
         } catch (IOException e) {
             e.printStackTrace();
         }

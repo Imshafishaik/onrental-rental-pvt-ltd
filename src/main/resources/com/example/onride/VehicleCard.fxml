@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.Insets?>
+
+
+<VBox spacing="10"
+      fx:controller="com.example.onride.controller.VehicleCardController"
+      styleClass="vehicle-card"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml">
+
+    <ImageView fx:id="vehicleImage"
+               fitWidth="260"
+               fitHeight="150"
+               preserveRatio="true"/>
+
+    <Label fx:id="title"
+           styleClass="vehicle-title"/>
+
+    <Label fx:id="subtitle"
+           styleClass="vehicle-subtitle"/>
+
+    <Label fx:id="location"
+           styleClass="vehicle-meta"/>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label fx:id="price"
+               styleClass="vehicle-price"/>
+
+        <Region HBox.hgrow="ALWAYS"/>
+
+        <Label fx:id="typeBadge"
+               styleClass="vehicle-badge"/>
+    </HBox>
+
+</VBox>

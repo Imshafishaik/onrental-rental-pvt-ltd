@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="TOP_CENTER" spacing="12" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.onride.controller.HostVehicleController">
+    <padding>
+        <Insets top="20" bottom="20" left="20" right="20" />
+    </padding>
+
+    <Label text="Host a Vehicle" styleClass="section-title" />
+
+    <GridPane hgap="10" vgap="10">
+        <columnConstraints>
+            <ColumnConstraints percentWidth="30" />
+            <ColumnConstraints percentWidth="70" />
+        </columnConstraints>
+
+        <Label text="Type:" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+        <ComboBox fx:id="typeCombo" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+
+        <Label text="Brand:" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+        <TextField fx:id="brandField" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+
+        <Label text="Model:" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+        <TextField fx:id="modelField" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+
+        <Label text="Year:" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+        <TextField fx:id="yearField" GridPane.rowIndex="3" GridPane.columnIndex="1" />
+
+        <Label text="Price / day:" GridPane.rowIndex="4" GridPane.columnIndex="0" />
+        <TextField fx:id="priceField" GridPane.rowIndex="4" GridPane.columnIndex="1" />
+
+        <Label text="Location:" GridPane.rowIndex="5" GridPane.columnIndex="0" />
+        <TextField fx:id="locationField" GridPane.rowIndex="5" GridPane.columnIndex="1" />
+
+    </GridPane>
+
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Region HBox.hgrow="ALWAYS" />
+        <Button text="Cancel" onAction="#handleCancelAction" />
+        <Button text="Host Vehicle" onAction="#handleHostAction" />
+    </HBox>
+</VBox>
