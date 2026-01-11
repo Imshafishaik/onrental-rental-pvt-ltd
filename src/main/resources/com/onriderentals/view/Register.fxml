@@ -1,42 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 
 <VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.onriderentals.controller.RegisterController" styleClass="root" stylesheets="@styles.css">
     
     <fx:include source="Navbar.fxml"/>
     
-    <VBox alignment="CENTER" spacing="20.0" VBox.vgrow="ALWAYS">
-        <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-        </padding>
+    <HBox alignment="CENTER" VBox.vgrow="ALWAYS" style="-fx-background-color: #f1f3f9;">
+        <children>
+            <!-- Left Side: Branding/Illustration area -->
+            <VBox alignment="CENTER" spacing="30" prefWidth="450" style="-fx-background-color: linear-gradient(to bottom right, #667eea, #764ba2); -fx-padding: 60;">
+                <children>
+                    <Label text="OnRide" style="-fx-font-size: 48px; -fx-font-weight: bold; -fx-text-fill: white;" />
+                    <Label text="Join the Community." style="-fx-font-size: 24px; -fx-text-fill: rgba(255,255,255,0.8);" />
+                    <Region VBox.vgrow="ALWAYS" />
+                    <VBox spacing="20">
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Label text="🚗" style="-fx-font-size: 24px;"/>
+                            <Label text="Access to 500+ Vehicles" style="-fx-text-fill: white; -fx-font-size: 16px;" />
+                        </HBox>
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Label text="⚡" style="-fx-font-size: 24px;"/>
+                            <Label text="Instant Booking Confirmation" style="-fx-text-fill: white; -fx-font-size: 16px;" />
+                        </HBox>
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Label text="🛡️" style="-fx-font-size: 24px;"/>
+                            <Label text="Verified &amp; Insured Rides" style="-fx-text-fill: white; -fx-font-size: 16px;" />
+                        </HBox>
+                    </VBox>
+                </children>
+            </VBox>
 
-        <Label text="Register" styleClass="label-title">
-            <font>
-                <Font name="System Bold" size="24.0" />
-            </font>
-        </Label>
-        
-        <VBox maxWidth="300" spacing="10" styleClass="card" style="-fx-padding: 30;">
-            <TextField fx:id="usernameField" promptText="Full Name" />
-            <TextField fx:id="emailField" promptText="Email" />
-            <PasswordField fx:id="passwordField" promptText="Password" />
-            
-            <Label text="I want to:" styleClass="label" />
-            <ChoiceBox fx:id="userTypeChoiceBox" maxWidth="Infinity" />
+            <!-- Right Side: Register Form -->
+            <VBox alignment="CENTER" spacing="25" prefWidth="500" style="-fx-padding: 50; -fx-background-color: white;">
+                <children>
+                    <VBox spacing="8" alignment="CENTER_LEFT">
+                        <Label text="Create Account" styleClass="label-title" style="-fx-font-size: 32px;" />
+                        <Label text="Be part of the future of mobility" styleClass="label-subtitle" />
+                    </VBox>
 
-            <Button fx:id="registerButton" onAction="#register" text="Register" maxWidth="Infinity" styleClass="button-primary"/>
-            <Button fx:id="backToLoginButton" onAction="#backToLogin" text="Back to Login" maxWidth="Infinity" styleClass="button-ghost"/>
-        </VBox>
-        
-    </VBox>
+                    <VBox spacing="15">
+                        <children>
+                            <VBox spacing="5">
+                                <Label text="Full Name" style="-fx-font-weight: bold; -fx-font-size: 12px; -fx-text-fill: #636e72;" />
+                                <TextField fx:id="usernameField" promptText="Enter your full name" />
+                            </VBox>
+                            
+                            <VBox spacing="5">
+                                <Label text="Email Address" style="-fx-font-weight: bold; -fx-font-size: 12px; -fx-text-fill: #636e72;" />
+                                <TextField fx:id="emailField" promptText="Enter your email" />
+                            </VBox>
+
+                            <VBox spacing="5">
+                                <Label text="Password" style="-fx-font-weight: bold; -fx-font-size: 12px; -fx-text-fill: #636e72;" />
+                                <PasswordField fx:id="passwordField" promptText="Create a secure password" />
+                            </VBox>
+
+                            <VBox spacing="5">
+                                <Label text="Account Type" style="-fx-font-weight: bold; -fx-font-size: 12px; -fx-text-fill: #636e72;" />
+                                <ChoiceBox fx:id="userTypeChoiceBox" maxWidth="Infinity" style="-fx-background-color: white; -fx-border-color: #dee2e6; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 8;" />
+                            </VBox>
+                        </children>
+                    </VBox>
+
+                    <VBox spacing="15">
+                        <Button onAction="#register" text="Create Account" maxWidth="Infinity" styleClass="button-primary" style="-fx-padding: 15;" />
+                        <HBox alignment="CENTER" spacing="5">
+                            <Label text="Already have an account?" styleClass="label-subtitle" />
+                            <Button onAction="#backToLogin" text="Sign In" styleClass="button-ghost" style="-fx-padding: 0; -fx-font-weight: bold;" />
+                        </HBox>
+                    </VBox>
+                </children>
+            </VBox>
+        </children>
+    </HBox>
 </VBox>
-
-

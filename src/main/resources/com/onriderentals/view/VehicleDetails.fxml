@@ -2,22 +2,123 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.onriderentals.controller.VehicleDetailsController">
-   <children>
-      <VBox alignment="CENTER" layoutX="250.0" layoutY="100.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Label fx:id="vehicleMakeModelLabel" text="Make and Model">
-               <font>
-                  <Font size="36.0" />
-               </font>
-            </Label>
-            <Label fx:id="vehicleDetailsLabel" text="Details" />
-            <Button fx:id="backButton" onAction="#handleBackButtonAction" text="Back" />
-         </children>
-      </VBox>
-   </children>
-</AnchorPane>
+<VBox prefHeight="650.0" prefWidth="850.0" spacing="0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.onriderentals.controller.VehicleDetailsController" styleClass="root" stylesheets="@styles.css" style="-fx-background-color: white;">
+    <children>
+        <!-- Header / Navigation Placeholder -->
+        <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 20 40; -fx-background-color: #f8f9fa; -fx-border-color: #eee; -fx-border-width: 0 0 1 0;">
+            <children>
+                <Button fx:id="backButton" onAction="#handleBackButtonAction" text="← Back to Search" styleClass="button-ghost" />
+                <Region HBox.hgrow="ALWAYS" />
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <children>
+                        <Label text="Vehicle ID:" styleClass="label-subtitle" style="-fx-font-size: 12px;"/>
+                        <Label fx:id="vehicleIdLabel" text="#V-10293" style="-fx-font-weight: bold; -fx-font-size: 12px;"/>
+                    </children>
+                </HBox>
+            </children>
+        </HBox>
+
+        <HBox spacing="0" VBox.vgrow="ALWAYS">
+            <children>
+                <!-- Left: Image and Key Stats -->
+                <VBox prefWidth="400" spacing="30" style="-fx-padding: 40; -fx-background-color: #fcfcfc;">
+                    <children>
+                        <VBox style="-fx-background-color: white; -fx-background-radius: 20; -fx-padding: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 5);" alignment="CENTER">
+                            <children>
+                                <ImageView fx:id="vehicleImageView" fitWidth="320" fitHeight="240" preserveRatio="true" />
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="15">
+                            <children>
+                                <Label text="Key Features" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
+                                <GridPane hgap="15" vgap="15">
+                                    <columnConstraints>
+                                        <ColumnConstraints percentWidth="50"/>
+                                        <ColumnConstraints percentWidth="50"/>
+                                    </columnConstraints>
+                                    <children>
+                                        <HBox spacing="8" alignment="CENTER_LEFT" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                                            <Label text="⛽" />
+                                            <Label text="Premium Fuel" style="-fx-font-size: 13px;"/>
+                                        </HBox>
+                                        <HBox spacing="8" alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                            <Label text="⚙️" />
+                                            <Label text="Automatic" style="-fx-font-size: 13px;"/>
+                                        </HBox>
+                                        <HBox spacing="8" alignment="CENTER_LEFT" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                                            <Label text="❄️" />
+                                            <Label text="Air Conditioning" style="-fx-font-size: 13px;"/>
+                                        </HBox>
+                                        <HBox spacing="8" alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                            <Label text="🎵" />
+                                            <Label text="Bluetooth Audio" style="-fx-font-size: 13px;"/>
+                                        </HBox>
+                                    </children>
+                                </GridPane>
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+
+                <!-- Right: Information and Booking -->
+                <VBox HBox.hgrow="ALWAYS" spacing="30" style="-fx-padding: 40;">
+                    <children>
+                        <VBox spacing="10">
+                            <children>
+                                <HBox alignment="CENTER_LEFT" spacing="10">
+                                    <children>
+                                        <Label fx:id="typeLabel" text="PREMIUM CAR" styleClass="badge" />
+                                        <Region HBox.hgrow="ALWAYS" />
+                                        <HBox alignment="CENTER_LEFT" spacing="3">
+                                            <Label text="★" style="-fx-text-fill: #fca311;" />
+                                            <Label text="4.9 (124 reviews)" styleClass="label-subtitle" style="-fx-font-size: 12px;" />
+                                        </HBox>
+                                    </children>
+                                </HBox>
+                                <Label fx:id="vehicleMakeModelLabel" text="BMW M5 Competition" styleClass="label-title" style="-fx-font-size: 36px;" />
+                                <Label fx:id="locationLabel" text="📍 Beverly Hills, Los Angeles" styleClass="label-subtitle" />
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="15">
+                            <children>
+                                <Label text="Vehicle Description" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
+                                <Label fx:id="vehicleDetailsLabel" text="Experience the pinnacle of automotive engineering. This luxury sedan offers unmatched performance combined with executive-level comfort. Perfect for business trips or weekend getaways." wrapText="true" styleClass="label-subtitle" style="-fx-line-spacing: 5;"/>
+                            </children>
+                        </VBox>
+
+                        <Separator style="-fx-padding: 10 0;"/>
+
+                        <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: #f8f9fa; -fx-padding: 25; -fx-background-radius: 15;">
+                            <children>
+                                <VBox spacing="5">
+                                    <children>
+                                        <Label text="Rental Price" styleClass="label-subtitle" style="-fx-font-size: 12px;"/>
+                                        <HBox alignment="BASELINE_LEFT" spacing="5">
+                                            <children>
+                                                <Label fx:id="priceLabel" text="\$180" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #667eea;" />
+                                                <Label text="/ day" styleClass="label-subtitle" />
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                                <Region HBox.hgrow="ALWAYS" />
+                                <Button text="Book This Ride" styleClass="button-primary" style="-fx-padding: 15 40; -fx-font-size: 16px;"/>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+    </children>
+</VBox>

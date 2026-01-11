@@ -1,14 +1,12 @@
-/* OnRide Rentals - Dark Theme Stylesheet */
+/* OnRide Rentals - Modern Premium Light Theme Stylesheet */
 @import "stats.css";
 
-
-/* Root styling - Dark Background */
+/* Reset and Root */
 .root {
     -fx-font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
     -fx-font-size: 14px;
-    -fx-background-color: #121212;
-    /* Main Dark Background */
-    -fx-text-fill: white;
+    -fx-background-color: #f8f9fa;
+    -fx-text-fill: #2d3436;
 }
 
 /* Scrollpane */
@@ -23,7 +21,7 @@
 }
 
 .scroll-pane .viewport {
-    -fx-background-color: #121212;
+    -fx-background-color: transparent;
 }
 
 /* Scrollbar styling */
@@ -34,11 +32,11 @@
 
 .scroll-bar:vertical .thumb,
 .scroll-bar:horizontal .thumb {
-    -fx-background-color: #333;
+    -fx-background-color: #ddd;
     -fx-background-radius: 5;
 }
 
-/* VBox & HBox */
+/* Common Layouts */
 .vbox {
     -fx-spacing: 20px;
 }
@@ -49,474 +47,245 @@
 
 /* Labels */
 .label {
-    -fx-text-fill: #e0e0e0;
-    -fx-font-size: 14px;
-}
-
-.label-title {
-    -fx-font-size: 36px;
-    -fx-font-weight: bold;
-    -fx-text-fill: white;
-}
-
-.label-title-highlight {
-    -fx-text-fill: #ff9900;
-    /* Orange highlight */
-}
-
-.label-subtitle {
-    -fx-font-size: 16px;
-    -fx-text-fill: #a0a0a0;
-}
-
-.label-section-title {
-    -fx-font-size: 18px;
-    -fx-font-weight: bold;
-    -fx-text-fill: white;
-}
-
-/* Buttons */
-.button {
-    -fx-padding: 10px 20px;
-    -fx-font-size: 14px;
-    -fx-border-radius: 5;
-    -fx-background-radius: 5;
-    -fx-cursor: hand;
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
-    -fx-background-color: #2d2d2d;
-}
-
-.button:hover {
-    -fx-background-color: #3d3d3d;
-}
-
-.button-primary {
-    -fx-background-color: #ff9900;
-    /* Primary Orange */
-    -fx-text-fill: #121212;
-}
-
-.button-primary:hover {
-    -fx-background-color: #e68a00;
-}
-
-.button-outlined {
-    -fx-background-color: transparent;
-    -fx-border-color: #ff9900;
-    -fx-border-width: 1;
-    -fx-text-fill: #ff9900;
-}
-
-.button-outlined:hover {
-    -fx-background-color: rgba(255, 153, 0, 0.1);
-}
-
-.button-icon {
-    -fx-background-color: transparent;
-    -fx-text-fill: #a0a0a0;
-    -fx-font-size: 16px;
-    -fx-padding: 5;
-}
-
-.button-icon:hover {
-    -fx-text-fill: white;
-}
-
-/* Navigation Bar */
-.navbar {
-    -fx-padding: 15 40;
-    -fx-background-color: #1a1a1a;
-    -fx-border-color: #2d2d2d;
-    -fx-border-width: 0 0 1 0;
-}
-
-.nav-link {
-    -fx-background-color: transparent;
-    -fx-text-fill: #a0a0a0;
-    -fx-font-size: 14px;
-    -fx-cursor: hand;
-}
-
-.nav-link:hover {
-    -fx-text-fill: white;
-}
-
-.nav-btn-primary {
-    -fx-background-color: #ff9900;
-    -fx-text-fill: #121212;
-    -fx-font-weight: bold;
-    -fx-padding: 8 20;
-    -fx-border-radius: 20;
-    -fx-background-radius: 20;
-}
-
-/* Sidebar */
-.sidebar {
-    -fx-background-color: #1a1a1a;
-    -fx-padding: 30 20;
-    -fx-min-width: 250px;
-    -fx-border-color: #2d2d2d;
-    -fx-border-width: 0 1 0 0;
-}
-
-.sidebar-label {
-    -fx-font-weight: bold;
-    -fx-text-fill: white;
-    -fx-font-size: 16px;
-}
-
-.filter-group-label {
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #a0a0a0;
-}
-
-/* Inputs */
-.combo-box {
-    -fx-background-color: #2d2d2d;
-    -fx-border-color: #3d3d3d;
-    -fx-border-radius: 5;
-    -fx-text-fill: white;
-}
-
-.combo-box .cell {
-    -fx-text-fill: white;
-    -fx-background-color: #2d2d2d;
-}
-
-.combo-box .list-cell {
-    -fx-text-fill: white;
-    -fx-background-color: #2d2d2d;
-}
-
-.combo-box .list-cell:hover {
-    -fx-background-color: #ff9900;
-    -fx-text-fill: #121212;
-}
-
-/* Slider (Price Range) */
-.slider .track {
-    -fx-background-color: #3d3d3d;
-    -fx-pref-height: 4px;
-}
-
-.slider .thumb {
-    -fx-background-color: #ff9900;
-    -fx-pref-width: 14px;
-    -fx-pref-height: 14px;
-    -fx-border-radius: 10px;
-    -fx-background-radius: 10px;
-}
-
-/* Vehicle Card */
-.vehicle-card {
-    -fx-background-color: #1a1a1a;
-    /* Somewhat lighter than BG */
-    -fx-background-radius: 12;
-    -fx-border-radius: 12;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 5);
-    -fx-padding: 10;
-    -fx-border-color: #2d2d2d;
-    -fx-border-width: 1;
-}
-
-.vehicle-card:hover {
-    -fx-border-color: #ff9900;
-}
-
-.card-image-view {
-    -fx-background-radius: 10 10 0 0;
-}
-
-.card-title {
-    -fx-font-size: 18px;
-    -fx-font-weight: bold;
-    -fx-text-fill: white;
-}
-
-.card-subtitle {
-    -fx-font-size: 12px;
-    -fx-text-fill: #7d7d7d;
-}
-
-.card-price {
-    -fx-font-size: 20px;
-    -fx-font-weight: bold;
-    -fx-text-fill: white;
-}
-
-.card-price-period {
-    -fx-font-size: 12px;
-    -fx-text-fill: #7d7d7d;
-    -fx-font-weight: normal;
-}
-
-.badge {
-    -fx-background-color: #2d2d2d;
-    -fx-text-fill: #a0a0a0;
-    -fx-padding: 4 8;
-    -fx-background-radius: 4;
-    -fx-font-size: 10px;
-}
-
-.score-label {
-    -fx-text-fill: #ff9900;
-    -fx-font-weight: bold;
-}
-
-/* Filter Controls */
-.filter-button {
-    -fx-padding: 10 0;
-    -fx-background-color: #2d2d2d;
-    -fx-text-fill: white;
-    -fx-alignment: center;
-    -fx-cursor: hand;
-    -fx-background-radius: 5;
-    -fx-border-color: transparent;
-}
-
-.filter-button.selected {
-    -fx-background-color: transparent;
-    -fx-border-color: #ff9900;
-    -fx-text-fill: #ff9900;
-}
-
-.text-field {
-    -fx-background-color: #2d2d2d;
-    -fx-text-fill: white;
-    -fx-prompt-text-fill: #7d7d7d;
-    -fx-border-color: #3d3d3d;
-    -fx-border-radius: 5;
-    -fx-background-radius: 5;
-}
-
-.text-field:focused {
-    -fx-border-color: #ff9900;
-}
-
-.date-picker .text-field {
-    -fx-background-color: #2d2d2d;
-}
-
-.date-picker .arrow-button {
-    -fx-background-color: #ff9900;
-}
-
-.date-picker-popup {
-    -fx-background-color: #2d2d2d;
-}
-
-/* Scrollpane */
-.scroll-pane {
-    -fx-padding: 0;
-    -fx-border-width: 0;
-    -fx-background-color: white;
-}
-
-.scroll-pane:focused {
-    -fx-border-color: transparent;
-}
-
-.scroll-pane .viewport {
-    -fx-background-color: white;
-}
-
-/* VBox & HBox */
-.vbox {
-    -fx-spacing: 20px;
-}
-
-.hbox {
-    -fx-spacing: 15px;
-}
-
-/* Labels */
-.label {
-    -fx-text-fill: #333333;
+    -fx-text-fill: #2d3436;
     -fx-font-size: 14px;
 }
 
 .label-title {
     -fx-font-size: 48px;
     -fx-font-weight: bold;
-    -fx-text-fill: white;
+    -fx-text-fill: #2d3436;
 }
 
 .label-subtitle {
     -fx-font-size: 16px;
-    -fx-text-fill: #666666;
+    -fx-text-fill: #636e72;
 }
 
 .label-section-title {
-    -fx-font-size: 42px;
+    -fx-font-size: 24px;
     -fx-font-weight: bold;
-    -fx-text-fill: #333333;
+    -fx-text-fill: #2d3436;
 }
 
-.label-section-label {
-    -fx-font-size: 12px;
+.label-title-highlight {
     -fx-text-fill: #667eea;
-    -fx-font-weight: bold;
-    -fx-text-alignment: center;
 }
 
 /* Buttons */
 .button {
-    -fx-padding: 10px 20px;
+    -fx-padding: 10px 24px;
     -fx-font-size: 14px;
-    -fx-border-radius: 5;
-    -fx-background-radius: 5;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
     -fx-cursor: hand;
-    -fx-font-weight: normal;
+    -fx-font-weight: bold;
+    -fx-background-color: #e9ecef;
+    -fx-text-fill: #2d3436;
+    -fx-transition: 0.3s;
 }
 
 .button:hover {
-    -fx-opacity: 0.9;
-}
-
-.button:pressed {
-    -fx-opacity: 0.8;
+    -fx-background-color: #dee2e6;
 }
 
 .button-primary {
-    -fx-background-color: #667eea;
+    -fx-background-color: linear-gradient(to right, #667eea, #764ba2);
     -fx-text-fill: white;
-    -fx-font-weight: bold;
 }
 
 .button-primary:hover {
-    -fx-background-color: #5568d3;
+    -fx-opacity: 0.9;
 }
 
 .button-secondary {
-    -fx-background-color: #764ba2;
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
-}
-
-.button-secondary:hover {
-    -fx-background-color: #65408a;
-}
-
-.button-danger {
-    -fx-background-color: #ff6b6b;
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
-}
-
-.button-danger:hover {
-    -fx-background-color: #ff5252;
+    -fx-background-color: #fca311;
+    -fx-text-fill: #14213d;
 }
 
 .button-ghost {
     -fx-background-color: transparent;
-    -fx-text-fill: #666666;
+    -fx-text-fill: #667eea;
 }
 
 .button-ghost:hover {
-    -fx-text-fill: #333333;
+    -fx-background-color: rgba(102, 126, 234, 0.1);
 }
 
-/* TextFields */
-.text-field {
-    -fx-padding: 10px 15px;
-    -fx-font-size: 14px;
-    -fx-border-radius: 5;
-    -fx-background-radius: 5;
-    -fx-border-color: #ddd;
-    -fx-border-width: 1;
-    -fx-text-fill: #333333;
+.button-icon {
+    -fx-background-color: transparent;
+    -fx-text-fill: #636e72;
+    -fx-font-size: 16px;
+    -fx-padding: 8;
 }
 
-.text-field:focused {
+.button-icon:hover {
+    -fx-text-fill: #667eea;
+}
+
+/* Forms and Inputs */
+.text-field,
+.password-field {
+    -fx-padding: 12px 16px;
+    -fx-background-color: white;
+    -fx-border-color: #dee2e6;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-text-fill: #2d3436;
+    -fx-prompt-text-fill: #adb5bd;
+}
+
+.text-field:focused,
+.password-field:focused {
     -fx-border-color: #667eea;
-    -fx-border-width: 2;
+    -fx-border-width: 1.5;
 }
 
-/* DatePicker */
-.date-picker {
-    -fx-padding: 10px;
-    -fx-font-size: 14px;
-    -fx-border-radius: 5;
-}
-
-/* ComboBox */
 .combo-box {
-    -fx-padding: 8px 10px;
-    -fx-font-size: 12px;
-    -fx-border-radius: 5;
+    -fx-background-color: white;
+    -fx-border-color: #dee2e6;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 5;
 }
 
-/* Slider */
-.slider {
-    -fx-padding: 5px 0;
+.combo-box .cell {
+    -fx-text-fill: #2d3436;
+}
+
+.date-picker {
+    -fx-background-color: white;
+    -fx-border-color: #dee2e6;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+
+.date-picker .text-field {
+    -fx-border-width: 0;
+}
+
+/* Navigation Bar */
+.navbar {
+    -fx-padding: 15 40;
+    -fx-background-color: white;
+    -fx-border-color: #e9ecef;
+    -fx-border-width: 0 0 1 0;
+}
+
+.nav-link {
+    -fx-background-color: transparent;
+    -fx-text-fill: #636e72;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+}
+
+.nav-link:hover {
+    -fx-text-fill: #667eea;
+}
+
+.nav-btn-primary {
+    -fx-background-color: #667eea;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10 24;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+}
+
+/* Sidebar */
+.sidebar {
+    -fx-background-color: white;
+    -fx-padding: 30 20;
+    -fx-min-width: 250px;
+    -fx-border-color: #e9ecef;
+    -fx-border-width: 0 1 0 0;
+}
+
+.filter-group-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #adb5bd;
+    -fx-text-transform: uppercase;
+}
+
+/* Filter Buttons */
+.filter-button {
+    -fx-padding: 10 15;
+    -fx-background-color: #f8f9fa;
+    -fx-text-fill: #636e72;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+}
+
+.filter-button.selected {
+    -fx-background-color: #667eea;
+    -fx-text-fill: white;
+}
+
+/* Slider (Price Range) */
+.slider .track {
+    -fx-background-color: #e9ecef;
+    -fx-pref-height: 4px;
 }
 
 .slider .thumb {
     -fx-background-color: #667eea;
+    -fx-pref-width: 16px;
+    -fx-pref-height: 16px;
+    -fx-background-radius: 10px;
 }
 
-.slider .track {
-    -fx-background-color: #ddd;
-}
-
-.slider:focused .thumb {
-    -fx-background-color: #5568d3;
-}
-
-/* Grid pane */
-.grid-pane {
-    -fx-hgap: 20;
-    -fx-vgap: 20;
-    -fx-padding: 10;
-}
-
-/* Separator/Region */
-.region {
-    -fx-background-color: transparent;
-}
-
-/* Hero section background */
-.hero-section {
-    -fx-background-color: linear-gradient(to bottom right, #667eea, #764ba2);
-    -fx-padding: 40;
-}
-
-/* Card styling */
-.card {
+/* Vehicle Card */
+.vehicle-card {
     -fx-background-color: white;
-    -fx-border-radius: 10;
-    -fx-background-radius: 10;
-    -fx-padding: 25;
+    -fx-background-radius: 16;
+    -fx-padding: 15;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.05), 15, 0, 0, 5);
+    -fx-cursor: hand;
 }
 
-/* Light background */
-.light-bg {
-    -fx-background-color: #f8f9fa;
+.vehicle-card:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(102, 126, 234, 0.2), 20, 0, 0, 8);
+    -fx-translate-y: -5;
 }
 
-/* Dark background (footer) */
-.dark-bg {
-    -fx-background-color: #1a1a2e;
+.card-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2d3436;
 }
 
-/* Navigation bar */
-.navbar {
-    -fx-padding: 20 40;
-    -fx-background-color: white;
-    -fx-border-color: #e0e0e0;
-    -fx-border-width: 0 0 1 0;
+.card-subtitle {
+    -fx-font-size: 14px;
+    -fx-text-fill: #636e72;
 }
 
-/* Modern TableView Styling */
+.card-price {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #667eea;
+}
+
+/* Badges */
+.badge {
+    -fx-background-color: #f1f3f9;
+    -fx-text-fill: #667eea;
+    -fx-padding: 4 10;
+    -fx-background-radius: 5;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+/* TableView Styling */
 .table-view {
     -fx-background-color: transparent;
     -fx-base: white;
     -fx-control-inner-background: white;
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-border-color: #eee;
+    -fx-border-color: #e9ecef;
     -fx-border-width: 1px;
 }
 
@@ -532,14 +301,14 @@
 }
 
 .table-view .column-header .label {
-    -fx-text-fill: #333;
+    -fx-text-fill: #2d3436;
     -fx-font-weight: bold;
 }
 
 .table-view .table-cell {
     -fx-padding: 15 10;
     -fx-border-color: transparent;
-    -fx-text-fill: #444;
+    -fx-text-fill: #2d3436;
     -fx-alignment: center-left;
 }
 
@@ -564,13 +333,16 @@
     -fx-text-fill: #667eea;
 }
 
-/* Scrollbar adjustment for tables */
-.table-view .scroll-bar:vertical {
-    -fx-background-color: transparent;
-    -fx-pref-width: 8;
+/* Cards */
+.card {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.05), 10, 0, 0, 5);
 }
 
-.table-view .scroll-bar:vertical .thumb {
-    -fx-background-color: #ddd;
-    -fx-background-radius: 4;
+/* Hero Section */
+.hero-banner {
+    -fx-background-color: linear-gradient(to right, #667eea, #764ba2);
+    -fx-background-radius: 20;
+    -fx-padding: 40;
 }

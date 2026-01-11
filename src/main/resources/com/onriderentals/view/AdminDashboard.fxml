@@ -60,7 +60,7 @@
                                          <Label text="💰" styleClass="stat-icon-label"/>
                                       </VBox>
                                       <VBox styleClass="stat-content">
-                                          <Label text="&#36;45,200" styleClass="stat-value"/>
+                                          <Label text="\$45,200" styleClass="stat-value"/>
                                          <Label text="Total Revenue" styleClass="stat-label"/>
                                          <Label text="↗ 8% this month" styleClass="stat-trend-up"/>
                                       </VBox>

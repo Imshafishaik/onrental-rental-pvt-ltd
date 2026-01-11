@@ -7,42 +7,67 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.Region?>
-<?import javafx.geometry.Pos?>
+<?import javafx.scene.layout.FlowPane?>
 
 <VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" 
       fx:controller="com.onriderentals.controller.VehicleCardController"
       styleClass="vehicle-card" maxWidth="280">
     
-    <StackPane>
-        <ImageView fx:id="vehicleImage" fitWidth="260" fitHeight="160" preserveRatio="true" styleClass="card-image-view" />
-        <Button fx:id="favoriteButton" styleClass="button-ghost" text="♡" StackPane.alignment="TOP_RIGHT" style="-fx-font-size: 20px; -fx-padding: 5;" />
-        <Label fx:id="typeBadge" text="Car" styleClass="badge" StackPane.alignment="TOP_LEFT" style="-fx-translate-x: 10; -fx-translate-y: 10;" />
+    <StackPane style="-fx-background-color: #f8f9fa; -fx-background-radius: 12;">
+        <children>
+            <ImageView fx:id="vehicleImage" fitWidth="250" fitHeight="150" preserveRatio="true" />
+            <Button fx:id="favoriteButton" styleClass="button-ghost" text="♡" StackPane.alignment="TOP_RIGHT" style="-fx-font-size: 18px; -fx-padding: 8; -fx-text-fill: #adb5bd;" />
+            <Label fx:id="typeBadge" text="Car" styleClass="badge" StackPane.alignment="TOP_LEFT" style="-fx-translate-x: 10; -fx-translate-y: 10;" />
+        </children>
     </StackPane>
     
-    <VBox spacing="5" style="-fx-padding: 10 0 0 0;">
-        <Label fx:id="vehicleName" text="Luxury Sedan Pro" styleClass="card-title" />
-        <Label fx:id="vehicleModel" text="BMW M5 - 2024" styleClass="card-subtitle" />
-        
-        <HBox spacing="5" style="-fx-padding: 5 0;">
-             <Label text="Location:" styleClass="label-subtitle" style="-fx-font-size: 12px;" />
-             <Label fx:id="locationLabel" text="Los Angeles" styleClass="label" style="-fx-font-size: 12px;" />
-        </HBox>
+    <VBox spacing="10" style="-fx-padding: 15 0 0 0;">
+        <children>
+            <VBox spacing="2">
+                <children>
+                    <Label fx:id="vehicleName" text="Luxury Sedan Pro" styleClass="card-title" />
+                    <Label fx:id="vehicleModel" text="BMW M5 - 2024" styleClass="card-subtitle" style="-fx-font-size: 13px;"/>
+                </children>
+            </VBox>
+            
+            <HBox spacing="5">
+                <children>
+                    <Label text="📍" style="-fx-font-size: 11px;"/>
+                    <Label fx:id="locationLabel" text="Los Angeles" styleClass="label-subtitle" style="-fx-font-size: 12px;" />
+                </children>
+            </HBox>
 
-        <FlowPane hgap="5" vgap="5">
-            <Label text="Automatic" styleClass="badge" />
-            <Label text="Diesel" styleClass="badge" />
-            <Label text="5 Seats" styleClass="badge" />
-        </FlowPane>
-        
-        <HBox alignment="CENTER_LEFT" spacing="5">
-            <Label text="★" style="-fx-text-fill: #ff9900;" />
-            <Label fx:id="ratingLabel" text="4.8" styleClass="score-label" />
-            <Label fx:id="reviewCountLabel" text="(89 reviews)" styleClass="label-subtitle" style="-fx-font-size: 12px;" />
-            <Region HBox.hgrow="ALWAYS" />
-            <Label fx:id="priceLabel" text="\$150" styleClass="card-price" />
-            <Label text="/day" styleClass="card-price-period" />
-        </HBox>
-        
-        <Button fx:id="bookButton" text="Book Now" styleClass="button-primary" maxWidth="Infinity" onAction="#handleBook" />
+            <FlowPane hgap="8" vgap="8">
+                <children>
+                    <Label text="Automatic" styleClass="badge" style="-fx-background-color: #f1f3f9; -fx-text-fill: #636e72;"/>
+                    <Label text="5 Seats" styleClass="badge" style="-fx-background-color: #f1f3f9; -fx-text-fill: #636e72;"/>
+                </children>
+            </FlowPane>
+            
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <children>
+                    <VBox alignment="CENTER_LEFT" spacing="2">
+                        <children>
+                            <HBox alignment="CENTER_LEFT" spacing="3">
+                                <Label text="★" style="-fx-text-fill: #fca311; -fx-font-size: 12px;" />
+                                <Label fx:id="ratingLabel" text="4.8" style="-fx-font-weight: bold; -fx-font-size: 12px;" />
+                                <Label fx:id="reviewCountLabel" text="(89)" styleClass="label-subtitle" style="-fx-font-size: 11px;" />
+                            </HBox>
+                        </children>
+                    </VBox>
+                    <Region HBox.hgrow="ALWAYS" />
+                    <VBox alignment="CENTER_RIGHT" spacing="0">
+                        <children>
+                            <HBox alignment="BASELINE_RIGHT" spacing="2">
+                                <Label fx:id="priceLabel" text="\$150" styleClass="card-price" />
+                                <Label text="/day" styleClass="label-subtitle" style="-fx-font-size: 12px;" />
+                            </HBox>
+                        </children>
+                    </VBox>
+                </children>
+            </HBox>
+            
+            <Button fx:id="bookButton" text="Rent Now" styleClass="button-primary" maxWidth="Infinity" onAction="#handleBook" style="-fx-padding: 12;"/>
+        </children>
     </VBox>
 </VBox>

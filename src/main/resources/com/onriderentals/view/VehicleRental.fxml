@@ -8,93 +8,110 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane fitToWidth="true" styleClass="scroll-pane" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.onriderentals.controller.VehicleRentalController">
-   <content>
-      <VBox styleClass="root">
-         <!-- Shared Navigation Bar -->
-         <fx:include source="Navbar.fxml"/>
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.onriderentals.controller.VehicleRentalController" styleClass="root" stylesheets="@styles.css">
+    <children>
+        <fx:include source="Navbar.fxml"/>
+        
+        <HBox VBox.vgrow="ALWAYS">
+            <children>
+                <!-- Modern Sidebar Filters -->
+                <VBox styleClass="sidebar" prefWidth="320" minWidth="320" spacing="30">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <Label text="Filters" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+                            <Region HBox.hgrow="ALWAYS" />
+                            <Button text="Reset" styleClass="button-ghost" style="-fx-font-size: 12px;"/>
+                        </HBox>
 
-         <!-- Main Content Area -->
-         <VBox spacing="30" style="-fx-padding: 40;">
-             <!-- Header -->
-             <VBox spacing="10">
-                 <HBox alignment="BASELINE_LEFT" spacing="10">
-                    <Label styleClass="label-title" text="Browse" />
-                    <Label styleClass="label-title, label-title-highlight" text="Vehicles" />
-                 </HBox>
-                 <Label styleClass="label-subtitle" text="Explore our extensive collection of premium bikes and cars. Find the perfect vehicle for your next adventure." wrapText="true" maxWidth="800" />
-             </VBox>
+                        <!-- Location Filter -->
+                        <VBox spacing="10">
+                            <Label text="Location" styleClass="filter-group-label" />
+                            <ComboBox fx:id="locationCombo" promptText="Select Area" maxWidth="Infinity" />
+                        </VBox>
 
-             <HBox spacing="30">
-                 <!-- Sidebar filters -->
-                 <VBox styleClass="card, sidebar" maxWidth="300" minWidth="280">
-                     <Label styleClass="label-section-title" text="Filters" />
-                     
-                     <VBox spacing="15">
-                         <Label styleClass="filter-group-label" text="Location" />
-                         <ComboBox fx:id="locationCombo" promptText="All Locations" maxWidth="Infinity" />
-                     </VBox>
+                        <!-- Vehicle Type Toggle -->
+                        <VBox spacing="10">
+                            <Label text="Vehicle Type" styleClass="filter-group-label" />
+                            <HBox spacing="10">
+                                <Button fx:id="filterAllBtn" text="All" styleClass="filter-button, selected" maxWidth="Infinity" HBox.hgrow="ALWAYS" onAction="#filterByType" />
+                                <Button fx:id="filterBikeBtn" text="Bikes" styleClass="filter-button" maxWidth="Infinity" HBox.hgrow="ALWAYS" onAction="#filterByType" />
+                                <Button fx:id="filterCarBtn" text="Cars" styleClass="filter-button" maxWidth="Infinity" HBox.hgrow="ALWAYS" onAction="#filterByType" />
+                            </HBox>
+                        </VBox>
 
-                     <VBox spacing="15">
-                         <Label styleClass="filter-group-label" text="Vehicle Type" />
-                         <HBox spacing="10">
-                             <Button fx:id="filterAllBtn" text="All" styleClass="filter-button, selected" maxWidth="Infinity" HBox.hgrow="ALWAYS" onAction="#filterByType" />
-                             <Button fx:id="filterBikeBtn" text="Bikes" styleClass="filter-button" maxWidth="Infinity" HBox.hgrow="ALWAYS" onAction="#filterByType" />
-                             <Button fx:id="filterCarBtn" text="Cars" styleClass="filter-button" maxWidth="Infinity" HBox.hgrow="ALWAYS" onAction="#filterByType" />
-                         </HBox>
-                     </VBox>
+                        <!-- Price Range Slider -->
+                        <VBox spacing="15">
+                            <Label text="Daily Budget" styleClass="filter-group-label" />
+                            <VBox spacing="10" style="-fx-background-color: #f8f9fa; -fx-padding: 15; -fx-background-radius: 12;">
+                                <Slider fx:id="priceSlider" min="0" max="500" value="500" />
+                                <HBox alignment="CENTER">
+                                    <Label text="\$0" style="-fx-font-weight: bold;"/>
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <Label fx:id="priceValueLabel" text="\$500" style="-fx-text-fill: #667eea; -fx-font-weight: bold; -fx-font-size: 16px;"/>
+                                </HBox>
+                            </VBox>
+                        </VBox>
 
-                     <VBox spacing="15">
-                         <Label styleClass="filter-group-label" text="Price Range" />
-                         <Slider fx:id="priceSlider" min="0" max="500" value="500" showTickLabels="false" showTickMarks="false" />
-                         <HBox alignment="CENTER_LEFT">
-                             <Label text="\$0" style="-fx-text-fill: white;" />
-                             <Region HBox.hgrow="ALWAYS" />
-                             <Label text="to" style="-fx-text-fill: #7d7d7d;" />
-                             <Region HBox.hgrow="ALWAYS" />
-                             <Label fx:id="priceValueLabel" text="\$500" style="-fx-text-fill: white;" />
-                         </HBox>
-                     </VBox>
+                        <!-- Dates -->
+                        <VBox spacing="10">
+                            <Label text="Rental Period" styleClass="filter-group-label" />
+                            <VBox spacing="15">
+                                <VBox spacing="5">
+                                    <Label text="Pickup" style="-fx-font-size: 12px; -fx-text-fill: #adb5bd;"/>
+                                    <DatePicker fx:id="pickupDatePicker" maxWidth="Infinity" promptText="Select Date" />
+                                </VBox>
+                                <VBox spacing="5">
+                                    <Label text="Return" style="-fx-font-size: 12px; -fx-text-fill: #adb5bd;"/>
+                                    <DatePicker fx:id="returnDatePicker" maxWidth="Infinity" promptText="Select Date" />
+                                </VBox>
+                            </VBox>
+                        </VBox>
+                    </children>
+                </VBox>
 
-                     <VBox spacing="15">
-                         <Label styleClass="filter-group-label" text="Availability" />
-                         <DatePicker fx:id="pickupDatePicker" promptText="Pick-up date" maxWidth="Infinity" />
-                         <DatePicker fx:id="returnDatePicker" promptText="Return date" maxWidth="Infinity" />
-                     </VBox>
-                 </VBox>
+                <!-- Main Results Area -->
+                <VBox HBox.hgrow="ALWAYS" style="-fx-background-color: #f1f3f9;">
+                    <children>
+                        <!-- Top Bar -->
+                        <HBox alignment="CENTER_LEFT" style="-fx-padding: 20 40; -fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.02), 5, 0, 0, 2);">
+                            <children>
+                                <Label fx:id="resultsCountLabel" text="Finding the best rides for you..." style="-fx-font-weight: bold; -fx-text-fill: #636e72;"/>
+                                <Region HBox.hgrow="ALWAYS" />
+                                <HBox spacing="15" alignment="CENTER_LEFT">
+                                    <Label text="Sort:" style="-fx-text-fill: #adb5bd;"/>
+                                    <ComboBox fx:id="sortCombo" promptText="Popularity" prefWidth="150" />
+                                </HBox>
+                            </children>
+                        </HBox>
 
-                 <!-- Grid Content -->
-                 <VBox spacing="20" HBox.hgrow="ALWAYS">
-                     <HBox alignment="CENTER_LEFT">
-                         <Label fx:id="resultsCountLabel" text="Showing all vehicles" style="-fx-text-fill: #a0a0a0;" />
-                         <Region HBox.hgrow="ALWAYS" />
-                         <Label text="Sort by:" style="-fx-text-fill: #a0a0a0;" />
-                         <ComboBox fx:id="sortCombo" promptText="Recommended" />
-                     </HBox>
-
-                     <FlowPane fx:id="vehicleGrid" hgap="25" vgap="25" prefWrapLength="800">
-                         <!-- Vehicle Cards will be injected here dynamically -->
-                     </FlowPane>
-
-                     <!-- Pagination -->
-                     <HBox alignment="CENTER" spacing="10" style="-fx-padding: 20 0;">
-                         <Button styleClass="button-icon" text="&lt;" />
-                         <Button styleClass="button-primary" text="1" />
-                         <Button styleClass="button-icon" text="2" />
-                         <Button styleClass="button-icon" text="&gt;" />
-                     </HBox>
-                 </VBox>
-             </HBox>
-         </VBox>
-      </VBox>
-   </content>
-</ScrollPane>
-
-
-
+                        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" style="-fx-background-color: transparent;">
+                            <content>
+                                <VBox style="-fx-padding: 40;" spacing="30">
+                                    <children>
+                                        <FlowPane fx:id="vehicleGrid" hgap="30" vgap="30" prefWrapLength="900">
+                                            <!-- Dynamics Cards -->
+                                        </FlowPane>
+                                        
+                                        <!-- Modern Pagination -->
+                                        <HBox alignment="CENTER" spacing="10" style="-fx-padding: 40 0;">
+                                            <Button styleClass="button-icon" text="←" />
+                                            <Button styleClass="button-primary" text="1" style="-fx-min-width: 45; -fx-min-height: 45;"/>
+                                            <Button styleClass="button-ghost" text="2" style="-fx-min-width: 45; -fx-min-height: 45;"/>
+                                            <Button styleClass="button-ghost" text="3" style="-fx-min-width: 45; -fx-min-height: 45;"/>
+                                            <Button styleClass="button-icon" text="→" />
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                            </content>
+                        </ScrollPane>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+    </children>
+</VBox>
