@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.onriderentals.controller.AdminDashboardController">
+   <top>
+      <Label text="Admin Dashboard" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </Label>
+   </top>
+   <center>
+      <TabPane prefHeight="600.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab text="User Management">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="userTable" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                           <columns>
+                              <TableColumn fx:id="userIdColumn" prefWidth="75.0" text="User ID" />
+                              <TableColumn fx:id="usernameColumn" prefWidth="150.0" text="Username" />
+                              <TableColumn fx:id="emailColumn" prefWidth="200.0" text="Email" />
+                              <TableColumn fx:id="userTypeColumn" prefWidth="100.0" text="User Type" />
+                              <TableColumn fx:id="userActionsColumn" prefWidth="200.0" text="Actions" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Booking Reports">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="bookingTable" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                           <columns>
+                              <TableColumn fx:id="bookingIdColumn" prefWidth="75.0" text="Booking ID" />
+                              <TableColumn fx:id="customerNameColumn" prefWidth="150.0" text="Customer" />
+                              <TableColumn fx:id="vehicleInfoColumn" prefWidth="200.0" text="Vehicle" />
+                              <TableColumn fx:id="bookingDatesColumn" prefWidth="200.0" text="Dates" />
+                              <TableColumn fx:id="bookingCostColumn" prefWidth="100.0" text="Cost" />
+                              <TableColumn fx:id="bookingStatusColumn" prefWidth="100.0" text="Status" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Vehicle Management">
+                <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        <children>
+                            <TableView fx:id="vehicleTable" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                                <columns>
+                                    <TableColumn fx:id="vehicleIdColumn" prefWidth="75.0" text="Vehicle ID" />
+                                    <TableColumn fx:id="vehicleMakeColumn" prefWidth="120.0" text="Make" />
+                                    <TableColumn fx:id="vehicleModelColumn" prefWidth="120.0" text="Model" />
+                                    <TableColumn fx:id="vehicleTypeColumn" prefWidth="100.0" text="Type" />
+                                    <TableColumn fx:id="vehiclePriceColumn" prefWidth="100.0" text="Price/Day" />
+                                    <TableColumn fx:id="vehicleStatusColumn" prefWidth="100.0" text="Status" />
+                                </columns>
+                            </TableView>
+                        </children>
+                    </AnchorPane>
+                </content>
+            </Tab>
+             <Tab text="Financial Overview">
+                 <content>
+                     <VBox alignment="CENTER" spacing="20.0">
+                         <padding>
+                             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                         </padding>
+                         <children>
+                             <Label text="Monthly Earnings">
+                                 <font>
+                                     <Font name="System Bold" size="18.0" />
+                                 </font>
+                             </Label>
+                             <BarChart fx:id="earningsChart" prefHeight="400.0" prefWidth="700.0">
+                                 <xAxis>
+                                     <CategoryAxis label="Month" />
+                                 </xAxis>
+                                 <yAxis>
+                                     <NumberAxis label="Earnings" />
+                                 </yAxis>
+                             </BarChart>
+                         </children>
+                     </VBox>
+                 </content>
+             </Tab>
+         </tabs>
+      </TabPane>
+   </center>
+</BorderPane>

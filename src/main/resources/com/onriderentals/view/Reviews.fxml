@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.onriderentals.controller.ReviewsController">
+    <Label text="Reviews" />
+    <TableView fx:id="reviewsTable">
+        <columns>
+            <TableColumn text="Vehicle" fx:id="vehicleColumn" />
+            <TableColumn text="User" fx:id="userColumn" />
+            <TableColumn text="Rating" fx:id="ratingColumn" />
+            <TableColumn text="Review" fx:id="reviewColumn" />
+        </columns>
+    </TableView>
+</VBox>

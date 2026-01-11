@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.onriderentals.controller.ReportsController">
+    <Label text="Reports" />
+    <HBox alignment="CENTER" spacing="10.0">
+        <Label text="Start Date:" />
+        <DatePicker fx:id="startDatePicker" />
+        <Label text="End Date:" />
+        <DatePicker fx:id="endDatePicker" />
+    </HBox>
+    <Button text="Generate Report" onAction="#generateReport" />
+    <!-- I will add a TableView here to display the report -->
+</VBox>

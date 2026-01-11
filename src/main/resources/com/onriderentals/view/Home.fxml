@@ -1,0 +1,755 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane fitToWidth="true" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.onriderentals.controller.HomeController">
+   <content>
+      <VBox spacing="0" style="-fx-font-family: 'Segoe UI', Arial, sans-serif;">
+         <!-- Hero Section -->
+         <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -fx-fill: true;">
+            <children>
+               <VBox layoutX="0" layoutY="0" spacing="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" alignment="CENTER">
+                  <children>
+                     <!-- Navigation Bar -->
+                     <HBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-padding: 20px 40px;">
+                        <children>
+                           <Label text="OnRide Rentals" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: white;">
+                              <font>
+                                 <Font size="24.0" />
+                              </font>
+                           </Label>
+                           <Region HBox.hgrow="ALWAYS" />
+                           <Button fx:id="navVehiclesBtn" onAction="#handleNavVehicles" text="Vehicles" style="-fx-font-size: 14px; -fx-text-fill: white; -fx-background-color: transparent; -fx-cursor: hand;" />
+                           <Button fx:id="navLoginBtn" onAction="#handleLogin" text="Sign In" style="-fx-font-size: 14px; -fx-text-fill: white; -fx-background-color: transparent; -fx-cursor: hand;" />
+                           <Button fx:id="navRegisterBtn" onAction="#handleRegister" text="Get Started" style="-fx-padding: 10px 20px; -fx-font-size: 14px; -fx-background-color: #ff6b6b; -fx-text-fill: white; -fx-border-radius: 5; -fx-background-radius: 5; -fx-cursor: hand;" />
+                        </children>
+                     </HBox>
+
+                     <!-- Hero Title and Subtitle -->
+                     <VBox alignment="CENTER" spacing="20.0" style="-fx-padding: 40px;">
+                        <children>
+                           <Label text="Drive Your Dreams" style="-fx-font-size: 56px; -fx-font-weight: bold; -fx-text-fill: white; -fx-text-alignment: center;">
+                              <font>
+                                 <Font size="56.0" />
+                              </font>
+                           </Label>
+                           <Label text="Rent with Ease" style="-fx-font-size: 48px; -fx-text-fill: #ffd700; -fx-text-alignment: center;">
+                              <font>
+                                 <Font size="48.0" />
+                              </font>
+                           </Label>
+                           <Label text="Experience premium bikes and cars at your fingertips. Book instantly, ride freely, and explore without limits." style="-fx-font-size: 16px; -fx-text-fill: white; -fx-text-alignment: center; -fx-wrap-text: true;">
+                              <font>
+                                 <Font size="16.0" />
+                              </font>
+                           </Label>
+                        </children>
+                     </VBox>
+
+                     <!-- Search Bar -->
+                     <VBox alignment="CENTER" spacing="15.0" style="-fx-padding: 20px 40px;">
+                        <children>
+                           <HBox alignment="CENTER" spacing="15.0" style="-fx-padding: 25px; -fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0.0, 0, 5);">
+                              <children>
+                                 <TextField fx:id="searchLocationField" promptText="Location" style="-fx-font-size: 14px; -fx-padding: 10px; -fx-min-width: 150px;" />
+                                 <DatePicker fx:id="pickupDatePicker" style="-fx-font-size: 14px; -fx-padding: 10px;" promptText="Pick-up  dd/mm/yyyy" />
+                                 <DatePicker fx:id="returnDatePicker" style="-fx-font-size: 14px; -fx-padding: 10px;" promptText="Return  dd/mm/yyyy" />
+                                 <Button fx:id="searchButton" onAction="#handleSearch" text="Search 500+ Vehicles" style="-fx-padding: 10px 25px; -fx-font-size: 14px; -fx-background-color: #667eea; -fx-text-fill: white; -fx-font-weight: bold; -fx-border-radius: 5; -fx-background-radius: 5; -fx-cursor: hand;" />
+                              </children>
+                           </HBox>
+
+                           <!-- Stats Row -->
+                           <HBox alignment="CENTER" spacing="60.0" style="-fx-padding: 20px;">
+                              <children>
+                                 <VBox alignment="CENTER" spacing="5.0">
+                                    <children>
+                                       <Label text="500+" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;">
+                                          <font>
+                                             <Font size="28.0" />
+                                          </font>
+                                       </Label>
+                                       <Label text="Vehicles" style="-fx-font-size: 14px; -fx-text-fill: white;">
+                                          <font>
+                                             <Font size="14.0" />
+                                          </font>
+                                       </Label>
+                                    </children>
+                                 </VBox>
+                                 <VBox alignment="CENTER" spacing="5.0">
+                                    <children>
+                                       <Label text="10K+" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;">
+                                          <font>
+                                             <Font size="28.0" />
+                                          </font>
+                                       </Label>
+                                       <Label text="Happy Customers" style="-fx-font-size: 14px; -fx-text-fill: white;">
+                                          <font>
+                                             <Font size="14.0" />
+                                          </font>
+                                       </Label>
+                                    </children>
+                                 </VBox>
+                                 <VBox alignment="CENTER" spacing="5.0">
+                                    <children>
+                                       <Label text="50+" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;">
+                                          <font>
+                                             <Font size="28.0" />
+                                          </font>
+                                       </Label>
+                                       <Label text="Locations" style="-fx-font-size: 14px; -fx-text-fill: white;">
+                                          <font>
+                                             <Font size="14.0" />
+                                          </font>
+                                       </Label>
+                                    </children>
+                                 </VBox>
+                              </children>
+                           </HBox>
+                        </children>
+                     </VBox>
+                  </children>
+               </VBox>
+            </children>
+         </AnchorPane>
+
+         <!-- Our Fleet Section -->
+         <VBox spacing="30.0" style="-fx-padding: 60px 40px; -fx-background-color: #f8f9fa;">
+            <children>
+               <VBox alignment="CENTER" spacing="15.0">
+                  <children>
+                     <Label text="OUR FLEET" style="-fx-font-size: 12px; -fx-text-fill: #667eea; -fx-font-weight: bold; -fx-letter-spacing: 2;">
+                        <font>
+                           <Font size="12.0" />
+                        </font>
+                     </Label>
+                     <Label text="Choose Your Ride" style="-fx-font-size: 42px; -fx-font-weight: bold; -fx-text-fill: #333;">
+                        <font>
+                           <Font size="42.0" />
+                        </font>
+                     </Label>
+                     <Label text="From powerful motorcycles to luxury cars, find the perfect vehicle for your next journey" style="-fx-font-size: 16px; -fx-text-fill: #666; -fx-text-alignment: center; -fx-wrap-text: true;">
+                        <font>
+                           <Font size="16.0" />
+                        </font>
+                     </Label>
+                  </children>
+               </VBox>
+
+               <!-- Vehicle Categories -->
+               <HBox alignment="CENTER" spacing="40.0" style="-fx-padding: 20px;">
+                  <children>
+                     <!-- Bikes Category -->
+                     <VBox spacing="15.0" alignment="CENTER" style="-fx-padding: 30px; -fx-background-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.0, 0, 3); -fx-min-width: 250px;">
+                        <children>
+                           <Label text="200+ Available" style="-fx-font-size: 14px; -fx-text-fill: #667eea; -fx-font-weight: bold;">
+                              <font>
+                                 <Font size="14.0" />
+                              </font>
+                           </Label>
+                           <Label text="Bikes" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #333;">
+                              <font>
+                                 <Font size="32.0" />
+                              </font>
+                           </Label>
+                           <Label text="Sport bikes, cruisers, and scooters for every adventure" style="-fx-font-size: 14px; -fx-text-fill: #666; -fx-text-alignment: center; -fx-wrap-text: true;">
+                              <font>
+                                 <Font size="14.0" />
+                              </font>
+                           </Label>
+                           <Label text="From $15/day" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #667eea;">
+                              <font>
+                                 <Font size="18.0" />
+                              </font>
+                           </Label>
+                           <Button fx:id="bikesButton" onAction="#handleBikesClick" text="Browse Bikes" style="-fx-padding: 10px 20px; -fx-font-size: 14px; -fx-background-color: #667eea; -fx-text-fill: white; -fx-border-radius: 5; -fx-background-radius: 5; -fx-cursor: hand;" />
+                        </children>
+                     </VBox>
+
+                     <!-- Cars Category -->
+                     <VBox spacing="15.0" alignment="CENTER" style="-fx-padding: 30px; -fx-background-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.0, 0, 3); -fx-min-width: 250px;">
+                        <children>
+                           <Label text="300+ Available" style="-fx-font-size: 14px; -fx-text-fill: #764ba2; -fx-font-weight: bold;">
+                              <font>
+                                 <Font size="14.0" />
+                              </font>
+                           </Label>
+                           <Label text="Cars" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #333;">
+                              <font>
+                                 <Font size="32.0" />
+                              </font>
+                           </Label>
+                           <Label text="Luxury sedans, SUVs, and sports cars at your service" style="-fx-font-size: 14px; -fx-text-fill: #666; -fx-text-alignment: center; -fx-wrap-text: true;">
+                              <font>
+                                 <Font size="14.0" />
+                              </font>
+                           </Label>
+                           <Label text="From $45/day" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #764ba2;">
+                              <font>
+                                 <Font size="18.0" />
+                              </font>
+                           </Label>
+                           <Button fx:id="carsButton" onAction="#handleCarsClick" text="Browse Cars" style="-fx-padding: 10px 20px; -fx-font-size: 14px; -fx-background-color: #764ba2; -fx-text-fill: white; -fx-border-radius: 5; -fx-background-radius: 5; -fx-cursor: hand;" />
+                        </children>
+                     </VBox>
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+
+         <!-- How It Works Section -->
+         <VBox spacing="40.0" style="-fx-padding: 60px 40px; -fx-background-color: white;">
+            <children>
+               <VBox alignment="CENTER" spacing="15.0">
+                  <children>
+                     <Label text="SIMPLE PROCESS" style="-fx-font-size: 12px; -fx-text-fill: #667eea; -fx-font-weight: bold; -fx-letter-spacing: 2;">
+                        <font>
+                           <Font size="12.0" />
+                        </font>
+                     </Label>
+                     <Label text="How It Works" style="-fx-font-size: 42px; -fx-font-weight: bold; -fx-text-fill: #333; -fx-text-alignment: center;">
+                        <font>
+                           <Font size="42.0" />
+                        </font>
+                     </Label>
+                     <Label text="Renting a vehicle has never been easier. Follow these simple steps to get on the road" style="-fx-font-size: 16px; -fx-text-fill: #666; -fx-text-alignment: center; -fx-wrap-text: true;">
+                        <font>
+                           <Font size="16.0" />
+                        </font>
+                     </Label>
+                  </children>
+               </VBox>
+
+               <HBox alignment="TOP_CENTER" spacing="30.0" style="-fx-padding: 20px;">
+                  <children>
+                     <!-- Step 1 -->
+                     <VBox spacing="15.0" alignment="TOP_CENTER" style="-fx-min-width: 200px;">
+                        <children>
+                           <Label text="01" style="-fx-font-size: 48px; -fx-font-weight: bold; -fx-text-fill: #667eea;">
+                              <font>
+                                 <Font size="48.0" />
+                              </font>
+                           </Label>
+                           <Label text="Search &amp; Browse" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;">
+                              <font>
+                                 <Font size="18.0" />
+                              </font>
+                           </Label>
+                           <Label text="Find the perfect vehicle from our extensive collection of bikes and cars" style="-fx-font-size: 14px; -fx-text-fill: #666; -fx-text-alignment: center; -fx-wrap-text: true;">
+                              <font>
+                                 <Font size="14.0" />
+                              </font>
+                           </Label>
+                        </children>
+                     </VBox>
+
+                     <!-- Step 2 -->
+                     <VBox spacing="15.0" alignment="TOP_CENTER" style="-fx-min-width: 200px;">
+                        <children>
+                           <Label text="02" style="-fx-font-size: 48px; -fx-font-weight: bold; -fx-text-fill: #764ba2;">
+                              <font>
+                                 <Font size="48.0" />
+                              </font>
+                           </Label>
+                           <Label text="Pick Your Dates" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;">
+                              <font>
+                                 <Font size="18.0" />
+                              </font>
+                           </Label>
+                           <Label text="Choose your rental duration and preferred pick-up location" style="-fx-font-size: 14px; -fx-text-fill: #666; -fx-text-alignment: center; -fx-wrap-text: true;">
+                              <font>
+                                 <Font size="14.0" />
+                              </font>
+                           </Label>
+                        </children>
+                     </VBox>
+
+                     <!-- Step 3 -->
+                     <VBox spacing="15.0" alignment="TOP_CENTER" style="-fx-min-width: 200px;">
+                        <children>
+                           <Label text="03" style="-fx-font-size: 48px; -fx-font-weight: bold; -fx-text-fill: #ff6b6b;">
+                              <font>
+                                 <Font size="48.0" />
+                              </font>
+                           </Label>
+                           <Label text="Book Instantly" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;">
+                              <font>
+                                 <Font size="18.0" />
+                              </font>
+                           </Label>
+                           <Label text="Secure your vehicle with our quick and safe booking process" style="-fx-font-size: 14px; -fx-text-fill: #666; -fx-text-alignment: center; -fx-wrap-text: true;">
+                              <font>
+                                 <Font size="14.0" />
+                              </font>
+                           </Label>
+                        </children>
+                     </VBox>
+
+                     <!-- Step 4 -->
+                     <VBox spacing="15.0" alignment="TOP_CENTER" style="-fx-min-width: 200px;">
+                        <children>
+                           <Label text="04" style="-fx-font-size: 48px; -fx-font-weight: bold; -fx-text-fill: #51cf66;">
+                              <font>
+                                 <Font size="48.0" />
+                              </font>
+                           </Label>
+                           <Label text="Hit the Road" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;">
+                              <font>
+                                 <Font size="18.0" />
+                              </font>
+                           </Label>
+                           <Label text="Pick up your vehicle and start your adventure with ease" style="-fx-font-size: 14px; -fx-text-fill: #666; -fx-text-alignment: center; -fx-wrap-text: true;">
+                              <font>
+                                 <Font size="14.0" />
+                              </font>
+                           </Label>
+                        </children>
+                     </VBox>
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+
+         <!-- Premium Features Section -->
+         <VBox spacing="40.0" style="-fx-padding: 60px 40px; -fx-background-color: #f8f9fa;">
+            <children>
+               <VBox alignment="CENTER" spacing="15.0">
+                  <children>
+                     <Label text="WHY CHOOSE US" style="-fx-font-size: 12px; -fx-text-fill: #667eea; -fx-font-weight: bold; -fx-letter-spacing: 2;">
+                        <font>
+                           <Font size="12.0" />
+                        </font>
+                     </Label>
+                     <Label text="Premium Features" style="-fx-font-size: 42px; -fx-font-weight: bold; -fx-text-fill: #333; -fx-text-alignment: center;">
+                        <font>
+                           <Font size="42.0" />
+                        </font>
+                     </Label>
+                     <Label text="Experience the difference with our comprehensive rental service designed for your convenience" style="-fx-font-size: 16px; -fx-text-fill: #666; -fx-text-alignment: center; -fx-wrap-text: true;">
+                        <font>
+                           <Font size="16.0" />
+                        </font>
+                     </Label>
+                  </children>
+               </VBox>
+
+               <HBox alignment="TOP_CENTER" spacing="30.0" style="-fx-padding: 20px; -fx-wrap-text: true;">
+                  <children>
+                     <!-- Feature 1: Secure Booking -->
+                     <VBox spacing="15.0" alignment="TOP_CENTER" style="-fx-padding: 25px; -fx-background-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.0, 0, 3); -fx-min-width: 200px;">
+                        <children>
+                           <Label text="🔒" style="-fx-font-size: 48px;">
+                              <font>
+                                 <Font size="48.0" />
+                              </font>
+                           </Label>
+                           <Label text="Secure Booking" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;">
+                              <font>
+                                 <Font size="16.0" />
+                              </font>
+                           </Label>
+                           <Label text="Your data is protected with enterprise-grade encryption and security protocols" style="-fx-font-size: 13px; -fx-text-fill: #666; -fx-text-alignment: center; -fx-wrap-text: true;">
+                              <font>
+                                 <Font size="13.0" />
+                              </font>
+                           </Label>
+                        </children>
+                     </VBox>
+
+                     <!-- Feature 2: 24/7 Availability -->
+                     <VBox spacing="15.0" alignment="TOP_CENTER" style="-fx-padding: 25px; -fx-background-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.0, 0, 3); -fx-min-width: 200px;">
+                        <children>
+                           <Label text="⏰" style="-fx-font-size: 48px;">
+                              <font>
+                                 <Font size="48.0" />
+                              </font>
+                           </Label>
+                           <Label text="24/7 Availability" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;">
+                              <font>
+                                 <Font size="16.0" />
+                              </font>
+                           </Label>
+                           <Label text="Book anytime, anywhere. Our platform is always ready when you are" style="-fx-font-size: 13px; -fx-text-fill: #666; -fx-text-alignment: center; -fx-wrap-text: true;">
+                              <font>
+                                 <Font size="13.0" />
+                              </font>
+                           </Label>
+                        </children>
+                     </VBox>
+
+                     <!-- Feature 3: Flexible Payments -->
+                     <VBox spacing="15.0" alignment="TOP_CENTER" style="-fx-padding: 25px; -fx-background-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.0, 0, 3); -fx-min-width: 200px;">
+                        <children>
+                           <Label text="💳" style="-fx-font-size: 48px;">
+                              <font>
+                                 <Font size="48.0" />
+                              </font>
+                           </Label>
+                           <Label text="Flexible Payments" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;">
+                              <font>
+                                 <Font size="16.0" />
+                              </font>
+                           </Label>
+                           <Label text="Multiple payment options including cards, digital wallets, and installments" style="-fx-font-size: 13px; -fx-text-fill: #666; -fx-text-alignment: center; -fx-wrap-text: true;">
+                              <font>
+                                 <Font size="13.0" />
+                              </font>
+                           </Label>
+                        </children>
+                     </VBox>
+
+                     <!-- Feature 4: Customer Support -->
+                     <VBox spacing="15.0" alignment="TOP_CENTER" style="-fx-padding: 25px; -fx-background-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.0, 3); -fx-min-width: 200px;">
+                        <children>
+                           <Label text="👥" style="-fx-font-size: 48px;">
+                              <font>
+                                 <Font size="48.0" />
+                              </font>
+                           </Label>
+                           <Label text="Customer Support" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;">
+                              <font>
+                                 <Font size="16.0" />
+                              </font>
+                           </Label>
+                           <Label text="Dedicated support team ready to assist you throughout your rental journey" style="-fx-font-size: 13px; -fx-text-fill: #666; -fx-text-alignment: center; -fx-wrap-text: true;">
+                              <font>
+                                 <Font size="13.0" />
+                              </font>
+                           </Label>
+                        </children>
+                     </VBox>
+
+                     <!-- Feature 5: Multiple Locations -->
+                     <VBox spacing="15.0" alignment="TOP_CENTER" style="-fx-padding: 25px; -fx-background-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.0, 0, 3); -fx-min-width: 200px;">
+                        <children>
+                           <Label text="📍" style="-fx-font-size: 48px;">
+                              <font>
+                                 <Font size="48.0" />
+                              </font>
+                           </Label>
+                           <Label text="Multiple Locations" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;">
+                              <font>
+                                 <Font size="16.0" />
+                              </font>
+                           </Label>
+                           <Label text="Pick up and drop off at convenient locations across the city" style="-fx-font-size: 13px; -fx-text-fill: #666; -fx-text-alignment: center; -fx-wrap-text: true;">
+                              <font>
+                                 <Font size="13.0" />
+                              </font>
+                           </Label>
+                        </children>
+                     </VBox>
+
+                     <!-- Feature 6: Quality Assured -->
+                     <VBox spacing="15.0" alignment="TOP_CENTER" style="-fx-padding: 25px; -fx-background-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.0, 0, 3); -fx-min-width: 200px;">
+                        <children>
+                           <Label text="✅" style="-fx-font-size: 48px;">
+                              <font>
+                                 <Font size="48.0" />
+                              </font>
+                           </Label>
+                           <Label text="Quality Assured" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;">
+                              <font>
+                                 <Font size="16.0" />
+                              </font>
+                           </Label>
+                           <Label text="All vehicles undergo rigorous inspections to ensure top condition" style="-fx-font-size: 13px; -fx-text-fill: #666; -fx-text-alignment: center; -fx-wrap-text: true;">
+                              <font>
+                                 <Font size="13.0" />
+                              </font>
+                           </Label>
+                        </children>
+                     </VBox>
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+
+         <!-- Testimonials Section -->
+         <VBox spacing="40.0" style="-fx-padding: 60px 40px; -fx-background-color: white;">
+            <children>
+               <VBox alignment="CENTER" spacing="15.0">
+                  <children>
+                     <Label text="TESTIMONIALS" style="-fx-font-size: 12px; -fx-text-fill: #667eea; -fx-font-weight: bold; -fx-letter-spacing: 2;">
+                        <font>
+                           <Font size="12.0" />
+                        </font>
+                     </Label>
+                     <Label text="What Our Customers Say" style="-fx-font-size: 42px; -fx-font-weight: bold; -fx-text-fill: #333; -fx-text-alignment: center;">
+                        <font>
+                           <Font size="42.0" />
+                        </font>
+                     </Label>
+                     <Label text="Don't just take our word for it - hear from thousands of satisfied riders who chose OnRide" style="-fx-font-size: 16px; -fx-text-fill: #666; -fx-text-alignment: center; -fx-wrap-text: true;">
+                        <font>
+                           <Font size="16.0" />
+                        </font>
+                     </Label>
+                  </children>
+               </VBox>
+
+               <HBox alignment="CENTER" spacing="30.0" style="-fx-padding: 20px;">
+                  <children>
+                     <!-- Testimonial 1 -->
+                     <VBox spacing="15.0" style="-fx-padding: 25px; -fx-background-color: #f8f9fa; -fx-border-radius: 10; -fx-background-radius: 10; -fx-min-width: 280px;">
+                        <children>
+                           <Label text="⭐⭐⭐⭐⭐" style="-fx-font-size: 20px;">
+                              <font>
+                                 <Font size="20.0" />
+                              </font>
+                           </Label>
+                           <Label text="OnRide made my business trip so much easier. The booking process was seamless, and the car was in perfect condition. Highly recommend!" style="-fx-font-size: 14px; -fx-text-fill: #666; -fx-wrap-text: true; -fx-text-alignment: justify;">
+                              <font>
+                                 <Font size="14.0" />
+                              </font>
+                           </Label>
+                           <Label text="Sarah Johnson" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #333;">
+                              <font>
+                                 <Font size="14.0" />
+                              </font>
+                           </Label>
+                           <Label text="Business Traveler" style="-fx-font-size: 12px; -fx-text-fill: #999;">
+                              <font>
+                                 <Font size="12.0" />
+                              </font>
+                           </Label>
+                        </children>
+                     </VBox>
+
+                     <!-- Testimonial 2 -->
+                     <VBox spacing="15.0" style="-fx-padding: 25px; -fx-background-color: #f8f9fa; -fx-border-radius: 10; -fx-background-radius: 10; -fx-min-width: 280px;">
+                        <children>
+                           <Label text="⭐⭐⭐⭐⭐" style="-fx-font-size: 20px;">
+                              <font>
+                                 <Font size="20.0" />
+                              </font>
+                           </Label>
+                           <Label text="Rented a bike for a weekend getaway. The experience was fantastic from start to finish. The prices are competitive and service is top-notch." style="-fx-font-size: 14px; -fx-text-fill: #666; -fx-wrap-text: true; -fx-text-alignment: justify;">
+                              <font>
+                                 <Font size="14.0" />
+                              </font>
+                           </Label>
+                           <Label text="Michael Chen" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #333;">
+                              <font>
+                                 <Font size="14.0" />
+                              </font>
+                           </Label>
+                           <Label text="Adventure Enthusiast" style="-fx-font-size: 12px; -fx-text-fill: #999;">
+                              <font>
+                                 <Font size="12.0" />
+                              </font>
+                           </Label>
+                        </children>
+                     </VBox>
+
+                     <!-- Testimonial 3 -->
+                     <VBox spacing="15.0" style="-fx-padding: 25px; -fx-background-color: #f8f9fa; -fx-border-radius: 10; -fx-background-radius: 10; -fx-min-width: 280px;">
+                        <children>
+                           <Label text="⭐⭐⭐⭐⭐" style="-fx-font-size: 20px;">
+                              <font>
+                                 <Font size="20.0" />
+                              </font>
+                           </Label>
+                           <Label text="I use OnRide regularly for my daily commute. The variety of vehicles and flexible rental options fit perfectly with my lifestyle." style="-fx-font-size: 14px; -fx-text-fill: #666; -fx-wrap-text: true; -fx-text-alignment: justify;">
+                              <font>
+                                 <Font size="14.0" />
+                              </font>
+                           </Label>
+                           <Label text="Emily Rodriguez" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #333;">
+                              <font>
+                                 <Font size="14.0" />
+                              </font>
+                           </Label>
+                           <Label text="Daily Commuter" style="-fx-font-size: 12px; -fx-text-fill: #999;">
+                              <font>
+                                 <Font size="12.0" />
+                              </font>
+                           </Label>
+                        </children>
+                     </VBox>
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+
+         <!-- CTA Section -->
+         <VBox spacing="30.0" style="-fx-padding: 60px 40px; -fx-background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -fx-fill: true; -fx-alignment: center;">
+            <children>
+               <Label text="Ready to Start Your Journey?" style="-fx-font-size: 42px; -fx-font-weight: bold; -fx-text-fill: white; -fx-text-alignment: center;">
+                  <font>
+                     <Font size="42.0" />
+                  </font>
+               </Label>
+               <Label text="Join thousands of happy customers who trust OnRide for their transportation needs. Sign up today and get your first ride at 20% off!" style="-fx-font-size: 16px; -fx-text-fill: white; -fx-text-alignment: center; -fx-wrap-text: true;">
+                  <font>
+                     <Font size="16.0" />
+                  </font>
+               </Label>
+               <HBox alignment="CENTER" spacing="20.0">
+                  <children>
+                     <Button fx:id="ctaGetStartedBtn" onAction="#handleGetStarted" text="Get Started Now" style="-fx-padding: 12px 30px; -fx-font-size: 14px; -fx-background-color: white; -fx-text-fill: #667eea; -fx-font-weight: bold; -fx-border-radius: 5; -fx-background-radius: 5; -fx-cursor: hand;" />
+                     <Button fx:id="ctaListVehicleBtn" onAction="#handleListVehicle" text="List Your Vehicle" style="-fx-padding: 12px 30px; -fx-font-size: 14px; -fx-background-color: #ff6b6b; -fx-text-fill: white; -fx-font-weight: bold; -fx-border-radius: 5; -fx-background-radius: 5; -fx-cursor: hand;" />
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+
+         <!-- Footer -->
+         <VBox spacing="30.0" style="-fx-padding: 40px; -fx-background-color: #1a1a2e;">
+            <children>
+               <HBox alignment="TOP_LEFT" spacing="60.0">
+                  <children>
+                     <VBox spacing="15.0">
+                        <children>
+                           <Label text="OnRide" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white;">
+                              <font>
+                                 <Font size="20.0" />
+                              </font>
+                           </Label>
+                           <Label text="Your trusted partner for premium bike and car rentals. Experience the freedom of the road with OnRide." style="-fx-font-size: 13px; -fx-text-fill: #aaa; -fx-wrap-text: true; -fx-min-width: 200px;">
+                              <font>
+                                 <Font size="13.0" />
+                              </font>
+                           </Label>
+                           <HBox spacing="10.0">
+                              <children>
+                                 <Label text="📧 support@onride.com" style="-fx-font-size: 12px; -fx-text-fill: #aaa;">
+                                    <font>
+                                       <Font size="12.0" />
+                                    </font>
+                                 </Label>
+                              </children>
+                           </HBox>
+                           <HBox spacing="10.0">
+                              <children>
+                                 <Label text="📞 +1 (555) 123-4567" style="-fx-font-size: 12px; -fx-text-fill: #aaa;">
+                                    <font>
+                                       <Font size="12.0" />
+                                    </font>
+                                 </Label>
+                              </children>
+                           </HBox>
+                           <HBox spacing="10.0">
+                              <children>
+                                 <Label text="📍 123 Rental Street, City, ST 12345" style="-fx-font-size: 12px; -fx-text-fill: #aaa;">
+                                    <font>
+                                       <Font size="12.0" />
+                                    </font>
+                                 </Label>
+                              </children>
+                           </HBox>
+                        </children>
+                     </VBox>
+
+                     <VBox spacing="10.0">
+                        <children>
+                           <Label text="Company" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: white;">
+                              <font>
+                                 <Font size="14.0" />
+                              </font>
+                           </Label>
+                           <Label text="About Us" style="-fx-font-size: 12px; -fx-text-fill: #aaa; -fx-cursor: hand;">
+                              <font>
+                                 <Font size="12.0" />
+                              </font>
+                           </Label>
+                           <Label text="Careers" style="-fx-font-size: 12px; -fx-text-fill: #aaa; -fx-cursor: hand;">
+                              <font>
+                                 <Font size="12.0" />
+                              </font>
+                           </Label>
+                           <Label text="Blog" style="-fx-font-size: 12px; -fx-text-fill: #aaa; -fx-cursor: hand;">
+                              <font>
+                                 <Font size="12.0" />
+                              </font>
+                           </Label>
+                           <Label text="Press" style="-fx-font-size: 12px; -fx-text-fill: #aaa; -fx-cursor: hand;">
+                              <font>
+                                 <Font size="12.0" />
+                              </font>
+                           </Label>
+                        </children>
+                     </VBox>
+
+                     <VBox spacing="10.0">
+                        <children>
+                           <Label text="Support" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: white;">
+                              <font>
+                                 <Font size="14.0" />
+                              </font>
+                           </Label>
+                           <Label text="Help Center" style="-fx-font-size: 12px; -fx-text-fill: #aaa; -fx-cursor: hand;">
+                              <font>
+                                 <Font size="12.0" />
+                              </font>
+                           </Label>
+                           <Label text="Safety" style="-fx-font-size: 12px; -fx-text-fill: #aaa; -fx-cursor: hand;">
+                              <font>
+                                 <Font size="12.0" />
+                              </font>
+                           </Label>
+                           <Label text="Cancellation" style="-fx-font-size: 12px; -fx-text-fill: #aaa; -fx-cursor: hand;">
+                              <font>
+                                 <Font size="12.0" />
+                              </font>
+                           </Label>
+                           <Label text="FAQs" style="-fx-font-size: 12px; -fx-text-fill: #aaa; -fx-cursor: hand;">
+                              <font>
+                                 <Font size="12.0" />
+                              </font>
+                           </Label>
+                        </children>
+                     </VBox>
+
+                     <VBox spacing="10.0">
+                        <children>
+                           <Label text="Legal" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: white;">
+                              <font>
+                                 <Font size="14.0" />
+                              </font>
+                           </Label>
+                           <Label text="Terms of Service" style="-fx-font-size: 12px; -fx-text-fill: #aaa; -fx-cursor: hand;">
+                              <font>
+                                 <Font size="12.0" />
+                              </font>
+                           </Label>
+                           <Label text="Privacy Policy" style="-fx-font-size: 12px; -fx-text-fill: #aaa; -fx-cursor: hand;">
+                              <font>
+                                 <Font size="12.0" />
+                              </font>
+                           </Label>
+                           <Label text="Cookie Policy" style="-fx-font-size: 12px; -fx-text-fill: #aaa; -fx-cursor: hand;">
+                              <font>
+                                 <Font size="12.0" />
+                              </font>
+                           </Label>
+                           <Label text="Licenses" style="-fx-font-size: 12px; -fx-text-fill: #aaa; -fx-cursor: hand;">
+                              <font>
+                                 <Font size="12.0" />
+                              </font>
+                           </Label>
+                        </children>
+                     </VBox>
+                  </children>
+               </HBox>
+
+               <Label text="© 2026 OnRide Rentals. All rights reserved." style="-fx-font-size: 12px; -fx-text-fill: #666;">
+                  <font>
+                     <Font size="12.0" />
+                  </font>
+               </Label>
+            </children>
+         </VBox>
+      </VBox>
+   </content>
+</ScrollPane>
