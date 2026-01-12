@@ -48,12 +48,22 @@ public class RenterDashboardController {
     private TextField mileageField;
     @FXML
     private TextField pricePerDayField;
+    @FXML
+    private TextField locationField;
+    @FXML
+    private TextField imageKeyField;
+
+    @FXML
+    private Label photoCountLabel;
 
     private VehicleDAO vehicleDAO;
+    private com.onriderentals.dao.VehiclePhotoDAO photoDAO;
     private ObservableList<Vehicle> vehicleList;
+    private java.util.List<com.onriderentals.model.VehiclePhoto> tempPhotos = new java.util.ArrayList<>();
 
     public void initialize() {
         vehicleDAO = new VehicleDAO();
+        photoDAO = new com.onriderentals.dao.VehiclePhotoDAO();
         vehicleList = FXCollections.observableArrayList();
 
         // Setup vehicle table columns
@@ -83,6 +93,12 @@ public class RenterDashboardController {
             typeField.setText(vehicle.getType());
             mileageField.setText(String.valueOf(vehicle.getMileage()));
             pricePerDayField.setText(String.valueOf(vehicle.getPricePerDay()));
+            locationField.setText(vehicle.getLocation() != null ? vehicle.getLocation() : "");
+            imageKeyField.setText(vehicle.getImageKey() != null ? vehicle.getImageKey() : "");
+            
+            // Load photos
+            tempPhotos = photoDAO.getPhotosByVehicleId(vehicle.getVehicleId());
+            photoCountLabel.setText(String.valueOf(tempPhotos.size()));
         } else {
             clearForm();
         }
@@ -107,6 +123,16 @@ public class RenterDashboardController {
             vehicle.setStatus("AVAILABLE"); // New vehicles are available by default
 
             vehicleDAO.addVehicle(vehicle);
+            
+            // Save additional photos
+            try {
+                for (com.onriderentals.model.VehiclePhoto photo : tempPhotos) {
+                    photo.setVehicleId(vehicle.getVehicleId());
+                    photoDAO.addPhoto(photo);
+                }
+            } catch (java.sql.SQLException e) {
+                e.printStackTrace();
+            }
 
             showAlert(Alert.AlertType.INFORMATION, "Vehicle Added", "New vehicle added successfully!");
 
@@ -133,6 +159,17 @@ public class RenterDashboardController {
             setVehicleFromFields(selectedVehicle);
 
             vehicleDAO.updateVehicle(selectedVehicle);
+            
+            // Update additional photos (simple sync: delete all and re-add)
+            try {
+                photoDAO.deleteAllPhotosForVehicle(selectedVehicle.getVehicleId());
+                for (com.onriderentals.model.VehiclePhoto photo : tempPhotos) {
+                    photo.setVehicleId(selectedVehicle.getVehicleId());
+                    photoDAO.addPhoto(photo);
+                }
+            } catch (java.sql.SQLException e) {
+                e.printStackTrace();
+            }
 
             showAlert(Alert.AlertType.INFORMATION, "Vehicle Updated", "Vehicle details updated successfully!");
 
@@ -175,13 +212,16 @@ public class RenterDashboardController {
         vehicle.setType(typeField.getText());
         vehicle.setMileage(Double.parseDouble(mileageField.getText()));
         vehicle.setPricePerDay(Double.parseDouble(pricePerDayField.getText()));
+        vehicle.setLocation(locationField.getText());
+        vehicle.setImageKey(imageKeyField.getText());
     }
     
     private boolean validateInput() {
         if (makeField.getText().isEmpty() || modelField.getText().isEmpty() || yearField.getText().isEmpty() || 
             colorField.getText().isEmpty() || licensePlateField.getText().isEmpty() || vinField.getText().isEmpty() || 
-            typeField.getText().isEmpty() || mileageField.getText().isEmpty() || pricePerDayField.getText().isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Invalid Input", "Please fill in all vehicle details.");
+            typeField.getText().isEmpty() || mileageField.getText().isEmpty() || pricePerDayField.getText().isEmpty() ||
+            locationField.getText().isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Invalid Input", "Please fill in all vehicle details including location.");
             return false;
         }
         return true;
@@ -198,7 +238,55 @@ public class RenterDashboardController {
         typeField.clear();
         mileageField.clear();
         pricePerDayField.clear();
+        locationField.clear();
+        imageKeyField.clear();
+        tempPhotos.clear();
+        photoCountLabel.setText("0");
         vehicleTable.getSelectionModel().clearSelection();
+    }
+
+    @FXML
+    public void handleManagePhotos() {
+        // Choice dialog for Upload vs URL
+        Alert choice = new Alert(Alert.AlertType.CONFIRMATION);
+        choice.setTitle("Add Photo");
+        choice.setHeaderText("How would you like to add a photo?");
+        choice.setContentText("Choose an option:");
+
+        ButtonType btnUpload = new ButtonType("Upload File");
+        ButtonType btnUrl = new ButtonType("Enter URL/Key");
+        ButtonType btnCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        choice.getButtonTypes().setAll(btnUpload, btnUrl, btnCancel);
+
+        Optional<ButtonType> option = choice.showAndWait();
+        if (option.get() == btnUpload) {
+            javafx.stage.FileChooser fileChooser = new javafx.stage.FileChooser();
+            fileChooser.getExtensionFilters().add(new javafx.stage.FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg"));
+            java.io.File file = fileChooser.showOpenDialog(photoCountLabel.getScene().getWindow());
+            if (file != null) {
+                String key = com.onriderentals.util.S3Service.uploadImage(file);
+                if (key != null) {
+                    tempPhotos.add(new com.onriderentals.model.VehiclePhoto(0, key));
+                    photoCountLabel.setText(String.valueOf(tempPhotos.size()));
+                } else {
+                    showAlert(Alert.AlertType.ERROR, "Upload Failed", "Could not upload image to S3. Check your credentials.");
+                }
+            }
+        } else if (option.get() == btnUrl) {
+            TextInputDialog dialog = new TextInputDialog();
+            dialog.setTitle("Add Photo");
+            dialog.setHeaderText("Enter Photo URL or S3 Key");
+            dialog.setContentText("URL:");
+
+            Optional<String> result = dialog.showAndWait();
+            result.ifPresent(url -> {
+                if (!url.isEmpty()) {
+                    tempPhotos.add(new com.onriderentals.model.VehiclePhoto(0, url));
+                    photoCountLabel.setText(String.valueOf(tempPhotos.size()));
+                }
+            });
+        }
     }
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {

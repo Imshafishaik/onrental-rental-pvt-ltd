@@ -46,7 +46,7 @@ public class LoginController {
 
             User user = userDAO.getUserByEmail(email);
 
-            if (user != null && user.getPassword().equals(password_hash)) {
+            if (user != null && com.onriderentals.util.PasswordUtils.checkPassword(password_hash, user.getPassword())) {
                 SessionManager.getInstance().setUserId(user.getUserId());
                 String role = user.getRole();
                 SessionManager.getInstance().setUserRole(role);

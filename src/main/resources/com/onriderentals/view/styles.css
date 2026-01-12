@@ -112,6 +112,15 @@
     -fx-background-color: rgba(102, 126, 234, 0.1);
 }
 
+.button-danger {
+    -fx-background-color: #ff4d4d;
+    -fx-text-fill: white;
+}
+
+.button-danger:hover {
+    -fx-background-color: #ff3333;
+}
+
 .button-icon {
     -fx-background-color: transparent;
     -fx-text-fill: #636e72;

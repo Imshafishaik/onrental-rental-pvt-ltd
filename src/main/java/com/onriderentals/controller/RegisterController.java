@@ -60,7 +60,7 @@ public class RegisterController {
         User newUser = new User();
         newUser.setName(username);
         newUser.setEmail(email);
-        newUser.setPassword(password_hash); // In a real app, hash the password_hash
+        newUser.setPassword(com.onriderentals.util.PasswordUtils.hashPassword(password_hash));
         newUser.setRole(dbRole);
 
         try {

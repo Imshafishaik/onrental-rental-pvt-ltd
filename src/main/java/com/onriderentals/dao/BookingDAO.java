@@ -118,4 +118,32 @@ public class BookingDAO {
         }
         return earningsByMonth;
     }
+
+    public double getTotalRevenue() {
+        String sql = "SELECT SUM(total_amount) FROM bookings WHERE status = 'CONFIRMED'";
+        try (Connection conn = Database.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                return rs.getDouble(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0.0;
+    }
+
+    public int getActiveBookingsCount() {
+        String sql = "SELECT COUNT(*) FROM bookings WHERE status = 'CONFIRMED'";
+        try (Connection conn = Database.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

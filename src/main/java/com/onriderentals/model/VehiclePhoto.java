@@ -5,6 +5,13 @@ public class VehiclePhoto {
     private int vehicleId;
     private String photoUrl;
 
+    public VehiclePhoto() {}
+
+    public VehiclePhoto(int vehicleId, String photoUrl) {
+        this.vehicleId = vehicleId;
+        this.photoUrl = photoUrl;
+    }
+
     public int getPhotoId() {
         return photoId;
     }

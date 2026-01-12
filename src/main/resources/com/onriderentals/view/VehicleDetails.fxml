@@ -37,6 +37,18 @@
                                 <ImageView fx:id="vehicleImageView" fitWidth="320" fitHeight="240" preserveRatio="true" />
                             </children>
                         </VBox>
+                        
+                        <!-- Photo Gallery -->
+                        <VBox spacing="10">
+                            <children>
+                                <Label text="Gallery" style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
+                                <javafx.scene.control.ScrollPane fitToHeight="true" prefHeight="80" style="-fx-background-color: transparent; -fx-background: transparent; -fx-border-color: transparent;">
+                                    <content>
+                                        <HBox fx:id="photoGallery" spacing="10" style="-fx-padding: 5;"/>
+                                    </content>
+                                </javafx.scene.control.ScrollPane>
+                            </children>
+                        </VBox>
 
                         <VBox spacing="15">
                             <children>
@@ -81,7 +93,8 @@
                                         <Region HBox.hgrow="ALWAYS" />
                                         <HBox alignment="CENTER_LEFT" spacing="3">
                                             <Label text="★" style="-fx-text-fill: #fca311;" />
-                                            <Label text="4.9 (124 reviews)" styleClass="label-subtitle" style="-fx-font-size: 12px;" />
+                                            <Label fx:id="ratingLabel" text="4.9" styleClass="label-subtitle" style="-fx-font-size: 12px; -fx-font-weight: bold;" />
+                                            <Label fx:id="reviewCountLabel" text="(124 reviews)" styleClass="label-subtitle" style="-fx-font-size: 12px;" />
                                         </HBox>
                                     </children>
                                 </HBox>

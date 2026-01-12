@@ -28,6 +28,7 @@ public class S3Service {
                         .region(Region.of(regionStr))
                         .credentialsProvider(StaticCredentialsProvider.create(
                                 AwsBasicCredentials.create(accessKey, secretKey)))
+                        .crossRegionAccessEnabled(true)
                         .build();
             } else {
                 System.err.println("aws.properties not found. S3 service will not be available.");
@@ -47,6 +48,25 @@ public class S3Service {
                     .key(key)
                     .build();
             return s3Client.utilities().getUrl(request).toExternalForm();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static String uploadImage(java.io.File file) {
+        if (s3Client == null || file == null || !file.exists()) {
+            return null;
+        }
+        String key = "vehicles/" + System.currentTimeMillis() + "_" + file.getName();
+        try {
+            software.amazon.awssdk.services.s3.model.PutObjectRequest request = 
+                software.amazon.awssdk.services.s3.model.PutObjectRequest.builder()
+                    .bucket(bucketName)
+                    .key(key)
+                    .build();
+            s3Client.putObject(request, software.amazon.awssdk.core.sync.RequestBody.fromFile(file));
+            return key;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

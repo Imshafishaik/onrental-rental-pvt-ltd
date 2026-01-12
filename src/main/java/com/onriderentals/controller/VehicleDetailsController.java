@@ -34,6 +34,12 @@ public class VehicleDetailsController {
     private Label priceLabel;
     
     @FXML
+    private Label ratingLabel;
+
+    @FXML
+    private Label reviewCountLabel;
+
+    @FXML
     private ImageView vehicleImageView;
 
     @FXML
@@ -42,8 +48,12 @@ public class VehicleDetailsController {
     @FXML
     private Button favoriteButton;
 
+    @FXML
+    private javafx.scene.layout.HBox photoGallery;
+
     private Vehicle vehicle;
     private FavoriteDAO favoriteDAO = new FavoriteDAO();
+    private com.onriderentals.dao.VehiclePhotoDAO photoDAO = new com.onriderentals.dao.VehiclePhotoDAO();
     private boolean isFavorited = false;
 
     public void setVehicle(Vehicle vehicle) {
@@ -62,6 +72,18 @@ public class VehicleDetailsController {
                 "Status: " + vehicle.getStatus()
         );
 
+        // Rating stats
+        com.onriderentals.dao.ReviewDAO reviewDAO = new com.onriderentals.dao.ReviewDAO();
+        com.onriderentals.dao.ReviewDAO.RatingStats stats = reviewDAO.getRatingStats(vehicle.getVehicleId());
+        
+        if (stats.reviewCount > 0) {
+            ratingLabel.setText(String.format("%.1f", stats.averageRating));
+            reviewCountLabel.setText("(" + stats.reviewCount + " reviews)");
+        } else {
+            ratingLabel.setText("N/A");
+            reviewCountLabel.setText("(No reviews)");
+        }
+
         // Image loading
         if (vehicle.getImageKey() != null && !vehicle.getImageKey().isEmpty()) {
             String imageUrl = com.onriderentals.util.S3Service.getImageUrl(vehicle.getImageKey());
@@ -75,7 +97,47 @@ public class VehicleDetailsController {
                 : "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=800&q=80";
             vehicleImageView.setImage(new javafx.scene.image.Image(placeholderUrl, true));
         }
+
+        // Load and display gallery photos
+        loadGallery();
+
         checkFavoriteStatus();
+    }
+
+    private void loadGallery() {
+        if (photoGallery == null || vehicle == null) return;
+        photoGallery.getChildren().clear();
+
+        java.util.List<com.onriderentals.model.VehiclePhoto> photos = photoDAO.getPhotosByVehicleId(vehicle.getVehicleId());
+        
+        // Add main image as the first thumbnail
+        if (vehicle.getImageKey() != null && !vehicle.getImageKey().isEmpty()) {
+            addThumbnail(com.onriderentals.util.S3Service.getImageUrl(vehicle.getImageKey()));
+        }
+
+        for (com.onriderentals.model.VehiclePhoto photo : photos) {
+            addThumbnail(photo.getPhotoUrl());
+        }
+    }
+
+    private void addThumbnail(String url) {
+        if (url == null || url.isEmpty()) return;
+        
+        ImageView thumb = new ImageView();
+        thumb.setFitHeight(60);
+        thumb.setFitWidth(80);
+        thumb.setPreserveRatio(true);
+        thumb.setCursor(javafx.scene.Cursor.HAND);
+        thumb.setStyle("-fx-border-color: #eee; -fx-border-width: 1; -fx-background-color: white;");
+
+        javafx.scene.image.Image img = new javafx.scene.image.Image(url, true);
+        thumb.setImage(img);
+
+        thumb.setOnMouseClicked(e -> {
+            vehicleImageView.setImage(img);
+        });
+
+        photoGallery.getChildren().add(thumb);
     }
 
     private void checkFavoriteStatus() {

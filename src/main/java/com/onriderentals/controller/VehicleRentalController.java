@@ -76,7 +76,11 @@ public class VehicleRentalController {
 
     private void setupFilters() {
         // Initialize Filter Controls
-        locationCombo.setItems(FXCollections.observableArrayList("All Locations", "New York", "Los Angeles", "Chicago", "Miami"));
+        // Initialize Filter Controls
+        List<String> locations = vehicleDAO.getUniqueLocations();
+        ObservableList<String> locationItems = FXCollections.observableArrayList("All Locations");
+        locationItems.addAll(locations);
+        locationCombo.setItems(locationItems);
         locationCombo.setValue("All Locations");
 
         sortCombo.setItems(FXCollections.observableArrayList("Recommended", "Price: Low to High", "Price: High to Low", "Rating"));

@@ -12,10 +12,13 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
+import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
@@ -55,6 +58,18 @@ public class AdminDashboardController {
     @FXML
     private TableView<Vehicle> vehicleTable;
     @FXML
+    private TabPane mainTabPane;
+    @FXML
+    private Button sidebarDashboardBtn;
+    @FXML
+    private Button sidebarUsersBtn;
+    @FXML
+    private Button sidebarBookingsBtn;
+    @FXML
+    private Button sidebarVehiclesBtn;
+    
+    private Button activeBtn;
+    @FXML
     private TableColumn<Vehicle, Integer> vehicleIdColumn;
     @FXML
     private TableColumn<Vehicle, String> vehicleMakeColumn;
@@ -66,6 +81,17 @@ public class AdminDashboardController {
     private TableColumn<Vehicle, Double> vehiclePriceColumn;
     @FXML
     private TableColumn<Vehicle, String> vehicleStatusColumn;
+    @FXML
+    private TableColumn<Vehicle, Void> vehicleActionsColumn;
+
+    @FXML
+    private Label totalUsersLabel;
+    @FXML
+    private Label totalRevenueLabel;
+    @FXML
+    private Label activeBookingsLabel;
+    @FXML
+    private Label totalVehiclesLabel;
 
     @FXML
     private BarChart<String, Number> earningsChart;
@@ -92,6 +118,14 @@ public class AdminDashboardController {
         loadBookings();
         loadVehicles();
         loadEarningsChart();
+        loadStats();
+    }
+
+    private void loadStats() {
+        totalUsersLabel.setText(String.valueOf(userDAO.getTotalUsersCount()));
+        totalRevenueLabel.setText("$" + String.format("%.0f", bookingDAO.getTotalRevenue()));
+        activeBookingsLabel.setText(String.valueOf(bookingDAO.getActiveBookingsCount()));
+        totalVehiclesLabel.setText(String.valueOf(vehicleDAO.getTotalVehiclesCount()));
     }
 
     private void setupUserTable() {
@@ -118,6 +152,27 @@ public class AdminDashboardController {
         vehicleTypeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
         vehiclePriceColumn.setCellValueFactory(new PropertyValueFactory<>("pricePerDay"));
         vehicleStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+        addVehicleActionsToTable();
+        setActiveSidebarButton(sidebarDashboardBtn);
+    }
+    
+    @FXML
+    private void handleSidebarAction(ActionEvent event) {
+        Button clickedBtn = (Button) event.getSource();
+        setActiveSidebarButton(clickedBtn);
+        
+        if (clickedBtn == sidebarDashboardBtn) mainTabPane.getSelectionModel().select(0);
+        else if (clickedBtn == sidebarUsersBtn) mainTabPane.getSelectionModel().select(1);
+        else if (clickedBtn == sidebarBookingsBtn) mainTabPane.getSelectionModel().select(2);
+        else if (clickedBtn == sidebarVehiclesBtn) mainTabPane.getSelectionModel().select(3);
+    }
+
+    private void setActiveSidebarButton(Button btn) {
+        if (activeBtn != null) {
+            activeBtn.getStyleClass().remove("sidebar-btn-active");
+        }
+        activeBtn = btn;
+        activeBtn.getStyleClass().add("sidebar-btn-active");
     }
 
     private void loadUsers() {
@@ -156,6 +211,7 @@ public class AdminDashboardController {
                     private final Button btn = new Button("Delete");
 
                     {
+                        btn.getStyleClass().add("button-danger");
                         btn.setOnAction(event -> {
                             User user = getTableView().getItems().get(getIndex());
                             deleteUser(user);
@@ -181,5 +237,43 @@ public class AdminDashboardController {
     private void deleteUser(User user) {
         userDAO.deleteUser(user.getUserId());
         loadUsers(); // Refresh the user table
+        loadStats();
+    }
+
+    private void addVehicleActionsToTable() {
+        Callback<TableColumn<Vehicle, Void>, TableCell<Vehicle, Void>> cellFactory = new Callback<>() {
+            @Override
+            public TableCell<Vehicle, Void> call(final TableColumn<Vehicle, Void> param) {
+                final TableCell<Vehicle, Void> cell = new TableCell<>() {
+                    private final Button btn = new Button("Delete");
+
+                    {
+                        btn.getStyleClass().add("button-danger");
+                        btn.setOnAction(event -> {
+                            Vehicle vehicle = getTableView().getItems().get(getIndex());
+                            deleteVehicle(vehicle);
+                        });
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+        vehicleActionsColumn.setCellFactory(cellFactory);
+    }
+
+    private void deleteVehicle(Vehicle vehicle) {
+        vehicleDAO.deleteVehicle(vehicle.getVehicleId());
+        loadVehicles();
+        loadStats();
     }
 }

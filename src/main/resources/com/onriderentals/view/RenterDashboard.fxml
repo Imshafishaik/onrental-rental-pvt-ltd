@@ -129,10 +129,28 @@
                                           
                                           <Label text="Rental Rate:" GridPane.rowIndex="8" GridPane.columnIndex="0" style="-fx-text-fill: #666;"/>
                                           <TextField fx:id="pricePerDayField" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
+
+                                          <Label text="Location:" GridPane.rowIndex="9" GridPane.columnIndex="0" style="-fx-text-fill: #666;"/>
+                                          <TextField fx:id="locationField" GridPane.rowIndex="9" GridPane.columnIndex="1" promptText="e.g., New York, Los Angeles"/>
+
+                                          <Label text="Image Key:" GridPane.rowIndex="10" GridPane.columnIndex="0" style="-fx-text-fill: #666;"/>
+                                          <TextField fx:id="imageKeyField" GridPane.rowIndex="10" GridPane.columnIndex="1" promptText="S3 image key or URL"/>
                                       </children>
                                   </GridPane>
-                        
-                                  <VBox spacing="10" style="-fx-padding: 20 0 0 0;">
+                                   
+                                   <VBox spacing="10" style="-fx-border-color: #eee; -fx-border-width: 1 0 0 0; -fx-padding: 10 0 0 0;">
+                                       <children>
+                                           <HBox alignment="CENTER_LEFT" spacing="10">
+                                               <children>
+                                                   <Label text="Additional Photos:" style="-fx-font-weight: bold;"/>
+                                                   <Label fx:id="photoCountLabel" text="0" />
+                                               </children>
+                                           </HBox>
+                                           <Button onAction="#handleManagePhotos" text="Manage Photos" styleClass="button-secondary" prefWidth="Infinity"/>
+                                       </children>
+                                   </VBox>
+                         
+                                   <VBox spacing="10" style="-fx-padding: 10 0 0 0;">
                                       <children>
                                           <Button onAction="#addVehicle" text="Add Vehicle" styleClass="button-primary" prefWidth="Infinity"/>
                                           <HBox spacing="10">

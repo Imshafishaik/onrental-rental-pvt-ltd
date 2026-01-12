@@ -125,9 +125,22 @@ public class UserDAO {
 
             stmt.setInt(1, userId);
             stmt.executeUpdate();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public int getTotalUsersCount() {
+        String sql = "SELECT COUNT(*) FROM users";
+        try (Connection conn = Database.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

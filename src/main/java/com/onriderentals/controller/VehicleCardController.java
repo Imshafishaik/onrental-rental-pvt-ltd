@@ -37,9 +37,19 @@ public class VehicleCardController {
         priceLabel.setText("$" + String.format("%.0f", vehicle.getPricePerDay()));
         
         // Real data from model
+        // Real data from model
         locationLabel.setText(vehicle.getLocation() != null ? vehicle.getLocation() : "Unknown"); 
-        ratingLabel.setText("4.5"); // Keep rating mock as it's not in DB yet
-        reviewCountLabel.setText("(120 reviews)");
+        
+        com.onriderentals.dao.ReviewDAO reviewDAO = new com.onriderentals.dao.ReviewDAO();
+        com.onriderentals.dao.ReviewDAO.RatingStats stats = reviewDAO.getRatingStats(vehicle.getVehicleId());
+        
+        if (stats.reviewCount > 0) {
+            ratingLabel.setText(String.format("%.1f", stats.averageRating));
+            reviewCountLabel.setText("(" + stats.reviewCount + " reviews)");
+        } else {
+            ratingLabel.setText("N/A");
+            reviewCountLabel.setText("(No reviews)");
+        }
 
         // Image loading logic (S3 integration)
         try {

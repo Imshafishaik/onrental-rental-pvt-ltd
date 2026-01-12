@@ -19,9 +19,17 @@ public class Vehicle {
     private String licensePlate;
     private String vin;
     private String imageKey;
+    private java.util.List<VehiclePhoto> photos = new java.util.ArrayList<>();
 
 
     // Getters and Setters
+    public java.util.List<VehiclePhoto> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(java.util.List<VehiclePhoto> photos) {
+        this.photos = photos;
+    }
     public String getImageKey() {
         return imageKey;
     }
