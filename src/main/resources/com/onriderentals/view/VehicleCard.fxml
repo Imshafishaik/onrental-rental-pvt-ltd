@@ -15,8 +15,8 @@
     
     <StackPane style="-fx-background-color: #f8f9fa; -fx-background-radius: 12;">
         <children>
-            <ImageView fx:id="vehicleImage" fitWidth="250" fitHeight="150" preserveRatio="true" />
-            <Button fx:id="favoriteButton" styleClass="button-ghost" text="♡" StackPane.alignment="TOP_RIGHT" style="-fx-font-size: 18px; -fx-padding: 8; -fx-text-fill: #adb5bd;" />
+            <ImageView fx:id="vehicleImage" fitWidth="250" fitHeight="150" preserveRatio="true" onMouseClicked="#handleViewDetails" style="-fx-cursor: hand;" />
+            <Button fx:id="favoriteButton" styleClass="button-ghost" text="♡" StackPane.alignment="TOP_RIGHT" style="-fx-font-size: 18px; -fx-padding: 8; -fx-text-fill: #adb5bd;" onAction="#handleFavorite" />
             <Label fx:id="typeBadge" text="Car" styleClass="badge" StackPane.alignment="TOP_LEFT" style="-fx-translate-x: 10; -fx-translate-y: 10;" />
         </children>
     </StackPane>

@@ -15,7 +15,7 @@ import java.util.Map;
 public class BookingDAO {
 
     public void addBooking(Booking booking) {
-        String bookingSql = "INSERT INTO bookings (customer_id, vehicle_id, start_date, end_date, total_cost, status) VALUES (?, ?, ?, ?, ?, ?)";
+        String bookingSql = "INSERT INTO bookings (customer_id, vehicle_id, start_date, end_date, total_amount, status) VALUES (?, ?, ?, ?, ?, ?)";
         String vehicleSql = "UPDATE vehicles SET status = ? WHERE vehicle_id = ?";
 
         try (Connection conn = Database.getConnection()) {
@@ -63,7 +63,7 @@ public class BookingDAO {
                 booking.setVehicleId(rs.getInt("vehicle_id"));
                 booking.setStartDate(rs.getDate("start_date").toLocalDate());
                 booking.setEndDate(rs.getDate("end_date").toLocalDate());
-                booking.setTotalCost(rs.getDouble("total_cost"));
+                booking.setTotalCost(rs.getDouble("total_amount"));
                 booking.setStatus(rs.getString("status"));
                 bookings.add(booking);
             }
@@ -87,7 +87,7 @@ public class BookingDAO {
                 booking.setVehicleId(rs.getInt("vehicle_id"));
                 booking.setStartDate(rs.getDate("start_date").toLocalDate());
                 booking.setEndDate(rs.getDate("end_date").toLocalDate());
-                booking.setTotalCost(rs.getDouble("total_cost"));
+                booking.setTotalCost(rs.getDouble("total_amount"));
                 booking.setStatus(rs.getString("status"));
                 bookings.add(booking);
             }
@@ -99,9 +99,9 @@ public class BookingDAO {
 
     public Map<Month, Double> getEarningsByMonth() {
         Map<Month, Double> earningsByMonth = new EnumMap<>(Month.class);
-        String sql = "SELECT EXTRACT(MONTH FROM start_date) as month, SUM(total_cost) as earnings " +
+        String sql = "SELECT EXTRACT(MONTH FROM start_date) as month, SUM(total_amount) as earnings " +
                      "FROM bookings " +
-                     "WHERE status = 'Booked' " +
+                     "WHERE status = 'CONFIRMED' " +
                      "GROUP BY EXTRACT(MONTH FROM start_date)";
 
         try (Connection conn = Database.getConnection();

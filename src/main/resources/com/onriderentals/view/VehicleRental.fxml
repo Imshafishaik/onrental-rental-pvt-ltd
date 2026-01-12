@@ -25,7 +25,7 @@
                         <HBox alignment="CENTER_LEFT" spacing="10">
                             <Label text="Filters" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
                             <Region HBox.hgrow="ALWAYS" />
-                            <Button text="Reset" styleClass="button-ghost" style="-fx-font-size: 12px;"/>
+                            <Button text="Reset" styleClass="button-ghost" style="-fx-font-size: 12px;" onAction="#handleResetFilters" />
                         </HBox>
 
                         <!-- Location Filter -->

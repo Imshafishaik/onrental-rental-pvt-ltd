@@ -58,7 +58,7 @@ public class HomeController {
         }
         System.out.println("Searching for vehicles in: " + location);
         // Navigate to vehicle rental with filters
-        SceneManager.switchScene("VehicleRental");
+        SceneManager.switchScene("VehicleRental", location);
     }
 
     @FXML

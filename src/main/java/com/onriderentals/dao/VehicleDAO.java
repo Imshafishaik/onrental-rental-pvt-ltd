@@ -29,6 +29,8 @@ public class VehicleDAO {
                 vehicle.setType(rs.getString("type"));
                 vehicle.setPricePerDay(rs.getDouble("price_per_day"));
                 vehicle.setStatus(rs.getString("status"));
+                vehicle.setLocation(rs.getString("location"));
+                vehicle.setImageKey(rs.getString("image_key"));
                 return vehicle;
             }
         } catch (SQLException e) {
@@ -55,6 +57,8 @@ public class VehicleDAO {
                 vehicle.setType(rs.getString("type"));
                 vehicle.setPricePerDay(rs.getDouble("price_per_day"));
                 vehicle.setStatus(rs.getString("status"));
+                vehicle.setLocation(rs.getString("location"));
+                vehicle.setImageKey(rs.getString("image_key"));
                 vehicles.add(vehicle);
             }
         } catch (SQLException e) {
@@ -84,6 +88,8 @@ public class VehicleDAO {
                 vehicle.setType(rs.getString("type"));
                 vehicle.setPricePerDay(rs.getDouble("price_per_day"));
                 vehicle.setStatus(rs.getString("status"));
+                vehicle.setLocation(rs.getString("location"));
+                vehicle.setImageKey(rs.getString("image_key"));
                 vehicles.add(vehicle);
             }
         } catch (SQLException e) {
@@ -94,7 +100,7 @@ public class VehicleDAO {
     }
 
     public void addVehicle(Vehicle vehicle) {
-        String sql = "INSERT INTO vehicles (renter_id, type, brand, model, year, price_per_day, location, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO vehicles (renter_id, type, brand, model, year, price_per_day, location, status, image_key) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = Database.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -105,8 +111,9 @@ public class VehicleDAO {
             stmt.setString(4, vehicle.getModel());
             stmt.setInt(5, vehicle.getYear());
             stmt.setDouble(6, vehicle.getPricePerDay());
-            stmt.setString(7, "Default Location");
+            stmt.setString(7, vehicle.getLocation() != null ? vehicle.getLocation() : "New York");
             stmt.setString(8, vehicle.getStatus());
+            stmt.setString(9, vehicle.getImageKey());
 
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -115,7 +122,7 @@ public class VehicleDAO {
     }
 
     public void updateVehicle(Vehicle vehicle) {
-        String sql = "UPDATE vehicles SET type = ?, brand = ?, model = ?, year = ?, price_per_day = ?, status = ? WHERE vehicle_id = ?";
+        String sql = "UPDATE vehicles SET type = ?, brand = ?, model = ?, year = ?, price_per_day = ?, status = ?, location = ?, image_key = ? WHERE vehicle_id = ?";
 
         try (Connection conn = Database.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -126,7 +133,9 @@ public class VehicleDAO {
             stmt.setInt(4, vehicle.getYear());
             stmt.setDouble(5, vehicle.getPricePerDay());
             stmt.setString(6, vehicle.getStatus());
-            stmt.setInt(7, vehicle.getVehicleId());
+            stmt.setString(7, vehicle.getLocation());
+            stmt.setString(8, vehicle.getImageKey());
+            stmt.setInt(9, vehicle.getVehicleId());
 
             stmt.executeUpdate();
         } catch (SQLException e) {

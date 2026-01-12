@@ -1,10 +1,12 @@
 package com.onriderentals.controller;
 
+import com.onriderentals.dao.FavoriteDAO;
 import com.onriderentals.dao.BookingDAO;
 import com.onriderentals.dao.VehicleDAO;
 import com.onriderentals.model.Booking;
 import com.onriderentals.model.SessionManager;
 import com.onriderentals.model.Vehicle;
+import com.onriderentals.factory.SceneManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -45,6 +47,8 @@ public class CustomerDashboardController {
     private DatePicker startDatePicker;
     @FXML
     private DatePicker endDatePicker;
+    @FXML
+    private javafx.scene.layout.FlowPane favoritesGrid;
 
     // My Bookings Table
     @FXML
@@ -64,12 +68,14 @@ public class CustomerDashboardController {
 
     private VehicleDAO vehicleDAO;
     private BookingDAO bookingDAO;
+    private FavoriteDAO favoriteDAO;
     private ObservableList<Vehicle> vehicleList;
     private ObservableList<Booking> bookingList;
 
     public void initialize() {
         vehicleDAO = new VehicleDAO();
         bookingDAO = new BookingDAO();
+        favoriteDAO = new FavoriteDAO();
         vehicleList = FXCollections.observableArrayList();
         bookingList = FXCollections.observableArrayList();
 
@@ -91,6 +97,7 @@ public class CustomerDashboardController {
         addDetailsButtonToTable();
         loadVehicles();
         loadUserBookings();
+        loadFavorites();
     }
 
     private void addDetailsButtonToTable() {
@@ -124,26 +131,7 @@ public class CustomerDashboardController {
     }
 
     private void showVehicleDetails(Vehicle vehicle) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/onriderentals/view/VehicleDetails.fxml"));
-            AnchorPane page = loader.load();
-
-            Stage detailsStage = new Stage();
-            detailsStage.setTitle("Vehicle Details");
-            detailsStage.initModality(Modality.WINDOW_MODAL);
-            detailsStage.initOwner(vehicleTable.getScene().getWindow());
-
-            Scene scene = new Scene(page);
-            detailsStage.setScene(scene);
-
-            VehicleDetailsController controller = loader.getController();
-            controller.initData(vehicle);
-
-            detailsStage.showAndWait();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        SceneManager.switchScene("VehicleDetails", vehicle);
     }
 
     private void loadVehicles() {
@@ -159,6 +147,29 @@ public class CustomerDashboardController {
         int customerId = SessionManager.getInstance().getUserId();
         bookingList.setAll(bookingDAO.getBookingsByCustomerId(customerId));
         bookingTable.setItems(bookingList);
+    }
+
+    private void loadFavorites() {
+        favoritesGrid.getChildren().clear();
+        if (!SessionManager.getInstance().isLoggedIn()) return;
+
+        int userId = SessionManager.getInstance().getUserId();
+        List<Integer> favIds = favoriteDAO.getFavoriteVehicleIds(userId);
+        
+        for (int vehicleId : favIds) {
+            Vehicle v = vehicleDAO.getVehicleById(vehicleId);
+            if (v != null) {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/onriderentals/view/VehicleCard.fxml"));
+                    javafx.scene.Parent card = loader.load();
+                    VehicleCardController controller = loader.getController();
+                    controller.setVehicle(v);
+                    favoritesGrid.getChildren().add(card);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     @FXML
@@ -203,7 +214,7 @@ public class CustomerDashboardController {
         booking.setStartDate(startDate);
         booking.setEndDate(endDate);
         booking.setTotalCost(totalCost);
-        booking.setStatus("Booked");
+        booking.setStatus("CONFIRMED");
 
         bookingDAO.addBooking(booking);
 

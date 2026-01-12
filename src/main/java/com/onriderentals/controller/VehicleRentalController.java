@@ -44,12 +44,34 @@ public class VehicleRentalController {
     private ObservableList<Vehicle> allVehicles;
     private String currentTypeFilter = "All";
 
+    private String initialLocation;
+
     public void initialize() {
         vehicleDAO = new VehicleDAO();
         allVehicles = FXCollections.observableArrayList();
 
         setupFilters();
         loadVehicles();
+        
+        // Initial price slider state
+        priceSlider.setValue(500.0); // Default max for premium rides
+        priceValueLabel.setText("$500");
+        
+        if (initialLocation != null) {
+            locationCombo.setValue(initialLocation);
+            filterVehicles();
+        }
+    }
+
+    public void setInitialLocation(String location) {
+        this.initialLocation = location;
+        if (locationCombo != null) {
+            if (!locationCombo.getItems().contains(location)) {
+                locationCombo.getItems().add(location);
+            }
+            locationCombo.setValue(location);
+            filterVehicles();
+        }
     }
 
     private void setupFilters() {
@@ -91,6 +113,13 @@ public class VehicleRentalController {
     private void renderVehicles(List<Vehicle> vehicles) {
         vehicleGrid.getChildren().clear();
         resultsCountLabel.setText("Showing " + vehicles.size() + " vehicles");
+
+        if (vehicles.isEmpty()) {
+            Label noResultsLabel = new Label("No vehicles found matching your criteria.");
+            noResultsLabel.setStyle("-fx-font-size: 18px; -fx-text-fill: #adb5bd; -fx-padding: 50 0 0 0;");
+            vehicleGrid.getChildren().add(noResultsLabel);
+            return;
+        }
 
         for (Vehicle vehicle : vehicles) {
             try {
@@ -136,15 +165,53 @@ public class VehicleRentalController {
                     if (currentTypeFilter.equals("All")) return true;
                     return v.getType().equalsIgnoreCase(currentTypeFilter);
                 })
-                // Add location filter logic here if Vehicle model has location
+                .filter(v -> {
+                    if (location == null || location.equals("All Locations")) return true;
+                    return location.equalsIgnoreCase(v.getLocation());
+                })
                 .collect(Collectors.toList());
         
+        sortVehiclesList(filtered);
         renderVehicles(filtered);
+    }
+
+    private void sortVehiclesList(List<Vehicle> vehicles) {
+        String sortOrder = sortCombo.getValue();
+        if (sortOrder == null) return;
+
+        switch (sortOrder) {
+            case "Price: Low to High":
+                vehicles.sort((v1, v2) -> Double.compare(v1.getPricePerDay(), v2.getPricePerDay()));
+                break;
+            case "Price: High to Low":
+                vehicles.sort((v1, v2) -> Double.compare(v2.getPricePerDay(), v1.getPricePerDay()));
+                break;
+            case "Rating":
+                // Assuming default rating for now as it's not in DB
+                break;
+            default: // Recommended
+                break;
+        }
     }
     
     private void sortVehicles() {
         // Implement sorting logic based on sortCombo.getValue()
         // For now just re-rendering
+        filterVehicles();
+    }
+
+    @FXML
+    private void handleResetFilters() {
+        priceSlider.setValue(priceSlider.getMax());
+        locationCombo.setValue("All Locations");
+        currentTypeFilter = "All";
+        
+        filterAllBtn.getStyleClass().add("selected");
+        filterBikeBtn.getStyleClass().remove("selected");
+        filterCarBtn.getStyleClass().remove("selected");
+        
+        sortCombo.setValue("Recommended");
+        
         filterVehicles();
     }
 

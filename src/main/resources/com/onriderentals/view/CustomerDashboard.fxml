@@ -80,6 +80,18 @@
                       </children>
                    </HBox>
     
+                   <!-- My Favorites Section -->
+                   <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 5, 0, 0, 2);">
+                       <children>
+                           <Label text="My Favorites" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;" />
+                           <ScrollPane fitToHeight="true" minHeight="200" style="-fx-background-color: transparent;">
+                               <content>
+                                   <javafx.scene.layout.FlowPane fx:id="favoritesGrid" hgap="20" vgap="20" style="-fx-padding: 10;" />
+                               </content>
+                           </ScrollPane>
+                       </children>
+                   </VBox>
+
                    <!-- Main Content Area -->
                    <VBox spacing="30">
                        <!-- My Bookings Section -->

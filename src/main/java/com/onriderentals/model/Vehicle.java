@@ -18,9 +18,17 @@ public class Vehicle {
     private String color;
     private String licensePlate;
     private String vin;
+    private String imageKey;
 
 
     // Getters and Setters
+    public String getImageKey() {
+        return imageKey;
+    }
+
+    public void setImageKey(String imageKey) {
+        this.imageKey = imageKey;
+    }
     public int getVehicleId() {
         return vehicleId;
     }

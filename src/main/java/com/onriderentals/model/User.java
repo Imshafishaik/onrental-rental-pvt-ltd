@@ -10,7 +10,9 @@ public class User {
     private boolean isActive;
 
     // Default constructor
-    public User() {}
+    public User() {
+        this.isActive = true;
+    }
 
     public User(int userId, String name, String email, String password_hash, String role, String phone,
             boolean isActive) {

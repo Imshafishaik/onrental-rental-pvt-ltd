@@ -32,6 +32,7 @@ CREATE TABLE vehicles (
     price_per_day DOUBLE NOT NULL,
     location VARCHAR(150) NOT NULL,
     status ENUM('AVAILABLE', 'BOOKED', 'MAINTENANCE') DEFAULT 'AVAILABLE',
+    image_key VARCHAR(255),
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (renter_id) REFERENCES users(user_id)
         ON DELETE CASCADE

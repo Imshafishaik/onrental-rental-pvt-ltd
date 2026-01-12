@@ -1,5 +1,10 @@
 package com.onriderentals.factory;
 
+import com.onriderentals.controller.BookingConfirmationController;
+import com.onriderentals.controller.VehicleDetailsController;
+import com.onriderentals.controller.VehicleRentalController;
+import com.onriderentals.model.Vehicle;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -29,21 +34,24 @@ public class SceneManager {
         sceneMap.put("Favorites", "/com/onriderentals/view/Favorites.fxml");
         sceneMap.put("Reviews", "/com/onriderentals/view/Reviews.fxml");
         sceneMap.put("Notifications", "/com/onriderentals/view/Notifications.fxml");
+        sceneMap.put("BookingConfirmation", "/com/onriderentals/view/BookingConfirmation.fxml");
     }
 
     public static void setPrimaryStage(Stage stage) {
         primaryStage = stage;
     }
 
-    public static void loadScene(String fxmlPath) {
+    public static Object loadScene(String fxmlPath) {
         try {
             FXMLLoader loader = new FXMLLoader(SceneManager.class.getResource(fxmlPath));
             Parent root = loader.load();
             Scene scene = new Scene(root, primaryStage.getWidth(), primaryStage.getHeight());
             primaryStage.setScene(scene);
+            return loader.getController();
         } catch (IOException e) {
             System.err.println("Error loading scene: " + fxmlPath);
             e.printStackTrace();
+            return null;
         }
     }
 
@@ -53,6 +61,20 @@ public class SceneManager {
             loadScene(fxmlPath);
         } else {
             System.err.println("Scene not found: " + sceneName);
+        }
+    }
+
+    public static void switchScene(String sceneName, Object data) {
+        String fxmlPath = sceneMap.get(sceneName);
+        if (fxmlPath != null) {
+            Object controller = loadScene(fxmlPath);
+            if (controller instanceof VehicleDetailsController && data instanceof Vehicle) {
+                ((VehicleDetailsController) controller).setVehicle((Vehicle) data);
+            } else if (controller instanceof BookingConfirmationController && data instanceof Vehicle) {
+                ((BookingConfirmationController) controller).setVehicle((Vehicle) data);
+            } else if (controller instanceof VehicleRentalController && data instanceof String) {
+                ((VehicleRentalController) controller).setInitialLocation((String) data);
+            }
         }
     }
 

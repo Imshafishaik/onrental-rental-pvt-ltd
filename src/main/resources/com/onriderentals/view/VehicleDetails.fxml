@@ -113,7 +113,8 @@
                                     </children>
                                 </VBox>
                                 <Region HBox.hgrow="ALWAYS" />
-                                <Button text="Book This Ride" styleClass="button-primary" style="-fx-padding: 15 40; -fx-font-size: 16px;"/>
+                                <Button fx:id="favoriteButton" onAction="#handleFavorite" styleClass="button-ghost" style="-fx-font-size: 24px; -fx-padding: 10; -fx-text-fill: #adb5bd;" text="♡" />
+                                <Button fx:id="bookButton" onAction="#handleBook" text="Book This Ride" styleClass="button-primary" style="-fx-padding: 15 40; -fx-font-size: 16px;"/>
                             </children>
                         </HBox>
                     </children>
