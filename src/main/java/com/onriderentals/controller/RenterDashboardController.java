@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.util.List;
 import java.util.Optional;
 
 public class RenterDashboardController {
@@ -80,6 +81,7 @@ public class RenterDashboardController {
                 (observable, oldValue, newValue) -> populateVehicleForm(newValue));
 
         loadRenterVehicles();
+        // loadRenterStats(); // TODO: Implement stats loading
     }
 
     private void populateVehicleForm(Vehicle vehicle) {

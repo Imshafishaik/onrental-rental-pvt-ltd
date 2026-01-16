@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Alert?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+<VBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.onriderentals.controller.CustomerProfileController" styleClass="root" stylesheets="@styles.css">
+    <children>
+        <fx:include source="Navbar.fxml"/>
+        
+        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
+           <content>
+             <VBox spacing="30" style="-fx-padding: 30; -fx-background-color: #f8f9fa;">
+                <children>
+                   <!-- Profile Header -->
+                   <VBox spacing="10" style="-fx-background-color: linear-gradient(to right, #667eea, #764ba2); -fx-padding: 40; -fx-background-radius: 20; -fx-effect: dropshadow(three-pass-box, rgba(102,126,234,0.3), 10, 0, 0, 5);">
+                       <children>
+                           <Label text="My Profile" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                           <Label text="Manage your personal information" style="-fx-font-size: 16px; -fx-text-fill: rgba(255,255,255,0.9);"/>
+                       </children>
+                   </VBox>
+    
+                   <!-- Personal Information Section -->
+                   <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 5, 0, 0, 2);">
+                       <children>
+                           <Label text="Personal Information" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                           <Separator style="-fx-padding: 0 0 10 0;"/>
+                           
+                           <GridPane hgap="15" vgap="15">
+                               <columnConstraints>
+                                   <javafx.scene.layout.ColumnConstraints minWidth="100" prefWidth="100" />
+                                   <javafx.scene.layout.ColumnConstraints hgrow="ALWAYS" />
+                               </columnConstraints>
+                               <children>
+                                   <Label text="Full Name:" GridPane.rowIndex="0" GridPane.columnIndex="0" style="-fx-text-fill: #666;"/>
+                                   <TextField fx:id="nameField" GridPane.rowIndex="0" GridPane.columnIndex="1" promptText="Enter your full name"/>
+                                   
+                                   <Label text="Email Address:" GridPane.rowIndex="1" GridPane.columnIndex="0" style="-fx-text-fill: #666;"/>
+                                   <TextField fx:id="emailField" GridPane.rowIndex="1" GridPane.columnIndex="1" promptText="Enter your email" editable="false"/>
+                                   
+                                   <Label text="Phone Number:" GridPane.rowIndex="2" GridPane.columnIndex="0" style="-fx-text-fill: #666;"/>
+                                   <TextField fx:id="phoneField" GridPane.rowIndex="2" GridPane.columnIndex="1" promptText="Enter your phone number"/>
+                                   
+                                   <Label text="Member Since:" GridPane.rowIndex="3" GridPane.columnIndex="0" style="-fx-text-fill: #666;"/>
+                                   <Label fx:id="memberSinceLabel" GridPane.rowIndex="3" GridPane.columnIndex="1" style="-fx-text-fill: #333; -fx-font-weight: bold;"/>
+                               </children>
+                           </GridPane>
+                       </children>
+                   </VBox>
+
+                   <!-- Account Statistics -->
+                   <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 5, 0, 0, 2);">
+                       <children>
+                           <Label text="Account Statistics" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                           <Separator style="-fx-padding: 0 0 10 0;"/>
+                           
+                           <HBox spacing="20">
+                               <children>
+                                   <VBox styleClass="stat-card">
+                                       <children>
+                                           <VBox styleClass="stat-icon-container, icon-blue" alignment="CENTER">
+                                               <Label text="📅" styleClass="stat-icon-label"/>
+                                           </VBox>
+                                           <VBox styleClass="stat-content">
+                                               <Label fx:id="totalBookingsLabel" text="0" styleClass="stat-value"/>
+                                               <Label text="Total Bookings" styleClass="stat-label"/>
+                                           </VBox>
+                                       </children>
+                                   </VBox>
+                                   
+                                   <VBox styleClass="stat-card">
+                                       <children>
+                                           <VBox styleClass="stat-icon-container, icon-green" alignment="CENTER">
+                                               <Label text="⭐" styleClass="stat-icon-label"/>
+                                           </VBox>
+                                           <VBox styleClass="stat-content">
+                                               <Label fx:id="loyaltyPointsLabel" text="0" styleClass="stat-value"/>
+                                               <Label text="Loyalty Points" styleClass="stat-label"/>
+                                           </VBox>
+                                       </children>
+                                   </VBox>
+                               </children>
+                           </HBox>
+                       </children>
+                   </VBox>
+
+                   <!-- Actions -->
+                   <HBox spacing="15">
+                       <children>
+                           <Button text="Update Profile" onAction="#updateProfile" styleClass="button-primary" prefWidth="150"/>
+                           <Button text="Change Password" onAction="#changePassword" styleClass="button-secondary" prefWidth="150"/>
+                           <Region HBox.hgrow="ALWAYS"/>
+                       </children>
+                   </HBox>
+                </children>
+             </VBox>
+           </content>
+        </ScrollPane>
+    </children>
+</VBox>

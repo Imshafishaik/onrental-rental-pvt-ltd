@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.control.Separator?>
+
+<VBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.onriderentals.controller.AdminProfileController" styleClass="root" stylesheets="@styles.css">
+    <children>
+        <fx:include source="Navbar.fxml"/>
+        
+        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
+           <content>
+             <VBox spacing="30" style="-fx-padding: 30; -fx-background-color: #f8f9fa;">
+                <children>
+                   <!-- Profile Header -->
+                   <VBox spacing="10" style="-fx-background-color: linear-gradient(to right, #667eea, #764ba2); -fx-padding: 40; -fx-background-radius: 20; -fx-effect: dropshadow(three-pass-box, rgba(102,126,234,0.3), 10, 0, 0, 5);">
+                       <children>
+                           <Label text="Admin Profile" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                           <Label text="System administrator account settings" style="-fx-font-size: 16px; -fx-text-fill: rgba(255,255,255,0.9);"/>
+                       </children>
+                   </VBox>
+    
+                   <!-- Admin Information Section -->
+                   <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 5, 0, 0, 2);">
+                       <children>
+                           <Label text="Administrator Information" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                           <Separator style="-fx-padding: 0 0 10 0;"/>
+                           
+                           <GridPane hgap="15" vgap="15">
+                               <columnConstraints>
+                                   <javafx.scene.layout.ColumnConstraints minWidth="120" prefWidth="120" />
+                                   <javafx.scene.layout.ColumnConstraints hgrow="ALWAYS" />
+                               </columnConstraints>
+                               <children>
+                                   <Label text="Admin ID:" GridPane.rowIndex="0" GridPane.columnIndex="0" style="-fx-text-fill: #666;"/>
+                                   <Label fx:id="adminIdLabel" GridPane.rowIndex="0" GridPane.columnIndex="1" style="-fx-text-fill: #333; -fx-font-weight: bold;"/>
+                                   
+                                   <Label text="Full Name:" GridPane.rowIndex="1" GridPane.columnIndex="0" style="-fx-text-fill: #666;"/>
+                                   <TextField fx:id="nameField" GridPane.rowIndex="1" GridPane.columnIndex="1" promptText="Enter your full name"/>
+                                   
+                                   <Label text="Email Address:" GridPane.rowIndex="2" GridPane.columnIndex="0" style="-fx-text-fill: #666;"/>
+                                   <TextField fx:id="emailField" GridPane.rowIndex="2" GridPane.columnIndex="1" promptText="Enter your email" editable="false"/>
+                                   
+                                   <Label text="System Role:" GridPane.rowIndex="3" GridPane.columnIndex="0" style="-fx-text-fill: #666;"/>
+                                   <Label fx:id="roleLabel" GridPane.rowIndex="3" GridPane.columnIndex="1" style="-fx-text-fill: #333; -fx-font-weight: bold; -fx-text-fill: #e74c3c;"/>
+                                   
+                                   <Label text="Member Since:" GridPane.rowIndex="4" GridPane.columnIndex="0" style="-fx-text-fill: #666;"/>
+                                   <Label fx:id="memberSinceLabel" GridPane.rowIndex="4" GridPane.columnIndex="1" style="-fx-text-fill: #333; -fx-font-weight: bold;"/>
+                               </children>
+                           </GridPane>
+                       </children>
+                   </VBox>
+
+                   <!-- System Access -->
+                   <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 5, 0, 0, 2);">
+                       <children>
+                           <Label text="System Access" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                           <Separator style="-fx-padding: 0 0 10 0;"/>
+                           
+                           <VBox spacing="10">
+                               <children>
+                                   <Label text="✅ Full system administration access" style="-fx-text-fill: #28a745; -fx-font-weight: bold;"/>
+                                   <Label text="✅ User management capabilities" style="-fx-text-fill: #28a745; -fx-font-weight: bold;"/>
+                                   <Label text="✅ Vehicle oversight permissions" style="-fx-text-fill: #28a745; -fx-font-weight: bold;"/>
+                                   <Label text="✅ Booking system control" style="-fx-text-fill: #28a745; -fx-font-weight: bold;"/>
+                                   <Label text="✅ Reports and analytics access" style="-fx-text-fill: #28a745; -fx-font-weight: bold;"/>
+                               </children>
+                           </VBox>
+                       </children>
+                   </VBox>
+
+                   <!-- Actions -->
+                   <HBox spacing="15">
+                       <children>
+                           <Button text="Update Profile" onAction="#updateProfile" styleClass="button-primary" prefWidth="150"/>
+                           <Button text="System Settings" onAction="#systemSettings" styleClass="button-secondary" prefWidth="150"/>
+                           <Region HBox.hgrow="ALWAYS"/>
+                       </children>
+                   </HBox>
+                </children>
+             </VBox>
+           </content>
+        </ScrollPane>
+    </children>
+</VBox>

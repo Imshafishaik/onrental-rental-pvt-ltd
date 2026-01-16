@@ -28,6 +28,9 @@ public class UserDAO {
                 user.setRole(rs.getString("role"));
                 user.setPhone(rs.getString("phone"));
                 user.setActive(rs.getBoolean("is_active"));
+                if (rs.getTimestamp("created_at") != null) {
+                    user.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
+                }
                 return user;
             }
         } catch (SQLException e) {
@@ -53,6 +56,9 @@ public class UserDAO {
                 user.setRole(rs.getString("role"));
                 user.setPhone(rs.getString("phone"));
                 user.setActive(rs.getBoolean("is_active"));
+                if (rs.getTimestamp("created_at") != null) {
+                    user.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
+                }
                 return user;
             }
         } catch (SQLException e) {
@@ -77,6 +83,9 @@ public class UserDAO {
                 user.setRole(rs.getString("role"));
                 user.setPhone(rs.getString("phone"));
                 user.setActive(rs.getBoolean("is_active"));
+                if (rs.getTimestamp("created_at") != null) {
+                    user.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
+                }
                 users.add(user);
             }
         } catch (SQLException e) {

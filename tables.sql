@@ -124,38 +124,3 @@ CREATE TABLE reviews (
         ON DELETE CASCADE
 );
 
--- ============================
--- NOTIFICATIONS
--- ============================
-CREATE TABLE notifications (
-    notification_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    title VARCHAR(150),
-    message TEXT,
-    status ENUM('SENT', 'PENDING') DEFAULT 'PENDING',
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(user_id)
-        ON DELETE CASCADE
-);
-
--- ============================
--- ADMIN LOGS
--- ============================
-CREATE TABLE admin_logs (
-    log_id INT AUTO_INCREMENT PRIMARY KEY,
-    admin_id INT NOT NULL,
-    action VARCHAR(255) NOT NULL,
-    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (admin_id) REFERENCES users(user_id)
-        ON DELETE CASCADE
-);
-
--- ============================
--- REPORTS
--- ============================
-CREATE TABLE reports (
-    report_id INT AUTO_INCREMENT PRIMARY KEY,
-    type VARCHAR(100) NOT NULL,
-    date_generated DATE DEFAULT CURRENT_DATE,
-    data TEXT
-);

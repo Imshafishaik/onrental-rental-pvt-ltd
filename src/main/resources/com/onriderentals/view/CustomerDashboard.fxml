@@ -44,7 +44,7 @@
                                   <Label text="📅" styleClass="stat-icon-label"/>
                                </VBox>
                                <VBox styleClass="stat-content">
-                                  <Label text="12" styleClass="stat-value"/>
+                                  <Label fx:id="totalBookingsLabel" text="0" styleClass="stat-value"/>
                                   <Label text="Total Bookings" styleClass="stat-label"/>
                                </VBox>
                             </children>
@@ -57,9 +57,9 @@
                                   <Label text="🚗" styleClass="stat-icon-label"/>
                                </VBox>
                                <VBox styleClass="stat-content">
-                                  <Label text="1" styleClass="stat-value"/>
+                                  <Label fx:id="activeRentalsLabel" text="0" styleClass="stat-value"/>
                                   <Label text="Active Rental" styleClass="stat-label"/>
-                                  <Label text="Until Tomorrow" styleClass="stat-trend-up"/>
+                                  <Label fx:id="rentalStatus" text="" styleClass="stat-trend-up"/>
                                </VBox>
                             </children>
                          </HBox>
@@ -71,9 +71,9 @@
                                   <Label text="⭐" styleClass="stat-icon-label"/>
                                </VBox>
                                <VBox styleClass="stat-content">
-                                  <Label text="450" styleClass="stat-value"/>
+                                  <Label fx:id="loyaltyPointsLabel" text="0" styleClass="stat-value"/>
                                   <Label text="Loyalty Points" styleClass="stat-label"/>
-                                  <Label text="Silver Member" styleClass="stat-trend-up"/>
+                                  <Label fx:id="memberStatus" text="" styleClass="stat-trend-up"/>
                                </VBox>
                             </children>
                          </HBox>

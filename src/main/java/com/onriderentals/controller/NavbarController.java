@@ -14,6 +14,7 @@ public class NavbarController implements Initializable {
     @FXML private Button loginBtn;
     @FXML private Button registerBtn;
     @FXML private Button logoutBtn;
+    @FXML private Button profileBtn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -26,6 +27,8 @@ public class NavbarController implements Initializable {
         
         dashboardBtn.setVisible(loggedIn);
         dashboardBtn.setManaged(loggedIn);
+        profileBtn.setVisible(loggedIn);
+        profileBtn.setManaged(loggedIn);
         logoutBtn.setVisible(loggedIn);
         logoutBtn.setManaged(loggedIn);
     }
@@ -96,6 +99,36 @@ public class NavbarController implements Initializable {
         }
     }
     
+    @FXML
+    public void handleProfile() {
+        String role = SessionManager.getInstance().getUserRole();
+        String sceneName = "CustomerProfile"; // Default
+        
+        if (role != null) {
+            switch (role.toUpperCase()) {
+                case "ADMIN":
+                case "-1":
+                    sceneName = "AdminProfile";
+                    break;
+                case "RENTER":
+                case "-2":
+                    sceneName = "RenterProfile";
+                    break;
+                case "CUSTOMER":
+                case "-3":
+                default:
+                    sceneName = "CustomerProfile";
+                    break;
+            }
+        }
+        
+        try {
+            SceneManager.switchScene(sceneName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     public void handleLogout() {
         SessionManager.getInstance().clearSession();

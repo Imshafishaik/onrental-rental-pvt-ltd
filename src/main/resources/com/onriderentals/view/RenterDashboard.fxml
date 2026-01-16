@@ -32,13 +32,13 @@
                         <!-- Total Earnings Card -->
                         <HBox styleClass="stat-card">
                            <children>
-                              <VBox styleClass="stat-icon-container, icon-green" alignment="CENTER">
+                              <VBox styleClass="stat-icon-container icon-green" alignment="CENTER">
                                  <Label text="💰" styleClass="stat-icon-label"/>
                               </VBox>
                               <VBox styleClass="stat-content">
-                                 <Label text="\$12,450" styleClass="stat-value"/>
+                                 <Label fx:id="totalEarningsLabel" text="${'$'}0" styleClass="stat-value"/>
                                  <Label text="Total Earnings" styleClass="stat-label"/>
-                                 <Label text="↗ 15% this month" styleClass="stat-trend-up"/>
+                                 <Label fx:id="earningsTrend" text="" styleClass="stat-trend-up"/>
                               </VBox>
                            </children>
                         </HBox>
@@ -46,11 +46,11 @@
                         <!-- Listed Vehicles Card -->
                         <HBox styleClass="stat-card">
                            <children>
-                              <VBox styleClass="stat-icon-container, icon-blue" alignment="CENTER">
+                              <VBox styleClass="stat-icon-container icon-blue" alignment="CENTER">
                                  <Label text="🚗" styleClass="stat-icon-label"/>
                               </VBox>
                               <VBox styleClass="stat-content">
-                                 <Label text="8" styleClass="stat-value"/>
+                                 <Label fx:id="listedVehiclesLabel" text="0" styleClass="stat-value"/>
                                  <Label text="Listed Vehicles" styleClass="stat-label"/>
                               </VBox>
                            </children>
@@ -59,13 +59,13 @@
                         <!-- Active Bookings Card -->
                         <HBox styleClass="stat-card">
                            <children>
-                              <VBox styleClass="stat-icon-container, icon-orange" alignment="CENTER">
+                              <VBox styleClass="stat-icon-container icon-orange" alignment="CENTER">
                                  <Label text="📅" styleClass="stat-icon-label"/>
                               </VBox>
                               <VBox styleClass="stat-content">
-                                 <Label text="3" styleClass="stat-value"/>
+                                 <Label fx:id="activeBookingsLabel" text="0" styleClass="stat-value"/>
                                  <Label text="Active Bookings" styleClass="stat-label"/>
-                                 <Label text="↗ 2 new requests" styleClass="stat-trend-up"/>
+                                 <Label fx:id="bookingRequests" text="" styleClass="stat-trend-up"/>
                               </VBox>
                            </children>
                         </HBox>

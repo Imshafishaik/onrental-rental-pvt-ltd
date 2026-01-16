@@ -50,6 +50,18 @@ public class CustomerDashboardController {
     @FXML
     private javafx.scene.layout.FlowPane favoritesGrid;
 
+    // Stats Labels
+    @FXML
+    private Label totalBookingsLabel;
+    @FXML
+    private Label activeRentalsLabel;
+    @FXML
+    private Label rentalStatus;
+    @FXML
+    private Label loyaltyPointsLabel;
+    @FXML
+    private Label memberStatus;
+
     // My Bookings Table
     @FXML
     private TableView<Booking> bookingTable;
@@ -98,6 +110,7 @@ public class CustomerDashboardController {
         loadVehicles();
         loadUserBookings();
         loadFavorites();
+        loadCustomerStats();
     }
 
     private void addDetailsButtonToTable() {
@@ -222,6 +235,41 @@ public class CustomerDashboardController {
 
         loadVehicles();
         loadUserBookings(); // Refresh the bookings table
+        loadCustomerStats(); // Refresh the stats cards
+    }
+
+    private void loadCustomerStats() {
+        int customerId = SessionManager.getInstance().getUserId();
+        
+        // Get total bookings count
+        List<Booking> bookings = bookingDAO.getBookingsByCustomerId(customerId);
+        totalBookingsLabel.setText(String.valueOf(bookings.size()));
+        
+        // Get active rentals (confirmed bookings that are ongoing)
+        long activeRentals = bookings.stream()
+                .filter(b -> "CONFIRMED".equals(b.getStatus()) && 
+                          !b.getEndDate().isBefore(java.time.LocalDate.now()))
+                .count();
+        activeRentalsLabel.setText(String.valueOf(activeRentals));
+        
+        if (activeRentals > 0) {
+            rentalStatus.setText("Active rentals");
+        } else {
+            rentalStatus.setText("No active rentals");
+        }
+        
+        // Calculate loyalty points (simplified: 10 points per booking)
+        int loyaltyPoints = bookings.size() * 10;
+        loyaltyPointsLabel.setText(String.valueOf(loyaltyPoints));
+        
+        // Determine member status
+        if (loyaltyPoints >= 500) {
+            memberStatus.setText("Gold Member");
+        } else if (loyaltyPoints >= 200) {
+            memberStatus.setText("Silver Member");
+        } else {
+            memberStatus.setText("Bronze Member");
+        }
     }
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {
