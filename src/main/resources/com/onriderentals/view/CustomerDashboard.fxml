@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<VBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.onriderentals.controller.CustomerDashboardController" styleClass="root" stylesheets="@styles.css">
+    <children>
+        <fx:include source="Navbar.fxml"/>
+        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
+           <content>
+             <VBox spacing="30" style="-fx-padding: 30; -fx-background-color: #f8f9fa;">
+                <children>
+                   <!-- Hero Banner -->
+                   <VBox spacing="10" style="-fx-background-color: linear-gradient(to right, #667eea, #764ba2); -fx-padding: 40; -fx-background-radius: 20; -fx-effect: dropshadow(three-pass-box, rgba(102,126,234,0.3), 10, 0, 0, 5);">
+                       <children>
+                           <Label text="Welcome back, Explorer!" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                           <Label text="Ready for your next adventure? Find the perfect ride below." style="-fx-font-size: 16px; -fx-text-fill: rgba(255,255,255,0.9);"/>
+                       </children>
+                   </VBox>
+    
+                   <!-- Section Title -->
+                   <HBox alignment="CENTER_LEFT" spacing="10">
+                       <children>
+                           <VBox style="-fx-background-color: #667eea; -fx-min-width: 5; -fx-min-height: 30; -fx-background-radius: 5;"/>
+                           <Label text="Dashboard Overview" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                       </children>
+                   </HBox>
+    
+                   <!-- Stats Cards Row -->
+                   <HBox spacing="20.0" alignment="CENTER_LEFT">
+                      <children>
+                         <!-- Total Bookings Card -->
+                         <HBox styleClass="stat-card">
+                            <children>
+                               <VBox styleClass="stat-icon-container, icon-purple" alignment="CENTER">
+                                  <Label text="📅" styleClass="stat-icon-label"/>
+                               </VBox>
+                               <VBox styleClass="stat-content">
+                                  <Label text="12" styleClass="stat-value"/>
+                                  <Label text="Total Bookings" styleClass="stat-label"/>
+                               </VBox>
+                            </children>
+                         </HBox>
+    
+                         <!-- Active Rentals Card -->
+                         <HBox styleClass="stat-card">
+                            <children>
+                               <VBox styleClass="stat-icon-container, icon-green" alignment="CENTER">
+                                  <Label text="🚗" styleClass="stat-icon-label"/>
+                               </VBox>
+                               <VBox styleClass="stat-content">
+                                  <Label text="1" styleClass="stat-value"/>
+                                  <Label text="Active Rental" styleClass="stat-label"/>
+                                  <Label text="Until Tomorrow" styleClass="stat-trend-up"/>
+                               </VBox>
+                            </children>
+                         </HBox>
+    
+                         <!-- Loyalty Points Card (Placeholder) -->
+                         <HBox styleClass="stat-card">
+                            <children>
+                               <VBox styleClass="stat-icon-container, icon-blue" alignment="CENTER">
+                                  <Label text="⭐" styleClass="stat-icon-label"/>
+                               </VBox>
+                               <VBox styleClass="stat-content">
+                                  <Label text="450" styleClass="stat-value"/>
+                                  <Label text="Loyalty Points" styleClass="stat-label"/>
+                                  <Label text="Silver Member" styleClass="stat-trend-up"/>
+                               </VBox>
+                            </children>
+                         </HBox>
+                      </children>
+                   </HBox>
+    
+                   <!-- My Favorites Section -->
+                   <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 5, 0, 0, 2);">
+                       <children>
+                           <Label text="My Favorites" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;" />
+                           <ScrollPane fitToHeight="true" minHeight="200" style="-fx-background-color: transparent;">
+                               <content>
+                                   <javafx.scene.layout.FlowPane fx:id="favoritesGrid" hgap="20" vgap="20" style="-fx-padding: 10;" />
+                               </content>
+                           </ScrollPane>
+                       </children>
+                   </VBox>
+
+                   <!-- Main Content Area -->
+                   <VBox spacing="30">
+                       <!-- My Bookings Section -->
+                       <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 5, 0, 0, 2);">
+                           <children>
+                               <Label text="My Bookings History" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;" />
+                               <TableView fx:id="bookingTable" prefHeight="250">
+                                  <columns>
+                                      <TableColumn fx:id="bookingMakeColumn" text="Make"/>
+                                      <TableColumn fx:id="bookingModelColumn" text="Model"/>
+                                      <TableColumn fx:id="bookingStartDateColumn" text="Start Date"/>
+                                      <TableColumn fx:id="bookingEndDateColumn" text="End Date"/>
+                                      <TableColumn fx:id="bookingCostColumn" text="Total Cost"/>
+                                      <TableColumn fx:id="bookingStatusColumn" text="Status"/>
+                                  </columns>
+                               </TableView>
+                           </children>
+                       </VBox>
+    
+                       <!-- Available Vehicles / Quick Book Section -->
+                       <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 5, 0, 0, 2);">
+                           <children>
+                               <Label text="Quick Book: Available Vehicles" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;" />
+                               
+                               <HBox spacing="10" alignment="CENTER_LEFT">
+                                  <TextField fx:id="searchField" promptText="Search by make, model, or type" HBox.hgrow="ALWAYS"/>
+                                  <Button text="Search" onAction="#searchVehicles" styleClass="button-primary"/>
+                               </HBox>
+    
+                               <TableView fx:id="vehicleTable" prefHeight="250">
+                                  <columns>
+                                     <TableColumn fx:id="makeColumn" text="Make"/>
+                                     <TableColumn fx:id="modelColumn" text="Model"/>
+                                     <TableColumn fx:id="yearColumn" text="Year"/>
+                                     <TableColumn fx:id="typeColumn" text="Type"/>
+                                     <TableColumn fx:id="rateColumn" text="Rental Rate"/>
+                                      <TableColumn fx:id="detailsColumn" text="Details"/>
+                                  </columns>
+                               </TableView>
+                               
+                               <HBox spacing="15" alignment="CENTER_LEFT" style="-fx-background-color: #f8f9fa; -fx-padding: 15; -fx-background-radius: 5;">
+                                  <VBox spacing="5">
+                                      <Label text="Start Date:" styleClass="label"/>
+                                      <DatePicker fx:id="startDatePicker"/>
+                                  </VBox>
+                                  <VBox spacing="5">
+                                      <Label text="End Date:" styleClass="label"/>
+                                      <DatePicker fx:id="endDatePicker"/>
+                                  </VBox>
+                                  <Button text="Book Selected Vehicle" onAction="#bookVehicle" styleClass="button-primary" style="-fx-min-height: 40px;"/>
+                               </HBox>
+                           </children>
+                       </VBox>
+                   </VBox>
+                </children>
+             </VBox>
+           </content>
+        </ScrollPane>
+    </children>
+</VBox>
