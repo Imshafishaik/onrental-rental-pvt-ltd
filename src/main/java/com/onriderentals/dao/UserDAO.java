@@ -140,6 +140,23 @@ public class UserDAO {
         }
     }
 
+    public boolean userExistsByEmail(String email) {
+        String sql = "SELECT COUNT(*) FROM users WHERE email = ?";
+        try (Connection conn = Database.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public int getTotalUsersCount() {
         String sql = "SELECT COUNT(*) FROM users";
         try (Connection conn = Database.getConnection();
@@ -152,5 +169,25 @@ public class UserDAO {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    public boolean updatePasswordByEmail(String email, String hashedPassword) {
+        String sql = "UPDATE users SET password_hash = ? WHERE email = ?";
+        try (Connection conn = Database.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, hashedPassword);
+            stmt.setString(2, email);
+
+            int rowsUpdated = stmt.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Password updated successfully for email: " + email);
+                return true;
+            }
+        } catch (SQLException e) {
+            System.err.println("Error updating password: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return false;
     }
 }

@@ -84,6 +84,15 @@ public class LoginController {
     }
 
     @FXML
+    public void goToForgotPassword() {
+        try {
+            SceneManager.switchScene("ForgotPassword");
+        } catch (Exception e) {
+            System.err.println("Error navigating to ForgotPassword: " + e.getMessage());
+        }
+    }
+
+    @FXML
     public void goToVehicleRental() {
         try {
             SceneManager.switchScene("VehicleRental");

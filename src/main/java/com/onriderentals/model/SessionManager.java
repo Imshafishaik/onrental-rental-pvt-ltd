@@ -5,6 +5,7 @@ public class SessionManager {
     private static SessionManager instance;
     private int userId;
     private String userRole;
+    private String currentUserEmail; // For password reset flow
 
     private SessionManager() {
     }
@@ -32,9 +33,18 @@ public class SessionManager {
         this.userRole = userRole;
     }
 
+    public String getCurrentUserEmail() {
+        return currentUserEmail;
+    }
+
+    public void setCurrentUserEmail(String email) {
+        this.currentUserEmail = email;
+    }
+
     public void clearSession() {
         this.userId = 0;
         this.userRole = null;
+        this.currentUserEmail = null;
     }
 
     public boolean isLoggedIn() {

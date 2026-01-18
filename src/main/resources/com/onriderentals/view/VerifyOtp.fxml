@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="20" style="-fx-padding: 30;" xmlns="http://javafx.com/javafx/21.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.onriderentals.controller.VerifyOtpController">
+    <VBox styleClass="stat-card" spacing="15" style="-fx-padding: 30; -fx-border-radius: 10; -fx-background-color: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+        
+        <Label text="Verify OTP" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #007bff;"/>
+        
+        <Label text="Enter the 6-digit code sent to your email" style="-fx-font-size: 14; -fx-text-fill: #666;"/>
+        
+        <Separator/>
+        
+        <VBox spacing="8">
+            <Label text="OTP Code" style="-fx-font-size: 12; -fx-font-weight: bold;"/>
+            <TextField fx:id="otpField" promptText="Enter 6-digit OTP" style="-fx-font-size: 16; -fx-padding: 10; -fx-control-inner-background: #f8f9fa;"/>
+        </VBox>
+        
+        <HBox alignment="CENTER" spacing="10">
+            <Label text="Time Remaining:" style="-fx-font-size: 12; -fx-font-weight: bold;"/>
+            <Label fx:id="timerLabel" text="Valid for 5:00" style="-fx-font-size: 12; -fx-text-fill: #28a745; -fx-font-weight: bold;"/>
+        </HBox>
+        
+        <Button fx:id="verifyButton" text="Verify OTP" onAction="#handleVerifyOtp" style="-fx-font-size: 14; -fx-padding: 10 20; -fx-background-color: #007bff; -fx-text-fill: white; -fx-cursor: hand;"/>
+        
+        <HBox alignment="CENTER" spacing="5">
+            <Label text="Remember the OTP?" style="-fx-font-size: 12;"/>
+            <Hyperlink text="Request New OTP" style="-fx-padding: 0;" onAction="#handleBackToForgotPassword"/>
+        </HBox>
+        
+        <Button fx:id="backButton" text="Back to Forgot Password" onAction="#handleBackToForgotPassword" style="-fx-font-size: 12; -fx-padding: 8 15; -fx-background-color: #6c757d; -fx-text-fill: white; -fx-cursor: hand;"/>
+        
+    </VBox>
+</VBox>

@@ -26,6 +26,9 @@ public class SceneManager {
         sceneMap.put("VehicleRental", "/com/onriderentals/view/VehicleRental.fxml");
         sceneMap.put("Login", "/com/onriderentals/view/Login.fxml");
         sceneMap.put("Register", "/com/onriderentals/view/Register.fxml");
+        sceneMap.put("ForgotPassword", "/com/onriderentals/view/ForgotPassword.fxml");
+        sceneMap.put("VerifyOtp", "/com/onriderentals/view/VerifyOtp.fxml");
+        sceneMap.put("ResetPassword", "/com/onriderentals/view/ResetPassword.fxml");
         sceneMap.put("CustomerDashboard", "/com/onriderentals/view/CustomerDashboard.fxml");
         sceneMap.put("CustomerProfile", "/com/onriderentals/view/CustomerProfile.fxml");
         sceneMap.put("RenterDashboard", "/com/onriderentals/view/RenterDashboard.fxml");

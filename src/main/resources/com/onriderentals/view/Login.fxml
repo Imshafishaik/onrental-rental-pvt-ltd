@@ -57,6 +57,10 @@
                     <VBox spacing="15">
                         <Button fx:id="loginButton" onAction="#login" text="Sign In" maxWidth="Infinity" styleClass="button-primary" style="-fx-padding: 15;" />
                         <HBox alignment="CENTER" spacing="5">
+                            <Label text="Forgot your password?" styleClass="label-subtitle" />
+                            <Button onAction="#goToForgotPassword" text="Reset it here" styleClass="button-ghost" style="-fx-padding: 0; -fx-font-weight: bold;" />
+                        </HBox>
+                        <HBox alignment="CENTER" spacing="5">
                             <Label text="Don't have an account?" styleClass="label-subtitle" />
                             <Button onAction="#goToRegister" text="Create Account" styleClass="button-ghost" style="-fx-padding: 0; -fx-font-weight: bold;" />
                         </HBox>
