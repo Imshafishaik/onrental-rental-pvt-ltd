@@ -15,8 +15,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         SceneManager.setPrimaryStage(primaryStage);
         primaryStage.setTitle("OnRide Rentals");
-        primaryStage.setWidth(1000);
-        primaryStage.setHeight(800);
+        primaryStage.setWidth(1500);
+        primaryStage.setHeight(1300);
         SceneManager.loadScene("/com/onriderentals/view/Home.fxml");
         primaryStage.show();
     }
