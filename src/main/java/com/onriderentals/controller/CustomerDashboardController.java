@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -30,25 +31,14 @@ public class CustomerDashboardController {
     @FXML
     private TextField searchField;
     @FXML
+    private javafx.scene.layout.FlowPane favoritesGrid;
+    @FXML
     private TableView<Vehicle> vehicleTable;
-    @FXML
-    private TableColumn<Vehicle, String> makeColumn;
-    @FXML
-    private TableColumn<Vehicle, String> modelColumn;
-    @FXML
-    private TableColumn<Vehicle, Integer> yearColumn;
-    @FXML
-    private TableColumn<Vehicle, String> typeColumn;
-    @FXML
-    private TableColumn<Vehicle, Double> rateColumn;
-    @FXML
-    private TableColumn<Vehicle, Void> detailsColumn;
     @FXML
     private DatePicker startDatePicker;
     @FXML
     private DatePicker endDatePicker;
-    @FXML
-    private javafx.scene.layout.FlowPane favoritesGrid;
+    private ObservableList<Vehicle> vehicleList;
 
     // Stats Labels
     @FXML
@@ -77,26 +67,20 @@ public class CustomerDashboardController {
     private TableColumn<Booking, Double> bookingCostColumn;
     @FXML
     private TableColumn<Booking, String> bookingStatusColumn;
+    @FXML
+    private TableColumn<Booking, Void> bookingActionColumn;
 
     private VehicleDAO vehicleDAO;
     private BookingDAO bookingDAO;
     private FavoriteDAO favoriteDAO;
-    private ObservableList<Vehicle> vehicleList;
     private ObservableList<Booking> bookingList;
 
     public void initialize() {
         vehicleDAO = new VehicleDAO();
         bookingDAO = new BookingDAO();
         favoriteDAO = new FavoriteDAO();
-        vehicleList = FXCollections.observableArrayList();
         bookingList = FXCollections.observableArrayList();
-
-        // Setup vehicle table
-        makeColumn.setCellValueFactory(new PropertyValueFactory<>("make"));
-        modelColumn.setCellValueFactory(new PropertyValueFactory<>("model"));
-        yearColumn.setCellValueFactory(new PropertyValueFactory<>("year"));
-        typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
-        rateColumn.setCellValueFactory(new PropertyValueFactory<>("pricePerDay"));
+        vehicleList = FXCollections.observableArrayList();
 
         // Setup booking table
         bookingMakeColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getVehicle().getMake()));
@@ -106,24 +90,44 @@ public class CustomerDashboardController {
         bookingCostColumn.setCellValueFactory(new PropertyValueFactory<>("totalCost"));
         bookingStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 
-        addDetailsButtonToTable();
-        loadVehicles();
+        addBookingActionColumn();
         loadUserBookings();
         loadFavorites();
         loadCustomerStats();
     }
 
-    private void addDetailsButtonToTable() {
-        Callback<TableColumn<Vehicle, Void>, TableCell<Vehicle, Void>> cellFactory = new Callback<>() {
+    private void addBookingActionColumn() {
+        Callback<TableColumn<Booking, Void>, TableCell<Booking, Void>> cellFactory = new Callback<TableColumn<Booking, Void>, TableCell<Booking, Void>>() {
             @Override
-            public TableCell<Vehicle, Void> call(final TableColumn<Vehicle, Void> param) {
-                final TableCell<Vehicle, Void> cell = new TableCell<>() {
-                    private final Button btn = new Button("Details");
+            public TableCell<Booking, Void> call(final TableColumn<Booking, Void> param) {
+                final TableCell<Booking, Void> cell = new TableCell<Booking, Void>() {
+
+                    private final Button completeBtn = new Button("Complete & Review");
+                    private final Button viewBtn = new Button("View Details");
 
                     {
-                        btn.setOnAction(event -> {
-                            Vehicle vehicle = getTableView().getItems().get(getIndex());
-                            showVehicleDetails(vehicle);
+                        completeBtn.setStyle(
+                                "-fx-padding: 8 15; -fx-font-size: 11; -fx-background-color: #28a745; -fx-text-fill: white; -fx-cursor: hand;");
+                        viewBtn.setStyle(
+                                "-fx-padding: 8 15; -fx-font-size: 11; -fx-background-color: #007bff; -fx-text-fill: white; -fx-cursor: hand;");
+
+                        completeBtn.setOnAction(event -> {
+                            Booking booking = getTableView().getItems().get(getIndex());
+                            if ("CONFIRMED".equalsIgnoreCase(booking.getStatus())) {
+                                SceneManager.switchScene("CompleteBooking", booking.getBookingId());
+                            } else {
+                                showAlert(Alert.AlertType.INFORMATION, "Info",
+                                        "Only CONFIRMED bookings can be completed.");
+                            }
+                        });
+
+                        viewBtn.setOnAction(event -> {
+                            Booking booking = getTableView().getItems().get(getIndex());
+                            showAlert(Alert.AlertType.INFORMATION, "Booking #" + booking.getBookingId(),
+                                    "Status: " + booking.getStatus() + "\n" +
+                                            "Start: " + booking.getStartDate() + "\n" +
+                                            "End: " + booking.getEndDate() + "\n" +
+                                            "Cost: ₹" + String.format("%.2f", booking.getTotalCost()));
                         });
                     }
 
@@ -133,27 +137,21 @@ public class CustomerDashboardController {
                         if (empty) {
                             setGraphic(null);
                         } else {
-                            setGraphic(btn);
+                            Booking booking = getTableView().getItems().get(getIndex());
+                            if ("CONFIRMED".equalsIgnoreCase(booking.getStatus())) {
+                                setGraphic(completeBtn);
+                            } else {
+                                setGraphic(viewBtn);
+                            }
+                            setAlignment(Pos.CENTER);
                         }
                     }
                 };
                 return cell;
             }
         };
-        detailsColumn.setCellFactory(cellFactory);
-    }
 
-    private void showVehicleDetails(Vehicle vehicle) {
-        SceneManager.switchScene("VehicleDetails", vehicle);
-    }
-
-    private void loadVehicles() {
-        List<Vehicle> allVehicles = vehicleDAO.getAllVehicles();
-        List<Vehicle> availableVehicles = allVehicles.stream()
-                .filter(vehicle -> "Available".equalsIgnoreCase(vehicle.getStatus()))
-                .collect(Collectors.toList());
-        vehicleList.setAll(availableVehicles);
-        vehicleTable.setItems(vehicleList);
+        bookingActionColumn.setCellFactory(cellFactory);
     }
 
     private void loadUserBookings() {
@@ -233,7 +231,7 @@ public class CustomerDashboardController {
 
         showAlert(Alert.AlertType.INFORMATION, "Booking Successful", "Vehicle booked successfully!");
 
-        loadVehicles();
+        // loadVehicles();
         loadUserBookings(); // Refresh the bookings table
         loadCustomerStats(); // Refresh the stats cards
     }

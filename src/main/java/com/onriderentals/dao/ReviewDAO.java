@@ -1,5 +1,6 @@
 package com.onriderentals.dao;
 
+import com.onriderentals.model.Review;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -52,5 +53,41 @@ public class ReviewDAO {
             e.printStackTrace();
         }
         return statsMap;
+    }
+
+    public boolean addReview(Review review) {
+        String sql = "INSERT INTO reviews (vehicle_id, customer_id, rating, comment, review_date) VALUES (?, ?, ?, ?, ?)";
+        try (Connection conn = Database.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, review.getVehicleId());
+            stmt.setInt(2, review.getCustomerId());
+            stmt.setInt(3, review.getRating());
+            stmt.setString(4, review.getComment());
+            stmt.setObject(5, review.getReviewDate());
+
+            int rowsInserted = stmt.executeUpdate();
+            return rowsInserted > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean hasReviewForBooking(int bookingId) {
+        String sql = "SELECT COUNT(*) FROM reviews WHERE booking_id = ?";
+        try (Connection conn = Database.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, bookingId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

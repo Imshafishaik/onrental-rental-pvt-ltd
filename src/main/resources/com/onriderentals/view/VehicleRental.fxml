@@ -98,12 +98,8 @@
                                         </FlowPane>
                                         
                                         <!-- Modern Pagination -->
-                                        <HBox alignment="CENTER" spacing="10" style="-fx-padding: 40 0;">
-                                            <Button styleClass="button-icon" text="←" />
-                                            <Button styleClass="button-primary" text="1" style="-fx-min-width: 45; -fx-min-height: 45;"/>
-                                            <Button styleClass="button-ghost" text="2" style="-fx-min-width: 45; -fx-min-height: 45;"/>
-                                            <Button styleClass="button-ghost" text="3" style="-fx-min-width: 45; -fx-min-height: 45;"/>
-                                            <Button styleClass="button-icon" text="→" />
+                                        <HBox fx:id="paginationBox" alignment="CENTER" spacing="10" style="-fx-padding: 40 0;">
+
                                         </HBox>
                                     </children>
                                 </VBox>

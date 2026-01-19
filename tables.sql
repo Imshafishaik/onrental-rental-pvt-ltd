@@ -58,7 +58,7 @@ CREATE TABLE bookings (
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
     total_amount DOUBLE NOT NULL,
-    status ENUM('PENDING', 'CONFIRMED', 'CANCELLED') DEFAULT 'PENDING',
+    status ENUM('PENDING', 'CONFIRMED', 'CANCELLED', 'COMPLETED') DEFAULT 'PENDING',
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (vehicle_id) REFERENCES vehicles(vehicle_id)
         ON DELETE CASCADE,

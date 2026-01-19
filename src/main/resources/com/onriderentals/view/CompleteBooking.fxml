@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="TOP_CENTER" spacing="20" style="-fx-padding: 30;" xmlns="http://javafx.com/javafx/21.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.onriderentals.controller.CompleteBookingController">
+    
+    <Label text="Complete Booking &amp; Submit Review" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #007bff;"/>
+    
+    <VBox styleClass="stat-card" spacing="15" style="-fx-padding: 20; -fx-border-radius: 10; -fx-background-color: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2); -fx-border-color: #e0e0e0; -fx-border-width: 1;">
+        
+        <!-- Booking Details Section -->
+        <Label text="Booking Details" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+        
+        <GridPane hgap="20" vgap="15" style="-fx-padding: 10;">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="30"/>
+                <ColumnConstraints percentWidth="70"/>
+            </columnConstraints>
+            
+            <Label text="Booking ID:" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <Label fx:id="bookingIdLabel" text="Booking #0000" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+            
+            <Label text="Vehicle:" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <Label fx:id="vehicleLabel" text="Vehicle details..." GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+            
+            <Label text="Customer:" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+            <Label fx:id="customerLabel" text="Customer ID: 0" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+            
+            <Label text="Dates:" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+            <Label fx:id="dateRangeLabel" text="Start - End Date" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+            
+            <Label text="Total Cost:" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+            <Label fx:id="totalCostLabel" text="₹0.00" style="-fx-text-fill: #28a745; -fx-font-weight: bold;" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+        </GridPane>
+        
+        <Separator style="-fx-padding: 10 0;"/>
+        
+        <!-- Review Section -->
+        <Label text="Submit Review" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+        
+        <VBox spacing="8">
+            <Label text="Rating (1-5 stars)" style="-fx-font-size: 12; -fx-font-weight: bold;"/>
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Spinner fx:id="ratingSpinner" prefWidth="80" style="-fx-padding: 5;"/>
+                <Label text="(5 = Excellent, 1 = Poor)" style="-fx-font-size: 11; -fx-text-fill: #666;"/>
+            </HBox>
+        </VBox>
+        
+        <VBox spacing="8">
+            <Label text="Review Comment (Min 10 characters)" style="-fx-font-size: 12; -fx-font-weight: bold;"/>
+            <TextArea fx:id="reviewCommentArea" prefRowCount="6" wrapText="true" style="-fx-font-size: 12; -fx-padding: 10; -fx-control-inner-background: #f8f9fa;" promptText="Share your experience with this vehicle..."/>
+        </VBox>
+        
+        <Separator style="-fx-padding: 10 0;"/>
+        
+        <!-- Action Buttons -->
+        <HBox spacing="15" alignment="CENTER">
+            <Button fx:id="completeButton" text="Complete Booking &amp; Submit Review" style="-fx-font-size: 14; -fx-padding: 12 30; -fx-background-color: #28a745; -fx-text-fill: white; -fx-cursor: hand; -fx-font-weight: bold;" onAction="#handleCompleteBooking"/>
+            <Button fx:id="cancelButton" text="Cancel" style="-fx-font-size: 14; -fx-padding: 12 30; -fx-background-color: #6c757d; -fx-text-fill: white; -fx-cursor: hand;" onAction="#handleCancel"/>
+        </HBox>
+        
+    </VBox>
+    
+</VBox>

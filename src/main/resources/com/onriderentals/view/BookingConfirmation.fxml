@@ -63,7 +63,7 @@
                     </children>
                 </VBox>
 
-                <!-- Right: Payment & Confirmation -->
+                <!-- Right: Payment &amp; Confirmation -->
                 <VBox HBox.hgrow="ALWAYS" spacing="30" style="-fx-padding: 40;">
                     <children>
                         <Label text="Price Breakdown" style="-fx-font-weight: bold; -fx-font-size: 20px;"/>

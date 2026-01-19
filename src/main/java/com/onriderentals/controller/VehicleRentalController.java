@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,9 +41,15 @@ public class VehicleRentalController {
     @FXML
     private Button filterCarBtn;
 
+    @FXML
+    private HBox paginationBox;
+
     private VehicleDAO vehicleDAO;
     private ObservableList<Vehicle> allVehicles;
+    private List<Vehicle> currentFilteredVehicles;
     private String currentTypeFilter = "All";
+    private int itemsPerPage = 6;
+    private int currentPage = 0;
 
     private String initialLocation;
 
@@ -106,7 +113,8 @@ public class VehicleRentalController {
                     .filter(v -> "Available".equalsIgnoreCase(v.getStatus()))
                     .collect(Collectors.toList());
                 allVehicles.setAll(available);
-                renderVehicles(allVehicles);
+                currentFilteredVehicles = allVehicles;
+                renderVehicles();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -114,18 +122,27 @@ public class VehicleRentalController {
         }
     }
 
-    private void renderVehicles(List<Vehicle> vehicles) {
+    private void renderVehicles() {
         vehicleGrid.getChildren().clear();
-        resultsCountLabel.setText("Showing " + vehicles.size() + " vehicles");
-
-        if (vehicles.isEmpty()) {
+        
+        if (currentFilteredVehicles == null || currentFilteredVehicles.isEmpty()) {
+            resultsCountLabel.setText("Showing 0 vehicles");
             Label noResultsLabel = new Label("No vehicles found matching your criteria.");
             noResultsLabel.setStyle("-fx-font-size: 18px; -fx-text-fill: #adb5bd; -fx-padding: 50 0 0 0;");
             vehicleGrid.getChildren().add(noResultsLabel);
+            updatePagination();
             return;
         }
 
-        for (Vehicle vehicle : vehicles) {
+        int totalItems = currentFilteredVehicles.size();
+        resultsCountLabel.setText("Showing " + totalItems + " vehicles");
+
+        int fromIndex = currentPage * itemsPerPage;
+        int toIndex = Math.min(fromIndex + itemsPerPage, totalItems);
+        
+        List<Vehicle> pageItems = currentFilteredVehicles.subList(fromIndex, toIndex);
+
+        for (Vehicle vehicle : pageItems) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/onriderentals/view/VehicleCard.fxml"));
                 Parent card = loader.load();
@@ -138,6 +155,55 @@ public class VehicleRentalController {
                 e.printStackTrace();
             }
         }
+        
+        updatePagination();
+    }
+
+    private void updatePagination() {
+        paginationBox.getChildren().clear();
+        if (currentFilteredVehicles == null || currentFilteredVehicles.size() <= itemsPerPage) {
+            return;
+        }
+
+        int totalPages = (int) Math.ceil((double) currentFilteredVehicles.size() / itemsPerPage);
+
+        // Previous button
+        Button prevBtn = new Button("←");
+        prevBtn.getStyleClass().add("button-icon");
+        prevBtn.setDisable(currentPage == 0);
+        prevBtn.setOnAction(e -> {
+            currentPage--;
+            renderVehicles();
+        });
+        paginationBox.getChildren().add(prevBtn);
+
+        // Page numbers
+        for (int i = 0; i < totalPages; i++) {
+            final int pageIdx = i;
+            Button pageBtn = new Button(String.valueOf(i + 1));
+            pageBtn.setMinWidth(45);
+            pageBtn.setMinHeight(45);
+            if (i == currentPage) {
+                pageBtn.getStyleClass().add("button-primary");
+            } else {
+                pageBtn.getStyleClass().add("button-ghost");
+            }
+            pageBtn.setOnAction(e -> {
+                currentPage = pageIdx;
+                renderVehicles();
+            });
+            paginationBox.getChildren().add(pageBtn);
+        }
+
+        // Next button
+        Button nextBtn = new Button("→");
+        nextBtn.getStyleClass().add("button-icon");
+        nextBtn.setDisable(currentPage == totalPages - 1);
+        nextBtn.setOnAction(e -> {
+            currentPage++;
+            renderVehicles();
+        });
+        paginationBox.getChildren().add(nextBtn);
     }
 
     @FXML
@@ -175,8 +241,10 @@ public class VehicleRentalController {
                 })
                 .collect(Collectors.toList());
         
-        sortVehiclesList(filtered);
-        renderVehicles(filtered);
+        currentFilteredVehicles = filtered;
+        sortVehiclesList(currentFilteredVehicles);
+        currentPage = 0; // Reset to first page on filter change
+        renderVehicles();
     }
 
     private void sortVehiclesList(List<Vehicle> vehicles) {

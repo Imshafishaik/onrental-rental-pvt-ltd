@@ -1,6 +1,7 @@
 package com.onriderentals.factory;
 
 import com.onriderentals.controller.BookingConfirmationController;
+import com.onriderentals.controller.CompleteBookingController;
 import com.onriderentals.controller.VehicleDetailsController;
 import com.onriderentals.controller.VehicleRentalController;
 import com.onriderentals.model.Vehicle;
@@ -37,6 +38,7 @@ public class SceneManager {
         sceneMap.put("AdminProfile", "/com/onriderentals/view/AdminProfile.fxml");
         sceneMap.put("VehicleDetails", "/com/onriderentals/view/VehicleDetails.fxml");
         sceneMap.put("MyBookings", "/com/onriderentals/view/MyBookings.fxml");
+        sceneMap.put("CompleteBooking", "/com/onriderentals/view/CompleteBooking.fxml");
         sceneMap.put("Favorites", "/com/onriderentals/view/Favorites.fxml");
         sceneMap.put("Reviews", "/com/onriderentals/view/Reviews.fxml");
         sceneMap.put("Notifications", "/com/onriderentals/view/Notifications.fxml");
@@ -80,6 +82,8 @@ public class SceneManager {
                 ((BookingConfirmationController) controller).setVehicle((Vehicle) data);
             } else if (controller instanceof VehicleRentalController && data instanceof String) {
                 ((VehicleRentalController) controller).setInitialLocation((String) data);
+            } else if (controller instanceof CompleteBookingController && data instanceof Integer) {
+                ((CompleteBookingController) controller).setBookingId((Integer) data);
             }
         }
     }

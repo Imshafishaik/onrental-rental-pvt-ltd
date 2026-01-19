@@ -146,4 +146,73 @@ public class BookingDAO {
         }
         return 0;
     }
+
+    public Booking getBookingById(int bookingId) {
+        String sql = "SELECT * FROM bookings WHERE booking_id = ?";
+        try (Connection conn = Database.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, bookingId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                Booking booking = new Booking();
+                booking.setBookingId(rs.getInt("booking_id"));
+                booking.setCustomerId(rs.getInt("customer_id"));
+                booking.setVehicleId(rs.getInt("vehicle_id"));
+                booking.setStartDate(rs.getDate("start_date").toLocalDate());
+                booking.setEndDate(rs.getDate("end_date").toLocalDate());
+                booking.setTotalCost(rs.getDouble("total_amount"));
+                booking.setStatus(rs.getString("status"));
+                return booking;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public boolean updateBookingStatus(int bookingId, String newStatus) {
+        String sql = "UPDATE bookings SET status = ? WHERE booking_id = ?";
+        try (Connection conn = Database.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, newStatus);
+            stmt.setInt(2, bookingId);
+
+            int rowsUpdated = stmt.executeUpdate();
+            return rowsUpdated > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean completeBooking(int bookingId, int vehicleId, String newVehicleStatus) {
+        String bookingSql = "UPDATE bookings SET status = 'COMPLETED' WHERE booking_id = ?";
+        String vehicleSql = "UPDATE vehicles SET status = ? WHERE vehicle_id = ?";
+
+        try (Connection conn = Database.getConnection()) {
+            conn.setAutoCommit(false);
+
+            // Update booking status
+            try (PreparedStatement bookingStmt = conn.prepareStatement(bookingSql)) {
+                bookingStmt.setInt(1, bookingId);
+                bookingStmt.executeUpdate();
+            }
+
+            // Update vehicle status
+            try (PreparedStatement vehicleStmt = conn.prepareStatement(vehicleSql)) {
+                vehicleStmt.setString(1, newVehicleStatus);
+                vehicleStmt.setInt(2, vehicleId);
+                vehicleStmt.executeUpdate();
+            }
+
+            conn.commit();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

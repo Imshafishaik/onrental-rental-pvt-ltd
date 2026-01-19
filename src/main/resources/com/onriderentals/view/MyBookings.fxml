@@ -4,17 +4,20 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.onriderentals.controller.MyBookingsController">
-    <Label text="My Bookings" />
-    <TableView fx:id="bookingsTable">
+<VBox alignment="TOP_LEFT" spacing="20.0" style="-fx-padding: 20;" xmlns="http://javafx.com/javafx/21.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.onriderentals.controller.MyBookingsController">
+    <Label text="My Bookings" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #007bff;"/>
+    
+    <TableView fx:id="bookingsTable" prefHeight="400" style="-fx-font-size: 12;">
         <columns>
-            <TableColumn text="Booking ID" fx:id="bookingIdColumn" />
-            <TableColumn text="Vehicle" fx:id="vehicleColumn" />
-            <TableColumn text="Start Date" fx:id="startDateColumn" />
-            <TableColumn text="End Date" fx:id="endDateColumn" />
-            <TableColumn text="Total Cost" fx:id="totalCostColumn" />
-            <TableColumn text="Status" fx:id="statusColumn" />
+            <TableColumn text="Booking ID" fx:id="bookingIdColumn" prefWidth="80"/>
+            <TableColumn text="Vehicle ID" fx:id="vehicleColumn" prefWidth="80"/>
+            <TableColumn text="Start Date" fx:id="startDateColumn" prefWidth="100"/>
+            <TableColumn text="End Date" fx:id="endDateColumn" prefWidth="100"/>
+            <TableColumn text="Total Cost" fx:id="totalCostColumn" prefWidth="100"/>
+            <TableColumn text="Status" fx:id="statusColumn" prefWidth="100"/>
+            <TableColumn text="Actions" fx:id="actionColumn" prefWidth="150"/>
         </columns>
     </TableView>
 </VBox>
